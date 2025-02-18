@@ -1,0 +1,17 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: "Pretendard";
+}
+
+:root {
+  --sub-color: #808080;
+  --highlihgt-color: #5f69be;
+  --sub-highlihgt-color: #f8f8fe;
+}
