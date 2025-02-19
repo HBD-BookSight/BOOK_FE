@@ -15,8 +15,8 @@ const BookDescription = ({ className, createdAt, ...props }: Readonly<Props>) =>
         </p>
       </div>
       <Link
-        href={`/book/${month}/${day}`}
-        className="flex h-fit items-center rounded-full px-6 py-2 shadow-[0_0_var(--root-layout-safe-area)_rgba(0,0,0,0.12)] backdrop-blur-[5px]"
+        href={{ pathname: `/birth-day`, query: { day, month } }}
+        className="flex h-fit items-center rounded-full bg-[#FFFFFFD9] px-6 py-2 shadow-[0_0_var(--root-layout-margin)_rgba(0,0,0,0.12)] backdrop-blur-[5px]"
       >
         view all
       </Link>
