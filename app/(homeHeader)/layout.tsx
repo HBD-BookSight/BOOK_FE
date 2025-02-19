@@ -1,6 +1,6 @@
 import HomeHeader from "@/components/homeHeader/HomeHeader";
 
-const layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
+const homeHeaderlayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <>
       <HomeHeader />
@@ -9,4 +9,4 @@ const layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   );
 };
 
-export default layout;
+export default homeHeaderlayout;

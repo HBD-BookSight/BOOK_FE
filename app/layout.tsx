@@ -14,8 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`mx-auto antialiased sm:max-w-[640px]`}>
+    <html lang="en" className="flex bg-slate-100">
+      <body
+        className={`mx-auto flex size-full min-h-lvh flex-col justify-between bg-white antialiased sm:max-w-[640px]`}
+      >
         {children}
         <BottomNav />
       </body>
