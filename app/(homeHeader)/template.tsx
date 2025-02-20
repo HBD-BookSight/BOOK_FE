@@ -2,7 +2,7 @@
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-const pageTransitonTemplate = ({
+const PageTransitonTemplate = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -27,4 +27,4 @@ const pageTransitonTemplate = ({
   );
 };
 
-export default pageTransitonTemplate;
+export default PageTransitonTemplate;
