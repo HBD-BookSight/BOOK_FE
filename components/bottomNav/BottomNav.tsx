@@ -1,14 +1,17 @@
 "use client";
-import { HTMLAttributes, useEffect, useState } from "react";
+import { Dispatch, HTMLAttributes, SetStateAction, useEffect, useState } from "react";
 import HomeIcon from "../icons/homeIcon.svg";
 import SearchIcon from "../icons/searchIcon.svg";
 import ExploreIcon from "../icons/exploreIcon.svg";
 import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 
-type Props = {} & HTMLAttributes<HTMLDivElement>;
+type Props = {
+  isSearchOpen: boolean;
+  setSearchOpen: Dispatch<SetStateAction<boolean>>;
+} & HTMLAttributes<HTMLDivElement>;
 type Tab = "home" | "search" | "explore" | null;
-const BottomNav = ({ className, ...props }: Readonly<Props>) => {
+const BottomNav = ({ className, isSearchOpen, setSearchOpen, ...props }: Readonly<Props>) => {
   const [tab, setTab] = useState<Tab>(null);
   const router = useRouter();
   const pathname = usePathname();
@@ -18,22 +21,23 @@ const BottomNav = ({ className, ...props }: Readonly<Props>) => {
       setTab("home");
     } else if (pathname === "/explore") {
       setTab("explore");
+    } else if (isSearchOpen) {
+      setTab("search");
     } else {
       setTab(null);
     }
-  }, [pathname]);
+  }, [isSearchOpen, pathname]);
 
   const handleHomeClick = () => {
-    setTab("home");
     router.push("/");
+    setSearchOpen(false);
   };
   const handleSearchClick = () => {
-    setTab("search");
-    router.push("/");
+    setSearchOpen((prev) => !prev);
   };
   const handleExploreClick = () => {
-    setTab("explore");
-    router.push("/");
+    router.push("/explore");
+    setSearchOpen(false);
   };
 
   return (
@@ -48,11 +52,11 @@ const BottomNav = ({ className, ...props }: Readonly<Props>) => {
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
             />
           )}
-          <HomeIcon className="relative z-[41]" />
+          <HomeIcon className="relative z-[41] w-14" />
         </button>
 
         <button onClick={handleSearchClick}>
-          {tab === "search" && (
+          {isSearchOpen && (
             <motion.div
               className="pointer-events-none absolute size-14 rounded-full bg-[#5f69be26]"
               layoutId="highlight"
@@ -60,7 +64,7 @@ const BottomNav = ({ className, ...props }: Readonly<Props>) => {
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
             />
           )}
-          <SearchIcon className="relative z-[41]" />
+          <SearchIcon className="relative z-[41] w-14" />
         </button>
 
         <button onClick={handleExploreClick}>
@@ -72,7 +76,7 @@ const BottomNav = ({ className, ...props }: Readonly<Props>) => {
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
             />
           )}
-          <ExploreIcon className="relative z-[41]" />
+          <ExploreIcon className="relative z-[41] w-14" />
         </button>
       </div>
     </div>
