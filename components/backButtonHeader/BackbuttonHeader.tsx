@@ -21,7 +21,7 @@ const BackbuttonHeader = ({ className, ...etc }: Readonly<Props>) => {
           router.back();
         }}
       >
-        <BackArrow />
+        <BackArrow className="w-12" />
       </button>
       <div className="flex flex-col items-center justify-center gap-2">
         <div className="text-lg font-semibold">{title}</div>
