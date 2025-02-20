@@ -12,6 +12,6 @@ body {
 
 :root {
   --sub-color: #808080;
-  --highlihgt-color: #5f69be;
-  --sub-highlihgt-color: #f8f8fe;
+  --highlight-color: #5f69be;
+  --sub-highlight-color: #f8f8fe;
 }

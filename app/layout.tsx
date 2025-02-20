@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="flex bg-slate-100">
       <body
-        className={`mx-auto flex size-full min-h-lvh flex-col justify-between bg-white antialiased sm:max-w-[640px]`}
+        className={`mx-auto flex size-full min-h-lvh flex-col justify-between overflow-x-hidden bg-white antialiased sm:max-w-[640px]`}
       >
         {children}
         <BottomNav />
