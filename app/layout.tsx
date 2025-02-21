@@ -3,6 +3,7 @@ import "./globals.css";
 import "./rootLayout.css";
 import { ReactNode } from "react";
 import BottomNavLayout from "./BottomNavLayout";
+import Head from "next/head";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,13 +17,18 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en" className="flex bg-slate-100">
-      <body
-        className={`relative mx-auto flex size-full min-h-lvh flex-col justify-between overflow-x-hidden bg-white antialiased sm:max-w-[640px]`}
-      >
-        {children}
-        <BottomNavLayout />
-      </body>
-    </html>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      </Head>
+      <html lang="ko" className="bg-slate-100">
+        <body
+          className={`relative mx-auto flex h-full min-h-screen w-screen flex-col bg-white antialiased sm:max-w-[640px]`}
+        >
+          <div className="relative mx-auto flex size-full flex-1 flex-col overflow-hidden">{children}</div>
+          <BottomNavLayout />
+        </body>
+      </html>
+    </>
   );
 }
