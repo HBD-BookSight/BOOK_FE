@@ -16,16 +16,15 @@ const BackbuttonHeader = ({ className, ...etc }: Readonly<Props>) => {
       {...etc}
     >
       <button
-        className="text-[var(--sub-color)]"
         onClick={() => {
           router.back();
         }}
       >
-        <BackArrow className="w-12" />
+        <BackArrow className="w-12 text-[var(--sub-color)]" />
       </button>
       <div className="flex flex-col items-center justify-center gap-2">
-        <div className="text-lg font-semibold">{title}</div>
-        {subtitle && <div className="text-sm font-normal text-[var(--sub-color)]">{subtitle}</div>}
+        <h1 className="text-lg font-semibold">{title}</h1>
+        {subtitle && <h2 className="text-sm font-normal text-[var(--sub-color)]">{subtitle}</h2>}
       </div>
       <button className="w-12">{etcButton && etcButton}</button>
     </div>

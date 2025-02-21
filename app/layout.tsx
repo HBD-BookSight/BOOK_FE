@@ -21,7 +21,7 @@ export default function RootLayout({
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </Head>
-      <html lang="ko" className="bg-slate-100">
+      <html lang="ko" className="overflow-x-hidden bg-slate-100">
         <body
           className={`relative mx-auto flex h-full min-h-screen w-screen flex-col bg-white antialiased sm:max-w-[640px]`}
         >
