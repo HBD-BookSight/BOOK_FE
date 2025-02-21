@@ -4,7 +4,7 @@ const homeHeaderlayout = ({ children }: Readonly<{ children: React.ReactNode }>)
   return (
     <>
       <HomeHeader />
-      {children}
+      <div className="overflow-hidden">{children}</div>
     </>
   );
 };
