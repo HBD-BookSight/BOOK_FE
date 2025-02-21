@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import BirthDayHeaderHelper from "./BirthDayHeaderHelper";
 const BirthDayDetail = () => {
   return (
-    <main className="flex size-full flex-1 items-center gap-8">
+    <main className="relative flex size-full flex-col items-center">
       <Suspense>
         <BirthDayHeaderHelper />
       </Suspense>
