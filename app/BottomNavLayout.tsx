@@ -1,13 +1,26 @@
 "use client";
 import BottomNav from "@/components/bottomNav/BottomNav";
 import SearchBottomPanel from "@/components/searchBottomPanel/SearchBottomPanel";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
 const BottomNavLayout = () => {
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   return (
     <>
-      {isSearchOpen && <SearchBottomPanel />}
+      <AnimatePresence mode="wait">
+        {isSearchOpen && (
+          <motion.div
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "100%" }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="absolute inset-y-0 z-40 mx-auto size-full"
+          >
+            <SearchBottomPanel />
+          </motion.div>
+        )}
+      </AnimatePresence>
       <BottomNav isSearchOpen={isSearchOpen} setSearchOpen={setIsSearchOpen} />
     </>
   );
