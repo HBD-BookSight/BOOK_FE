@@ -20,10 +20,10 @@ const BookItem = ({ className, isbn, imageUrl, bookName, author, publisher, ...p
       <Image alt="book" src={imageUrl} className={`rounded-2xl shadow-[5px_0_8px_3px_rgba(0,0,0,0.08)]`} fill />
       <div className="pointer-events-none absolute size-full rounded-2xl bg-gradient-to-t from-black to-transparent">
         <div className="relative bottom-0 flex size-full flex-col justify-end px-4 pb-6 text-white">
-          <h3 className="pb-5 font-bold">{bookName ?? "책이름"}</h3>
+          <h3 className="relative mb-5 line-clamp-2 h-fit w-full break-words font-bold">{bookName ?? "책이름"}</h3>
           <div className="flex flex-row">
-            <p className="font-semibold">{author ?? "저자"}</p>·
-            <p className="text-[var(--sub-color)]">{publisher ?? "출판사"}</p>
+            <p className="relative line-clamp-1 min-w-0 break-words font-semibold">{author ?? "저자"}</p>·
+            <p className="relative line-clamp-1 min-w-0 break-words text-[var(--sub-color)]">{publisher ?? "출판사"}</p>
           </div>
         </div>
       </div>
