@@ -1,7 +1,5 @@
 "use client";
-import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
-
 const PageTransitonTemplate = ({
   children,
 }: Readonly<{
@@ -13,14 +11,8 @@ const PageTransitonTemplate = ({
     exit: { opacity: 0, x: -100 },
   };
   return (
-    <AnimatePresence mode="popLayout">
-      <motion.div
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        variants={layoutVariants}
-        className="relative size-full"
-      >
+    <AnimatePresence mode="wait">
+      <motion.div initial="initial" animate="animate" exit="exit" variants={layoutVariants}>
         {children}
       </motion.div>
     </AnimatePresence>
