@@ -46,9 +46,7 @@ const BirthDayGrid = ({ className, ...props }: Readonly<Props>) => {
   }, []);
   return (
     <div
-      className={`relative grid w-full auto-rows-fr grid-cols-2 ${
-        className || ""
-      } gap-[10px] p-[var(--root-layout-margin)]`}
+      className={`relative grid w-full grid-cols-2 gap-[10px] p-[var(--root-layout-margin)] ${className || ""}`}
       {...props}
     >
       {books?.map((item) => (
