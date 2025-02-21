@@ -13,9 +13,9 @@ type BackHeaderStore = {
 };
 
 const useBackHeaderStore = create<BackHeaderStore>((set) => ({
-  title: "페이지 제목",
+  title: "",
   setTitle: (title: string) => set({ title }),
-  subtitle: "페이지 부제목",
+  subtitle: "",
   setSubTitle: (subtitle: string) => set({ subtitle }),
   etcButton: null,
   setEtcButton: (etcButton: ReactNode) => set({ etcButton }),
