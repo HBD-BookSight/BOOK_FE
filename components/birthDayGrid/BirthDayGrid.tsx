@@ -45,14 +45,14 @@ const BirthDayGrid = ({ className, ...props }: Readonly<Props>) => {
     ]);
   }, []);
   return (
-    <div
+    <section
       className={`relative grid w-full grid-cols-2 gap-[10px] p-[var(--root-layout-margin)] ${className || ""}`}
       {...props}
     >
       {books?.map((item) => (
         <BookItem key={item.isbn} isbn={item.isbn} imageUrl={item.image_url} />
       ))}
-    </div>
+    </section>
   );
 };
 

@@ -9,7 +9,7 @@ const BackbuttonHeader = ({ className, ...etc }: Readonly<Props>) => {
   const { title, subtitle, etcButton } = useBackHeader();
   const router = useRouter();
   return (
-    <div
+    <header
       className={`sticky top-0 z-40 flex w-full flex-row justify-between bg-[#FFFFFFD9] p-[var(--root-layout-margin)] backdrop-blur-[5px] ${
         className || ""
       }`}
@@ -27,7 +27,7 @@ const BackbuttonHeader = ({ className, ...etc }: Readonly<Props>) => {
         {subtitle && <h2 className="text-sm font-normal text-[var(--sub-color)]">{subtitle}</h2>}
       </div>
       <button className="w-12">{etcButton && etcButton}</button>
-    </div>
+    </header>
   );
 };
 

@@ -43,7 +43,7 @@ const BottomNav = ({ className, isSearchOpen, setSearchOpen, ...props }: Readonl
   };
 
   return (
-    <div
+    <nav
       className={`sticky bottom-0 z-40 flex size-full items-end pb-[var(--root-layout-margin)] will-change-transform ${
         className || ""
       }`}
@@ -90,7 +90,7 @@ const BottomNav = ({ className, isSearchOpen, setSearchOpen, ...props }: Readonl
           <ExploreIcon className="relative z-[41] w-14" />
         </button>
       </div>
-    </div>
+    </nav>
   );
 };
 

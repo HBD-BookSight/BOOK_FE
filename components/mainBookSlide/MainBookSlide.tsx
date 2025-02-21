@@ -53,14 +53,14 @@ const MainBookSlide = ({ className, ...etc }: Readonly<Props>) => {
     ]);
   }, []);
   return (
-    <div className={`flex size-full flex-col px-[var(--root-layout-margin)] ${className || ""}`} {...etc}>
+    <section className={`flex size-full flex-col px-[var(--root-layout-margin)] ${className || ""}`} {...etc}>
       <BookDescription createdAt={new Date()} />
       <div className="flex size-full h-[341px] flex-row-reverse justify-between pl-[235px]">
         {books.map((book, index) => (
           <BookItem key={index} ind={index} isbn={book.isbn} imageUrl={book.image_url} bookLength={books.length} />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 
