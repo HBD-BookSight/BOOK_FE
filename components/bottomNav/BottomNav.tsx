@@ -3,6 +3,7 @@ import { Dispatch, HTMLAttributes, SetStateAction, useEffect, useState } from "r
 import HomeIcon from "../icons/homeIcon.svg";
 import SearchIcon from "../icons/searchIcon.svg";
 import ExploreIcon from "../icons/exploreIcon.svg";
+import BackArrowIcon from "../icons/backArrowIcon.svg";
 import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 
@@ -25,8 +26,9 @@ const BottomNav = ({ className, isSearchOpen, setSearchOpen, ...props }: Readonl
       setTab("search");
     } else {
       setTab(null);
+      setSearchOpen(false);
     }
-  }, [isSearchOpen, pathname]);
+  }, [setSearchOpen, isSearchOpen, pathname]);
 
   const handleHomeClick = () => {
     router.push("/");
@@ -59,7 +61,6 @@ const BottomNav = ({ className, isSearchOpen, setSearchOpen, ...props }: Readonl
           )}
           <HomeIcon className="relative z-[41] w-14" />
         </button>
-
         <button onClick={handleSearchClick}>
           {isSearchOpen && (
             <motion.div
@@ -69,7 +70,12 @@ const BottomNav = ({ className, isSearchOpen, setSearchOpen, ...props }: Readonl
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
             />
           )}
-          <SearchIcon className="relative z-[41] w-14" />
+
+          {isSearchOpen ? (
+            <BackArrowIcon className="relative z-[41] w-14" />
+          ) : (
+            <SearchIcon className="relative z-[41] w-14" />
+          )}
         </button>
 
         <button onClick={handleExploreClick}>
