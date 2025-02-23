@@ -4,14 +4,25 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: "Pretendard";
+@layer base {
+  body {
+    color: var(--foreground);
+    background: var(--background);
+    font-family: "Pretendard";
+  }
+
+  :root {
+    --sub-color: #808080;
+    --highlight-color: #5f69be;
+    --sub-highlight-color: #f8f8fe;
+  }
 }
 
-:root {
-  --sub-color: #808080;
-  --highlight-color: #5f69be;
-  --sub-highlight-color: #f8f8fe;
+@layer utilities {
+  .scrollbar-hide {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    scrollbar-width: none;
+  }
 }
