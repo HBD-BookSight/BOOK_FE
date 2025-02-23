@@ -21,6 +21,7 @@ const BookDetail = ({ className, ...props }: Readonly<Props>) => {
         pulisher="출판사 이름"
         description="asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdsdfasdfasdfasdfasdfasdfasdfaasdsdfasdfasdfasdfasdfasdfasdfassdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfafasdf"
         viewMoreUrl="/a/"
+        className="mb-10"
       />
       <section>
         <h2 className="text-lg font-bold">추천 콘텐츠</h2>

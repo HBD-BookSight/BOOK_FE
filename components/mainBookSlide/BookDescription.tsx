@@ -7,7 +7,7 @@ const BookDescription = ({ className, createdAt, ...props }: Readonly<Props>) =>
   const day = createdAt.getDate();
 
   return (
-    <div className={`flex w-full items-end justify-between py-7 ${className || ""}`} {...props}>
+    <div className={`mb-7 flex w-full items-end justify-between ${className || ""}`} {...props}>
       <div className="flex flex-col items-start gap-2">
         <h2 className="text-2xl font-bold">Happy Books Day!</h2>
         <p className="text-sm text-[var(--sub-color)]">
