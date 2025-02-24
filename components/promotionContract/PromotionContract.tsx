@@ -1,5 +1,5 @@
 import React from "react";
-import CalendarIcon from "../icons/calendarIcon.svg";
+import MailIcon from "../icons/mailIcon.svg";
 
 const PromotionContract = () => {
   return (
@@ -10,7 +10,7 @@ const PromotionContract = () => {
           <p className="font-semibold text-[var(--highlight-color)]">홍보 문의하러 가기</p>
         </span>
         <button className="flex aspect-square w-12 items-center justify-center rounded-full border">
-          <CalendarIcon className="w-6 text-[var(--sub-color)]" />
+          <MailIcon className="w-6 text-[var(--sub-color)]" />
         </button>
       </aside>
     </section>
