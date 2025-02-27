@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
-import "./rootLayout.css";
+import "../globals.css";
 import { ReactNode } from "react";
-import BottomNavLayout from "./BottomNavLayout";
 import Head from "next/head";
 
 export const metadata: Metadata = {
@@ -19,14 +17,13 @@ export default function RootLayout({
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
       </Head>
       <html lang="ko" className="bg-slate-100">
         <body
-          className={`relative mx-auto flex h-full min-h-screen w-screen flex-col bg-white antialiased sm:max-w-[640px]`}
+          className={`relative mx-auto flex h-full min-h-screen w-screen flex-col bg-white antialiased xl:max-w-[1280px]`}
         >
           <div className="relative mx-auto flex size-full flex-1 flex-col">{children}</div>
-          <BottomNavLayout />
         </body>
       </html>
     </>
