@@ -10,7 +10,7 @@ const BackbuttonHeader = ({ className, ...etc }: Readonly<Props>) => {
   const router = useRouter();
   return (
     <header
-      className={`sticky top-0 z-40 flex w-full flex-row justify-between bg-[#FFFFFFD9] p-[var(--root-layout-margin)] backdrop-blur-[5px] ${
+      className={`sticky top-0 z-40 flex w-full flex-row justify-between bg-[#FFFFFFD9] p-[var(--client-layout-margin)] backdrop-blur-[5px] ${
         className || ""
       }`}
       {...etc}

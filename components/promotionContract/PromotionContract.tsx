@@ -3,7 +3,7 @@ import MailIcon from "../icons/mailIcon.svg";
 
 const PromotionContract = () => {
   return (
-    <section className="relative flex size-full flex-col px-[var(--root-layout-margin)]">
+    <section className="relative flex size-full flex-col px-[var(--client-layout-margin)]">
       <aside className="relative flex size-full flex-row justify-between rounded-2xl bg-[var(--sub-highlight-color)]  p-5">
         <span className="flex flex-col justify-center text-sm">
           <p className="text-[var(--sub-color)]">내 이벤트를 알리고 싶으신가요?</p>

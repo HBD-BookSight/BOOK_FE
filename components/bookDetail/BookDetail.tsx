@@ -13,7 +13,7 @@ const BookDetail = ({ className, ...props }: Readonly<Props>) => {
   const imageUrl =
     "https://s3-alpha-sig.figma.com/img/6968/9fe6/099879556d8a4fa78e4f47da472f3ccc?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=DG5-W8XYicpyjSur7jnZ7k5PmgDY8qjFQzbN2YrPxRHG9mcji3pRUX2zBBPczIgT21eOIuJDnSzEWW6cTDEkWcfjdKUJzYoaGbVJsrYWPZahVZ4OIFek970Jr~4RCYVJWlvzkNiOn2wH4woAfST1dx7uqnQmIQcS0PlX1CUNCQVJw-MobnwPgAENstFrQqjQ8ulbH9EREhzUfE0SWG~HptvljbyD6903xVYVwag6iHvSbxPv7xvvLOdst5Zl~8xEy7jNDrjC0jxazCtPJTTn2bCM-2wgEv85qh2hh7jII8iJBT079ArQwksJOHR6Vwm0nU6XaVvkDxXn~lbop2Qy9w__";
   return (
-    <div className={`relative flex size-full flex-col px-[var(--root-layout-margin)] ${className || ""}`} {...props}>
+    <div className={`relative flex size-full flex-col px-[var(--client-layout-margin)] ${className || ""}`} {...props}>
       <BookDetailImageSection imageUrl={imageUrl} className="my-6" />
       <BookTitleSection bookName="책이름" birthDayDate={new Date()} isbn={StringIsbn} className="mb-10" />
       <BookDetailSection

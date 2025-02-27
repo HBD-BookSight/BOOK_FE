@@ -16,7 +16,7 @@ const SearchBar = ({ className, ...props }: Readonly<Props>) => {
   }, []);
 
   return (
-    <div className={`sticky top-0 w-full px-[var(--root-layout-margin)] py-3 ${className || ""}`} {...props}>
+    <div className={`sticky top-0 w-full px-[var(--client-layout-margin)] py-3 ${className || ""}`} {...props}>
       <div className="relative flex w-full flex-row rounded-2xl border bg-white p-1">
         <SearchIcon className="w-11 text-[var(--sub-color)]" />
         <input

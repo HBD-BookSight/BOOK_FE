@@ -44,12 +44,12 @@ const BottomNav = ({ className, isSearchOpen, setSearchOpen, ...props }: Readonl
 
   return (
     <nav
-      className={`sticky bottom-0 z-40 flex size-full items-end pb-[var(--root-layout-margin)] will-change-transform ${
+      className={`sticky bottom-0 z-40 flex size-full items-end pb-[var(--client-layout-margin)] will-change-transform ${
         className || ""
       }`}
       {...props}
     >
-      <div className="relative mx-auto flex items-center justify-around gap-[var(--root-layout-margin)] rounded-full bg-[#FFFFFFD9] stroke-2 px-10 py-3 text-[var(--sub-color)] shadow-[0_0_var(--root-layout-margin)_rgba(0,0,0,0.12)] backdrop-blur-[20px]">
+      <div className="relative mx-auto flex items-center justify-around gap-[var(--client-layout-margin)] rounded-full bg-[#FFFFFFD9] stroke-2 px-10 py-3 text-[var(--sub-color)] shadow-[0_0_var(--client-layout-margin)_rgba(0,0,0,0.12)] backdrop-blur-[20px]">
         <button onClick={handleHomeClick}>
           {tab === "home" && (
             <motion.div

@@ -72,7 +72,11 @@ const MainBookSlide = ({ className, ...etc }: Readonly<Props>) => {
   }, []);
 
   return (
-    <section className={`flex size-full flex-col px-[var(--root-layout-margin)] ${className || ""}`} {...etc} ref={ref}>
+    <section
+      className={`flex size-full flex-col px-[var(--client-layout-margin)] ${className || ""}`}
+      {...etc}
+      ref={ref}
+    >
       <ReactConfetti
         width={size.width}
         height={size.height}
