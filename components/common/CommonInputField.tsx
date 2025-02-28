@@ -5,7 +5,7 @@ type Props = {
   placeholder?: string;
   type?: string;
 } & HTMLAttributes<HTMLInputElement>;
-const CommonInputField = ({ className, ...props }: Props) => {
+const CommonInputField = ({ className, ...props }: Readonly<Props>) => {
   return (
     <input
       className={`relative size-full rounded-xl border px-4 py-2.5 placeholder-[var(--sub-color)] outline-none placeholder:text-sm ${

@@ -4,7 +4,7 @@ type Props = {
   className?: string;
   htmlFor?: string;
 } & HTMLAttributes<HTMLLabelElement>;
-const CommonInputFieldLabel = ({ className, ...props }: Props) => {
+const CommonLabel = ({ className, ...props }: Readonly<Props>) => {
   return (
     <label
       className={`relative size-full text-sm font-semibold text-[var(--highlight-color)] ${className || ""}`}
@@ -13,4 +13,4 @@ const CommonInputFieldLabel = ({ className, ...props }: Props) => {
   );
 };
 
-export default CommonInputFieldLabel;
+export default CommonLabel;
