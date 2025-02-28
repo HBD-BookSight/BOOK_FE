@@ -2,7 +2,7 @@
 import { useForm } from "react-hook-form";
 import CommonInputField from "../common/CommonInputField";
 import { HTMLAttributes } from "react";
-import CommonInputFieldLabel from "../common/CommonInputFieldLabel";
+import CommonLabel from "../common/CommonLabel";
 import { useRouter } from "next/navigation";
 
 type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
@@ -37,7 +37,7 @@ const LoginForm = ({ className, ...props }: Props) => {
       </span>
       <form className="relative flex size-full flex-col gap-6" onSubmit={handleSubmit(onSubmitHandler, onErrorHandler)}>
         <div className="relative flex size-full flex-col gap-3">
-          <CommonInputFieldLabel htmlFor="email">E-mail</CommonInputFieldLabel>
+          <CommonLabel htmlFor="email">E-mail</CommonLabel>
           <CommonInputField
             placeholder="이메일을 입력하세요"
             type="email"
@@ -46,7 +46,7 @@ const LoginForm = ({ className, ...props }: Props) => {
           />
         </div>
         <div className="relative flex size-full flex-col gap-3">
-          <CommonInputFieldLabel htmlFor="password">Password</CommonInputFieldLabel>
+          <CommonLabel htmlFor="password">Password</CommonLabel>
           <CommonInputField
             placeholder="비밀번호를 입력하세요"
             type="password"
