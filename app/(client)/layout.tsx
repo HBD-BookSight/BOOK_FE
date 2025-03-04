@@ -7,14 +7,12 @@ const ClientLayout = ({
   children: ReactNode;
 }>) => {
   return (
-    <>
-      <body
-        className={`relative mx-auto flex h-full min-h-screen w-screen flex-col bg-white antialiased sm:max-w-[640px]`}
-      >
-        <div className="relative mx-auto flex size-full flex-1 flex-col">{children}</div>
-        <BottomNavLayout />
-      </body>
-    </>
+    <body
+      className={`relative mx-auto flex h-full min-h-screen w-screen flex-col bg-white antialiased sm:max-w-[640px]`}
+    >
+      <div className="relative mx-auto flex size-full flex-1 flex-col">{children}</div>
+      <BottomNavLayout />
+    </body>
   );
 };
 
