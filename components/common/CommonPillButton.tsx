@@ -6,7 +6,7 @@ type Props = {
 const CommonPillButton = ({ children, className, ...props }: Readonly<Props>) => {
   return (
     <button
-      className={`relative size-full rounded-full border border-[var(--highlight-color)] py-2 text-sm text-[var(--highlight-color)] ${
+      className={`relative flex size-full items-center justify-center rounded-full border border-[var(--highlight-color)] py-2 text-sm text-[var(--highlight-color)] ${
         className || ""
       }`}
       {...props}
