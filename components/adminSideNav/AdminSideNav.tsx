@@ -10,21 +10,23 @@ type Props = {
 } & HTMLAttributes<HTMLDivElement>;
 const AdminSideNav = ({ className, ...props }: Readonly<Props>) => {
   const pathname = usePathname();
+
   return (
     <nav className={`sticky left-0 top-0 flex w-1/4 ${className || ""}`} {...props}>
-      <div className="relative flex size-full flex-col gap-5 py-12 pl-[50%] font-semibold">
-        <CommonLabel className="!size-fit">menu</CommonLabel>
+      <div className="relative flex size-full flex-col gap-5 pb-12 pl-[50%] font-semibold">
+        <CommonLabel className="flex h-16 items-center justify-start">menu</CommonLabel>
         <Link href="/admin/content" className={`${pathname === "/admin/content" ? "" : "text-[var(--sub-color)]"}`}>
-          추천 컨텐츠
+          Content
         </Link>
         <Link href="/admin/event" className={`${pathname === "/admin/event" ? "" : "text-[var(--sub-color)]"}`}>
-          다가오는 일정
+          Event
         </Link>
         <Link href="/admin/publisher" className={`${pathname === "/admin/publisher" ? "" : "text-[var(--sub-color)]"}`}>
-          출판사
+          Publisher
         </Link>
-
-        <CommonPillButton className="mt-auto !h-fit">로그아웃</CommonPillButton>
+        <CommonPillButton className="mt-auto !h-fit w-full border-gray-200 text-[var(--sub-color)]">
+          Logout
+        </CommonPillButton>
       </div>
     </nav>
   );
