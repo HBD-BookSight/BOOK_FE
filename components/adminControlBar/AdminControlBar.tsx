@@ -1,10 +1,27 @@
 "use client";
 
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, useRef } from "react";
 import CommonPillButton from "../common/CommonPillButton";
+import { usePopupActon } from "@/context/popupStore";
+import AdminDeleteForm, { AdminDeleteFormRef } from "../popupProvider/adminForm/AdminDeleteForm";
+import AlertPopupModal from "../popupProvider/AlertPopupModal";
 
 type Props = { className?: string; resultLength?: number; onClick?: () => void } & HTMLAttributes<HTMLDivElement>;
 const AdminControlBar = ({ className, resultLength, onClick, ...props }: Props) => {
+  const { openPopup, closePopup } = usePopupActon();
+  const ref = useRef<AdminDeleteFormRef>(null);
+
+  const onDeleteHandler = () => {
+    openPopup(
+      <AlertPopupModal>
+        <AdminDeleteForm ref={ref} />
+      </AlertPopupModal>,
+      closePopup,
+      () => {
+        ref.current?.handleSubmit();
+      }
+    );
+  };
   return (
     <div
       className={`relative flex h-16 w-full flex-row items-center justify-between !text-sm font-semibold ${
@@ -19,7 +36,7 @@ const AdminControlBar = ({ className, resultLength, onClick, ...props }: Props) 
         </CommonPillButton>
       </span>
       <span className="flex flex-row gap-2">
-        <CommonPillButton onClick={onClick} className="h-8 w-20 border-red-600 text-red-600">
+        <CommonPillButton onClick={onDeleteHandler} className="h-8 w-20 border-red-600 text-red-600">
           Delete
         </CommonPillButton>
         <CommonPillButton onClick={onClick} className="h-8 w-20 border-gray-200 text-[var(--sub-color)]">
