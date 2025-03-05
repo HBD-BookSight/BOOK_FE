@@ -23,7 +23,7 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(({ className, ..
   const { register, handleSubmit, control } = useForm<Inputs>({
     mode: "onSubmit",
     defaultValues: {
-      urls: [{ value: "", type: "video" }],
+      urls: [{ value: "", type: "Video" }],
     },
   });
   const { closePopup } = usePopupActon();

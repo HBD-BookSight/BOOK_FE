@@ -11,7 +11,7 @@ const AdminPopupModal = ({ className, children, ...props }: Readonly<Props>) => 
   const { closeCallback, confirmCallback } = usePopupState();
   return (
     <div
-      className={`pointer-events-auto flex size-fit w-[400px] flex-col items-center justify-center rounded-2xl bg-white p-6 shadow-[0_0_20px_0_rgba(0,0,0,0.12)] backdrop-blur-[20px] ${
+      className={`pointer-events-auto flex size-fit w-[400px] flex-col items-center justify-center rounded-2xl bg-white p-6 shadow-[0_0_20px_0_rgba(0,0,0,0.12)] ${
         className || ""
       }`}
       {...props}
@@ -22,13 +22,13 @@ const AdminPopupModal = ({ className, children, ...props }: Readonly<Props>) => 
           onClick={confirmCallback}
           className="h-10 w-20 bg-[var(--highlight-color)] font-bold text-white"
         >
-          확인
+          Ok
         </CommonPillButton>
         <CommonPillButton
           onClick={closeCallback}
-          className="h-10 w-20 border-[--sub-color] font-bold text-[var(--sub-color)]"
+          className="h-10 w-20 border-gray-200 font-bold text-[var(--sub-color)]"
         >
-          취소
+          Cancle
         </CommonPillButton>
       </div>
     </div>
