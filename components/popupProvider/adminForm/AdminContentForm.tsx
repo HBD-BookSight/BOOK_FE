@@ -6,21 +6,23 @@ import { usePopupActon } from "@/context/popupStore";
 import { forwardRef, HTMLAttributes, useImperativeHandle } from "react";
 import { FieldValues, useFieldArray, useForm } from "react-hook-form";
 import CancleIcon from "@/components/icons/cancleIcon.svg";
+import { useRouter } from "next/navigation";
 
 type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
-type Inputs = {
+export type AdminContentInputs = {
   urls: { value: string; type: string }[];
-  isbn: string;
-  contentTitle: string;
-  bookName: string;
-  memo: string;
-  tag: string;
+  isbn: number;
+  contentTitle?: string;
+  bookName?: string;
+  memo?: string;
+  tag?: string;
 };
 export type AdminContentFormRef = {
   handleSubmit: () => void;
 };
 const AdminContentForm = forwardRef<AdminContentFormRef, Props>(({ className, ...props }, ref) => {
-  const { register, handleSubmit, control } = useForm<Inputs>({
+  const router = useRouter();
+  const { register, handleSubmit, control } = useForm<AdminContentInputs>({
     mode: "onSubmit",
     defaultValues: {
       urls: [{ value: "", type: "Video" }],
@@ -34,6 +36,7 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(({ className, ..
   const onSubmitHandler = (data: FieldValues) => {
     console.log(data);
     closePopup(); //성공시 모달 종료
+    router.refresh();
   };
   const onErrorHandler = (data: FieldValues) => {
     console.log(data);

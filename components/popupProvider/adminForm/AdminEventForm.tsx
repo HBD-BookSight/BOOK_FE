@@ -112,14 +112,14 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(({ className, ...pro
             <CommonInputField
               id="startDate"
               type="date"
-              className="px-1"
+              className="!px-1"
               {...register("startDate", { required: "입력이 필요합니다" })}
             />
             ~
             <CommonInputField
               id="endDate"
               type="date"
-              className="px-1"
+              className="!px-1"
               {...register("endDate", { required: "입력이 필요합니다" })}
             />
           </div>
