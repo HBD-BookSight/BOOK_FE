@@ -6,15 +6,20 @@ import { usePopupActon } from "@/context/popupStore";
 import AdminDeleteForm, { AdminDeleteFormRef } from "../popupProvider/adminForm/AdminDeleteForm";
 import AlertPopupModal from "../popupProvider/AlertPopupModal";
 
-type Props = { className?: string; resultLength?: number; onClick?: () => void } & HTMLAttributes<HTMLDivElement>;
-const AdminControlBar = ({ className, resultLength, onClick, ...props }: Props) => {
+type Props = {
+  className?: string;
+  resultLength?: number;
+  onClick?: () => void;
+  selectRow: number | undefined;
+} & HTMLAttributes<HTMLDivElement>;
+const AdminRowController = ({ className, resultLength, onClick, selectRow, ...props }: Props) => {
   const { openPopup, closePopup } = usePopupActon();
   const ref = useRef<AdminDeleteFormRef>(null);
 
   const onDeleteHandler = () => {
     openPopup(
       <AlertPopupModal>
-        <AdminDeleteForm ref={ref} />
+        <AdminDeleteForm rowKey={selectRow} ref={ref} />
       </AlertPopupModal>,
       closePopup,
       () => {
@@ -36,7 +41,10 @@ const AdminControlBar = ({ className, resultLength, onClick, ...props }: Props) 
         </CommonPillButton>
       </span>
       <span className="flex flex-row gap-2">
-        <CommonPillButton onClick={onDeleteHandler} className="h-8 w-20 border-red-600 text-red-600">
+        <CommonPillButton
+          onClick={selectRow !== undefined ? onDeleteHandler : undefined}
+          className="h-8 w-20 border-red-600 text-red-600"
+        >
           Delete
         </CommonPillButton>
         <CommonPillButton onClick={onClick} className="h-8 w-20 border-gray-200 text-[var(--sub-color)]">
@@ -47,4 +55,4 @@ const AdminControlBar = ({ className, resultLength, onClick, ...props }: Props) 
   );
 };
 
-export default AdminControlBar;
+export default AdminRowController;
