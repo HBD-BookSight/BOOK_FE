@@ -8,11 +8,11 @@ const AdminHomeLayout = ({
   children: ReactNode;
 }>) => {
   return (
-    <div className="relative flex size-full flex-1 flex-col">
+    <div className="relative flex flex-1 flex-col">
       <AdminHeader />
-      <div className="relative mx-auto flex size-full flex-1 flex-row">
+      <div className="relative flex flex-1 flex-row overflow-hidden">
         <AdminSideNav />
-        <div className="relative flex-1 px-16">{children}</div>
+        <div className="relative mx-16 flex flex-1 flex-col overflow-hidden">{children}</div>
       </div>
     </div>
   );
