@@ -25,11 +25,14 @@ export const AdminRowListItem = <T,>({
 }: Readonly<Props<T>>) => {
   return (
     <label
-      className={`relative flex w-fit flex-row items-center gap-2 ${isSelect ? "bg-[#F8F8FE]" : ""} ${className || ""}`}
+      className={`relative flex w-fit flex-row items-center gap-2 pl-2 ${isSelect ? "bg-[#F8F8FE]" : ""} ${
+        className || ""
+      }`}
       onClick={() => setSelectRow(rowIndex)}
     >
       <CommonRadioButton name="row" isSelected={isSelect} />
-      <p className="w-24 overflow-hidden text-ellipsis">{rowIndex}</p>
+      <p className="w-12 overflow-hidden text-ellipsis text-center">{rowIndex}</p>
+      {/* 실제로는 pk값을 사용해야됨 */}
       {keys.map((key: string, index: number) => (
         <p key={index} className="w-24 overflow-hidden text-ellipsis">
           {item[key as keyof T] !== undefined ? String(item[key as keyof T]) : ""}

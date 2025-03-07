@@ -12,9 +12,9 @@ const AdminRowList = <T,>({ className, keys, ...props }: Readonly<Props>) => {
 
   return (
     <div className={`relative flex flex-1 flex-col overflow-auto ${className || ""}`} {...props}>
-      <div className="absolute size-full">
-        <div className="sticky top-0 flex w-fit flex-row gap-2 border-b-[1px] bg-white pl-6">
-          <p className="w-24 overflow-hidden text-ellipsis font-bold"></p>
+      <div className="absolute flex size-full flex-col gap-2">
+        <div className="sticky top-0 flex w-fit flex-row gap-2 border-b-[1px] bg-white pl-8">
+          <p className="w-12 overflow-hidden text-ellipsis font-bold"></p>
           {keys.map((key, index) => {
             return (
               <p key={index} className="w-24 overflow-hidden text-ellipsis font-bold">
