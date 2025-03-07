@@ -10,22 +10,22 @@ import CommonToggleSwitch from "@/components/common/CommonToggleSwitch";
 
 type Props = { className?: string; defaultValues?: AdminEventInputs } & HTMLAttributes<HTMLDivElement>;
 export type AdminEventInputs = {
-  urls: { value: string; type: string }[];
+  urls: { value: string; type: "Video" | "Article" | "Podcast" | "Link" }[];
   eventTitle: string;
   eventHost: string;
   startDate: Date;
   endDate: Date;
-  location: string;
+  location: "Online" | "Offline" | "Online/Offline";
   eventType: string;
-  eventFlag: string;
-  isPosting: string;
-  isbn: string;
-  bookName: string;
-  senderName: string;
-  senderEmail: string;
-  senderMessage: string;
-  memo: string;
-  tag: string;
+  eventFlag: "Solo" | "Group" | "etc";
+  isPosting: boolean;
+  isbn?: number;
+  bookName?: string;
+  senderName?: string;
+  senderEmail?: string;
+  senderMessage?: string;
+  memo?: string;
+  tag?: string;
 };
 export type AdminEventFormRef = {
   handleSubmit: () => void;
@@ -100,7 +100,7 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(({ className, defaul
           ))}
           <div className="relative flex size-full flex-row justify-end gap-2">
             <button
-              onClick={() => append({ value: "", type: "video" })}
+              onClick={() => append({ value: "", type: "Video" })}
               className="text-sm font-semibold text-[var(--sub-color)]"
             >
               + Add

@@ -11,9 +11,9 @@ type Props = { className?: string; defaultValues?: AdminPublisherInputs } & HTML
 export type AdminPublisherInputs = {
   publisherName: string;
   instagramId: string;
-  urls: { value: string; type: string }[];
-  memo: string;
-  tag: string;
+  urls: { value: string; type: "Link" | "Youtube" | "Profile" | "Homepage" | "Blog" }[];
+  memo?: string;
+  tag?: string;
 };
 export type AdminPublisherFormRef = {
   handleSubmit: () => void;
@@ -92,7 +92,7 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(({ className
           ))}
           <div className="relative flex size-full flex-row justify-end gap-2">
             <button
-              onClick={() => append({ value: "", type: "video" })}
+              onClick={() => append({ value: "", type: "Link" })}
               className="text-sm font-semibold text-[var(--sub-color)]"
             >
               + Add

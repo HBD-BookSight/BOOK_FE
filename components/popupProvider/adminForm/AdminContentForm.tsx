@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 
 type Props = { className?: string; defaultValues?: AdminContentInputs } & HTMLAttributes<HTMLDivElement>;
 export type AdminContentInputs = {
-  urls: { value: string; type: string }[];
+  urls: { value: string; type: "Video" | "Article" | "Podcast" | "Link" }[];
   isbn: number;
   contentTitle?: string;
   bookName?: string;
@@ -84,7 +84,7 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(({ className, de
           ))}
           <div className="relative flex size-full flex-row justify-end gap-2">
             <button
-              onClick={() => append({ value: "", type: "video" })}
+              onClick={() => append({ value: "", type: "Video" })}
               className="text-sm font-semibold text-[var(--sub-color)]"
             >
               + Add
