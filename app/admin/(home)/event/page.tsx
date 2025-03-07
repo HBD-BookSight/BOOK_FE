@@ -14,7 +14,21 @@ const Event = async ({ searchParams }: { searchParams: Promise<{ keyword?: strin
   console.log("searchParams 테스트", keyword);
 
   return (
-    <PageDataProvider<AdminEventInputs[]> initialData={[]}>
+    <PageDataProvider<AdminEventInputs[]>
+      initialData={[
+        {
+          urls: [{ value: "asdassdfasdf", type: "Video" }],
+          eventTitle: "test",
+          eventHost: "test",
+          startDate: new Date(),
+          endDate: new Date(),
+          location: "Offline",
+          eventType: "test",
+          eventFlag: "Group",
+          isPosting: true,
+        },
+      ]}
+    >
       <AdminRowControllerContainer />
       <AdminRowList<AdminEventInputs[]>
         keys={[

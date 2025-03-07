@@ -14,7 +14,17 @@ const Publisher = async ({ searchParams }: { searchParams: Promise<{ keyword?: s
   console.log("searchParams 테스트", keyword);
 
   return (
-    <PageDataProvider<AdminPublisherInputs[]> initialData={[]}>
+    <PageDataProvider<AdminPublisherInputs[]>
+      initialData={[
+        {
+          publisherName: "test",
+          instagramId: "test",
+          urls: [{ value: "test", type: "Link" }],
+          memo: "test",
+          tag: "test",
+        },
+      ]}
+    >
       <AdminRowControllerContainer />
       <AdminRowList<AdminPublisherInputs[]>
         keys={[
@@ -22,12 +32,12 @@ const Publisher = async ({ searchParams }: { searchParams: Promise<{ keyword?: s
           "urls",
           "urlsasdfasdfafsasdfasfd",
           "312342344",
-          "312342564",
-          "312342344",
+          "memo",
+          "publisherName",
           "312342564",
           "31264663264",
           "31264663264",
-          "31434636",
+          "tag",
           "311234",
         ]}
       ></AdminRowList>
