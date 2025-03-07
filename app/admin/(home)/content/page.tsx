@@ -1,6 +1,9 @@
 import { redirect } from "next/navigation";
-import AdminControlBarContainer from "./AdminControlBarContainer";
-import { Suspense } from "react";
+import AdminRowControllerContainer from "../../../../components/adminRowController/AdminRowControllerContainer";
+import PageDataProvider from "@/context/PageDataProvider";
+import AdminRowList from "@/components/adminRowList/AdminRowList";
+import { AdminContentInputs } from "@/components/popupProvider/adminForm/AdminContentForm";
+import AdminPaginationController from "@/components/adminPaginationController/AdminPaginationController";
 
 const Content = async ({ searchParams }: { searchParams: Promise<{ keyword?: string }> }) => {
   if (false) {
@@ -8,13 +11,33 @@ const Content = async ({ searchParams }: { searchParams: Promise<{ keyword?: str
     redirect("/admin/login");
   }
   const { keyword } = await searchParams;
+  console.log("searchParams 테스트", keyword);
+
   return (
-    <>
-      <Suspense>
-        <AdminControlBarContainer />
-      </Suspense>
-      {keyword}
-    </>
+    <PageDataProvider<AdminContentInputs[]>
+      initialData={[
+        { isbn: 132141213123, urls: [{ value: "asdassdfasdf", type: "Video" }] },
+        { isbn: 25, urls: [{ value: "123", type: "Video" }] },
+      ]}
+    >
+      <AdminRowControllerContainer />
+      <AdminRowList<AdminContentInputs[]>
+        keys={[
+          "isbn",
+          "urls",
+          "urlsasdfasdfafsasdfasfd",
+          "312342344",
+          "312342564",
+          "312342344",
+          "312342564",
+          "31264663264",
+          "31264663264",
+          "31434636",
+          "311234",
+        ]}
+      ></AdminRowList>
+      <AdminPaginationController />
+    </PageDataProvider>
   );
 };
 
