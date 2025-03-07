@@ -8,7 +8,7 @@ import { FieldValues, useFieldArray, useForm } from "react-hook-form";
 import CancleIcon from "@/components/icons/cancleIcon.svg";
 import { useRouter } from "next/navigation";
 
-type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
+type Props = { className?: string; defaultValues?: AdminContentInputs } & HTMLAttributes<HTMLDivElement>;
 export type AdminContentInputs = {
   urls: { value: string; type: string }[];
   isbn: number;
@@ -20,11 +20,11 @@ export type AdminContentInputs = {
 export type AdminContentFormRef = {
   handleSubmit: () => void;
 };
-const AdminContentForm = forwardRef<AdminContentFormRef, Props>(({ className, ...props }, ref) => {
+const AdminContentForm = forwardRef<AdminContentFormRef, Props>(({ className, defaultValues, ...props }, ref) => {
   const router = useRouter();
   const { register, handleSubmit, control } = useForm<AdminContentInputs>({
     mode: "onSubmit",
-    defaultValues: {
+    defaultValues: defaultValues || {
       urls: [{ value: "", type: "Video" }],
     },
   });

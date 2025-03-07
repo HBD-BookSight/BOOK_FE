@@ -8,9 +8,9 @@ import CancleIcon from "@/components/icons/cancleIcon.svg";
 import CommonSelectBox from "@/components/common/CommonSelectBox";
 import CommonToggleSwitch from "@/components/common/CommonToggleSwitch";
 
-type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
-type Inputs = {
-  urls: { value: string }[];
+type Props = { className?: string; defaultValues?: AdminEventInputs } & HTMLAttributes<HTMLDivElement>;
+export type AdminEventInputs = {
+  urls: { value: string; type: string }[];
   eventTitle: string;
   eventHost: string;
   startDate: Date;
@@ -30,11 +30,11 @@ type Inputs = {
 export type AdminEventFormRef = {
   handleSubmit: () => void;
 };
-const AdminEventForm = forwardRef<AdminEventFormRef, Props>(({ className, ...props }, ref) => {
-  const { register, handleSubmit, control, setValue, watch } = useForm<Inputs>({
+const AdminEventForm = forwardRef<AdminEventFormRef, Props>(({ className, defaultValues, ...props }, ref) => {
+  const { register, handleSubmit, control, setValue, watch } = useForm<AdminEventInputs>({
     mode: "onSubmit",
-    defaultValues: {
-      urls: [{ value: "" }],
+    defaultValues: defaultValues || {
+      urls: [{ value: "", type: "Video" }],
     },
   });
   const { closePopup } = usePopupActon();
@@ -80,8 +80,14 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(({ className, ...pro
               <CommonInputField
                 placeholder="https://example.com"
                 type="url"
+                className="flex-[2]"
                 id={`url${index}`}
                 {...register(`urls.${index}.value`, { required: "입력이 필요합니다" })}
+              />
+              <CommonSelectBox
+                optionItems={["Video", "Article", "Podcast", "Link"]}
+                className="flex-1"
+                {...register(`urls.${index}.type`, { required: "입력이 필요합니다" })}
               />
               <button
                 type="button"
@@ -93,7 +99,10 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(({ className, ...pro
             </div>
           ))}
           <div className="relative flex size-full flex-row justify-end gap-2">
-            <button onClick={() => append({ value: "" })} className="text-sm font-semibold text-[var(--sub-color)]">
+            <button
+              onClick={() => append({ value: "", type: "video" })}
+              className="text-sm font-semibold text-[var(--sub-color)]"
+            >
               + Add
             </button>
           </div>

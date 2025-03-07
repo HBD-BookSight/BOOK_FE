@@ -7,8 +7,8 @@ import { forwardRef, HTMLAttributes, useImperativeHandle } from "react";
 import { FieldValues, useFieldArray, useForm } from "react-hook-form";
 import CancleIcon from "@/components/icons/cancleIcon.svg";
 
-type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
-type Inputs = {
+type Props = { className?: string; defaultValues?: AdminPublisherInputs } & HTMLAttributes<HTMLDivElement>;
+export type AdminPublisherInputs = {
   publisherName: string;
   instagramId: string;
   urls: { value: string; type: string }[];
@@ -18,10 +18,10 @@ type Inputs = {
 export type AdminPublisherFormRef = {
   handleSubmit: () => void;
 };
-const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(({ className, ...props }, ref) => {
-  const { register, handleSubmit, control } = useForm<Inputs>({
+const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(({ className, defaultValues, ...props }, ref) => {
+  const { register, handleSubmit, control } = useForm<AdminPublisherInputs>({
     mode: "onSubmit",
-    defaultValues: {
+    defaultValues: defaultValues || {
       urls: [{ value: "", type: "Link" }],
     },
   });
