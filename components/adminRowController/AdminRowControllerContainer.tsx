@@ -8,7 +8,7 @@ import { usePageData } from "@/context/PageDataProvider";
  */
 const AdminRowControllerContainer = () => {
   const { selectRow, data } = usePageData();
-  const defaultValues = data instanceof Array && data[selectRow ?? 0];
+  const defaultValues = data instanceof Array && selectRow !== undefined && data[selectRow];
 
   return (
     <AdminRowController
