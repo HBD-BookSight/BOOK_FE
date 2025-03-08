@@ -92,6 +92,7 @@ export async function GET(request: Request) {
   try {
     // 미리 생성된 인덱스 로드
     const index = JSON.parse(fs.readFileSync(indexFilePath, "utf-8"));
+    console.log("index 호출됨:", indexFilePath);
 
     // 인덱스에서 데이터 위치 확인
     const offset = index[targetId];
@@ -136,6 +137,7 @@ export async function GET(request: Request) {
           }
         })
         .on("error", (error) => {
+          console.log(error);
           reject(error); // 에러 발생 시 Promise를 실패 상태로 설정
         })
         .on("end", () => {
@@ -149,6 +151,7 @@ export async function GET(request: Request) {
     });
 
     if (result) {
+      console.log("찾은 데이터:", result);
       return NextResponse.json({ data: result });
     } else {
       return NextResponse.json({ message: "데이터를 찾을 수 없습니다." }, { status: 404 });

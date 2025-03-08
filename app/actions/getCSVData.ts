@@ -8,6 +8,7 @@ export async function getCSVData(isbn: string) {
   const csvFilePath = path.join(process.cwd(), "data", "NL_BO_SPECIES_MASTER_NEW_202112.csv");
   const indexFilePath = path.join(process.cwd(), "data", "index.json");
 
+  console.log("getCSVData 호출됨:", isbn);
   if (!isbn) {
     return { message: "ID가 제공되지 않았습니다." };
   }
@@ -15,10 +16,12 @@ export async function getCSVData(isbn: string) {
   try {
     // 미리 생성된 인덱스 로드
     const index = JSON.parse(fs.readFileSync(indexFilePath, "utf-8"));
+    console.log("index 호출됨:", indexFilePath);
 
     // 인덱스에서 데이터 위치 확인
     const offset = index[isbn];
     if (offset === undefined) {
+      console.log("offset 찾을수없음:", offset);
       return { message: "데이터를 찾을 수 없습니다." };
     }
 
@@ -54,11 +57,13 @@ export async function getCSVData(isbn: string) {
         .on("data", (data) => {
           if (data.ISBN_THIRTEEN_NO === isbn) {
             // 조건에 맞는 데이터를 찾으면 바로 resolve
+            console.log("data찾음:", data);
             resolve(data);
             stream.destroy(); // 스트림 강제 종료
           }
         })
         .on("error", (error) => {
+          console.log("스트림 예외:", error);
           reject(error); // 에러 발생 시 Promise를 실패 상태로 설정
         })
         .on("end", () => {

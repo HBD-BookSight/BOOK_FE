@@ -1,7 +1,7 @@
 "use client";
 import { HTMLAttributes, useEffect, useRef } from "react";
 import SearchIcon from "../icons/searchIcon.svg";
-import { getCSVData } from "@/function/getCSVData";
+import { getCSVData } from "@/app/actions/getCSVData";
 
 type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
 const SearchBar = ({ className, ...props }: Readonly<Props>) => {
