@@ -1,6 +1,7 @@
 "use client";
 import { HTMLAttributes, useEffect, useRef } from "react";
 import SearchIcon from "../icons/searchIcon.svg";
+import { getCSVData } from "@/function/getCSVData";
 
 type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
 const SearchBar = ({ className, ...props }: Readonly<Props>) => {
@@ -15,10 +16,17 @@ const SearchBar = ({ className, ...props }: Readonly<Props>) => {
     return () => clearTimeout(focusTimer);
   }, []);
 
+  const handleFetchData = async () => {
+    const isbn = SearchBarRef.current?.value;
+    if (!isbn) return;
+    const response = await getCSVData(isbn);
+    console.log(response);
+  };
+
   return (
     <div className={`sticky top-0 w-full px-[var(--client-layout-margin)] py-3 ${className || ""}`} {...props}>
       <div className="relative flex w-full flex-row rounded-2xl border bg-white p-1">
-        <SearchIcon className="w-11 text-[var(--sub-color)]" />
+        <SearchIcon className="w-11 text-[var(--sub-color)]" onClick={handleFetchData} />
         <input
           className="w-full outline-none"
           placeholder="제목, 작가, 출판사를 검색하세요"
