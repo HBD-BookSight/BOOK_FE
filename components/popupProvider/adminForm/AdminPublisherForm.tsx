@@ -50,7 +50,7 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(({ className
     <div className={`relative flex size-full flex-col ${className || ""}`} {...props}>
       <h2 className="flex justify-center text-sm font-semibold text-[var(--sub-color)]">Add Content</h2>
       <form
-        className="relative flex size-full flex-col gap-6 py-6"
+        className="relative flex size-full max-h-[80vh] flex-col gap-6 overflow-auto py-6"
         onSubmit={handleSubmit(onSubmitHandler, onErrorHandler)}
       >
         <div>
