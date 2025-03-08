@@ -1,7 +1,6 @@
 "use client";
 import { HTMLAttributes, useEffect, useRef } from "react";
 import SearchIcon from "../icons/searchIcon.svg";
-import { getCSVData } from "@/app/actions/getCSVData";
 
 type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
 const SearchBar = ({ className, ...props }: Readonly<Props>) => {
@@ -19,8 +18,9 @@ const SearchBar = ({ className, ...props }: Readonly<Props>) => {
   const handleFetchData = async () => {
     const isbn = SearchBarRef.current?.value;
     if (!isbn) return;
-    const response = await getCSVData(isbn);
-    console.log(response);
+    const response = await fetch(`/api/book?isbn=${isbn}`);
+    const data = await response.json();
+    console.log(data);
   };
 
   return (

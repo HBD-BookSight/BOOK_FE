@@ -78,24 +78,23 @@ import path from "path";
 import { NextResponse } from "next/server";
 import csv from "csv-parser";
 
-const csvFilePath = path.join(process.cwd(), "data", "NL_BO_SPECIES_MASTER_NEW_202112.csv");
-const indexFilePath = path.join(process.cwd(), "data", "index.json");
+const csvFilePath = path.join(process.cwd(), "public", "data", "NL_BO_SPECIES_MASTER_NEW_202112.csv");
+const indexFilePath = path.join(process.cwd(), "public", "data", "index.json");
 
 // 클라이언트 요청 처리
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const targetId = searchParams.get("id");
-  if (!targetId) {
-    return NextResponse.json({ message: "ID가 제공되지 않았습니다." }, { status: 400 });
+  const isbn = searchParams.get("isbn");
+  if (!isbn) {
+    return NextResponse.json({ message: "isbn이 제공되지 않았습니다." }, { status: 400 });
   }
 
   try {
     // 미리 생성된 인덱스 로드
     const index = JSON.parse(fs.readFileSync(indexFilePath, "utf-8"));
-    console.log("index 호출됨:", indexFilePath);
 
     // 인덱스에서 데이터 위치 확인
-    const offset = index[targetId];
+    const offset = index[isbn];
     if (offset === undefined) {
       return NextResponse.json({ message: "데이터를 찾을 수 없습니다." }, { status: 404 });
     }
@@ -130,18 +129,16 @@ export async function GET(request: Request) {
           })
         )
         .on("data", (data) => {
-          if (data.ISBN_THIRTEEN_NO === targetId) {
+          if (data.ISBN_THIRTEEN_NO === isbn) {
             // 조건에 맞는 데이터를 찾으면 바로 resolve
             resolve(data);
             stream.destroy(); // 스트림 강제 종료
           }
         })
         .on("error", (error) => {
-          console.log(error);
           reject(error); // 에러 발생 시 Promise를 실패 상태로 설정
         })
         .on("end", () => {
-          console.log("스트림 종료: 데이터 없음");
           resolve(null); // 데이터가 없으면 null 반환
         })
         .on("close", () => {
@@ -151,7 +148,6 @@ export async function GET(request: Request) {
     });
 
     if (result) {
-      console.log("찾은 데이터:", result);
       return NextResponse.json({ data: result });
     } else {
       return NextResponse.json({ message: "데이터를 찾을 수 없습니다." }, { status: 404 });
