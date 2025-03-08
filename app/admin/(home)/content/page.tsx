@@ -16,14 +16,14 @@ const Content = async ({ searchParams }: { searchParams: Promise<{ keyword?: str
   return (
     <PageDataProvider<AdminContentInputs[]>
       initialData={[
-        { isbn: 132141213123, urls: [{ value: "asdassdfasdf", type: "Video" }] },
-        { isbn: 25, urls: [{ value: "123", type: "Video" }] },
+        { isbns: [{ value: 123123123 }], urls: [{ value: "asdassdfasdf", type: "Video" }] },
+        { isbns: [{ value: 123 }, { value: 123 }], urls: [{ value: "123", type: "Video" }] },
       ]}
     >
       <AdminRowControllerContainer />
       <AdminRowList<AdminContentInputs[]>
         keys={[
-          "isbn",
+          "isbns",
           "urls",
           "urlsasdfasdfafsasdfasfd",
           "312342344",
