@@ -55,6 +55,7 @@ export async function getCSVData(isbn: string) {
           })
         )
         .on("data", (data) => {
+          console.log("데이터 처리 중:");
           if (data.ISBN_THIRTEEN_NO === isbn) {
             // 조건에 맞는 데이터를 찾으면 바로 resolve
             console.log("data찾음:", data);
@@ -82,6 +83,7 @@ export async function getCSVData(isbn: string) {
       return { message: "데이터를 찾을 수 없습니다." };
     }
   } catch (error) {
+    console.log("data찾음:", error);
     return { error };
   }
 }
