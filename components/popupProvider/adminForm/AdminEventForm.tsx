@@ -4,7 +4,7 @@ import CommonLabel from "@/components/common/CommonLabel";
 import { usePopupActon } from "@/context/popupStore";
 import { forwardRef, HTMLAttributes, useEffect, useImperativeHandle } from "react";
 import { FieldValues, useFieldArray, useForm } from "react-hook-form";
-import CancleIcon from "@/components/icons/cancleIcon.svg";
+import CancleIcon from "@/public/icons/cancleIcon.svg";
 import CommonSelectBox from "@/components/common/CommonSelectBox";
 import CommonToggleSwitch from "@/components/common/CommonToggleSwitch";
 

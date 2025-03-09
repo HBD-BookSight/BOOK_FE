@@ -1,9 +1,9 @@
 "use client";
 import { Dispatch, HTMLAttributes, SetStateAction, useEffect, useState } from "react";
-import HomeIcon from "../icons/homeIcon.svg";
-import SearchIcon from "../icons/searchIcon.svg";
-import ExploreIcon from "../icons/exploreIcon.svg";
-import BackArrowIcon from "../icons/backArrowIcon.svg";
+import HomeIcon from "@/public/icons/homeIcon.svg";
+import SearchIcon from "@/public/icons/searchIcon.svg";
+import ExploreIcon from "@/public/icons/exploreIcon.svg";
+import BackArrowIcon from "@/public/icons/backArrowIcon.svg";
 import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import MailIcon from "../icons/mailIcon.svg";
+import MailIcon from "@/public/icons/mailIcon.svg";
 
 const PromotionContract = () => {
   return (

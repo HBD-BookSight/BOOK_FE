@@ -1,5 +1,5 @@
 "use client";
-import SearchIcon from "@/components/icons/searchIcon.svg";
+import SearchIcon from "@/public/icons/searchIcon.svg";
 import { usePathname, useRouter } from "next/navigation";
 import { HTMLAttributes, KeyboardEvent, useRef } from "react";
 

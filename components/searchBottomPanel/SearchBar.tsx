@@ -1,6 +1,6 @@
 "use client";
 import { HTMLAttributes, useEffect, useRef } from "react";
-import SearchIcon from "../icons/searchIcon.svg";
+import SearchIcon from "@/public/icons/searchIcon.svg";
 
 type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
 const SearchBar = ({ className, ...props }: Readonly<Props>) => {
@@ -19,19 +19,24 @@ const SearchBar = ({ className, ...props }: Readonly<Props>) => {
     const isbn = SearchBarRef.current?.value;
     if (!isbn) return;
     const response = await fetch(`/api/book?isbn=${isbn}`);
-    const data = await response.json();
+    const { data } = await response.json();
     console.log(data);
   };
 
   return (
     <div className={`sticky top-0 w-full px-[var(--client-layout-margin)] py-3 ${className || ""}`} {...props}>
       <div className="relative flex w-full flex-row rounded-2xl border bg-white p-1">
-        <SearchIcon className="w-11 text-[var(--sub-color)]" onClick={handleFetchData} />
+        <SearchIcon className="w-11 cursor-pointer text-[var(--sub-color)]" onClick={handleFetchData} />
         <input
           className="w-full outline-none"
           placeholder="제목, 작가, 출판사를 검색하세요"
           type="search"
           ref={SearchBarRef}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleFetchData();
+            }
+          }}
         ></input>
       </div>
     </div>

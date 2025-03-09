@@ -1,7 +1,7 @@
 "use client";
 import { useBackHeader } from "@/context/backHeaderStore";
 import { HTMLAttributes } from "react";
-import BackArrow from "../icons/backArrowIcon.svg";
+import BackArrow from "@/public/icons/backArrowIcon.svg";
 import { useRouter } from "next/navigation";
 
 type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;

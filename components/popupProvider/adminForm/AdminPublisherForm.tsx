@@ -5,7 +5,7 @@ import CommonSelectBox from "@/components/common/CommonSelectBox";
 import { usePopupActon } from "@/context/popupStore";
 import { forwardRef, HTMLAttributes, useImperativeHandle } from "react";
 import { FieldValues, useFieldArray, useForm } from "react-hook-form";
-import CancleIcon from "@/components/icons/cancleIcon.svg";
+import CancleIcon from "@/public/icons/cancleIcon.svg";
 
 type Props = { className?: string; defaultValues?: AdminPublisherInputs } & HTMLAttributes<HTMLDivElement>;
 export type AdminPublisherInputs = {

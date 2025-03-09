@@ -1,5 +1,5 @@
 import React, { HTMLAttributes } from "react";
-import CalendarIcon from "../icons/calendarIcon.svg";
+import CalendarIcon from "@/public/icons/calendarIcon.svg";
 import { formatDateToKorean } from "@/function/common";
 
 type Props = {

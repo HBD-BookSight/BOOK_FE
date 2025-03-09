@@ -2,7 +2,7 @@
 import { useBackHeader } from "@/context/backHeaderStore";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
-import ShareIcon from "@/components/icons/shareIcon.svg";
+import ShareIcon from "@/public/icons/shareIcon.svg";
 
 const BookHeaderHelper = () => {
   const { isbn } = useParams();

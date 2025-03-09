@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from "react";
-import BirthDayCakeIcon from "../icons/birthDayCakeIcon.svg";
-import BookMarkIcon from "../icons/bookMarkIcon.svg";
+import BirthDayCakeIcon from "@/public/icons/birthDayCakeIcon.svg";
+import BookMarkIcon from "@/public/icons/bookMarkIcon.svg";
 import Link from "next/link";
 import { formatDateToKorean } from "@/function/common";
 

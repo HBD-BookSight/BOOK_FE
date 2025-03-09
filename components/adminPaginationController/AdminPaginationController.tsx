@@ -1,7 +1,7 @@
 "use client";
 import { usePageData } from "@/context/PageDataProvider";
 import React, { HTMLAttributes, ReactNode } from "react";
-import ArrowHeadIcon from "../icons/arrowHeadIcon.svg";
+import ArrowHeadIcon from "@/public/icons/arrowHeadIcon.svg";
 
 type Props = { className?: string; children?: ReactNode } & HTMLAttributes<HTMLDivElement>;
 const AdminPaginationController = ({ className, ...props }: Readonly<Props>) => {
