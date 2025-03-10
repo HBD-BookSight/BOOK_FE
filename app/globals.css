@@ -26,3 +26,23 @@
     scrollbar-width: none;
   }
 }
+
+@layer utilities {
+  .scrollbar-custom {
+    overflow: hidden;
+  }
+  .scrollbar-custom:hover {
+    overflow: scroll;
+  }
+  .scrollbar-custom::-webkit-scrollbar {
+    height: 8px; /* 스크롤바 너비 */
+    width: 8px;
+  }
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background-color: rgba(200, 200, 200, 0.3); /* track 색상 및 투명도 */
+    border-radius: 4px; /* 모서리 둥글게 */
+  }
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background-opacity: 0;
+  }
+}
