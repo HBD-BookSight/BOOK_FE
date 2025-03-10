@@ -35,7 +35,7 @@ const getBirtdayBook = async (): Promise<Book[]> => {
         .pipe(csv())
         .on("data", (row) => {
           const spltit = row.TWO_PBLICTE_DE.split("-");
-          if (`${spltit[1]}-${spltit[2]}` === toDayDate) {
+          if (`${spltit[1]}-${spltit[2]}` === toDayDate && row.IMAGE_URL.includes("image.aladin.co.kr")) {
             bookData.push(row);
             if (bookData.length === 6) {
               //최대 6개까지만 찾음 다 찾으면 너무 오래걸리고 어차피 안씀
