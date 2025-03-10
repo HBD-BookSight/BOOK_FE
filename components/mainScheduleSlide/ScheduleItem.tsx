@@ -2,7 +2,7 @@ import React, { HTMLAttributes } from "react";
 import CalendarIcon from "@/public/icons/calendarIcon.svg";
 import { formatDateToKorean } from "@/function/common";
 
-type Props = {
+export type ScheduleItemProps = {
   className?: string;
   typeName?: string;
   title?: string;
@@ -10,7 +10,15 @@ type Props = {
   startDate?: Date;
   endDate?: Date;
 } & HTMLAttributes<HTMLDivElement>;
-const ScheduleItem = ({ className, typeName, title, publisher, startDate, endDate, ...props }: Readonly<Props>) => {
+const ScheduleItem = ({
+  className,
+  typeName,
+  title,
+  publisher,
+  startDate,
+  endDate,
+  ...props
+}: Readonly<ScheduleItemProps>) => {
   return (
     <aside className={`relative flex min-w-fit flex-col gap-1 rounded-2xl border p-6 ${className || ""}`} {...props}>
       <p className="text-sm font-bold text-[var(--highlight-color)]">{typeName ?? "타입"}</p>
