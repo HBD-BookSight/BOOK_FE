@@ -19,7 +19,7 @@ const MainScheduleSlideContainer = ({ className, ...props }: Readonly<Props>) =>
         }
       />
       <div
-        className="scrollbar-hide relative flex size-full snap-x snap-proximity flex-row gap-2 overflow-x-scroll pr-[var(--client-layout-margin)]"
+        className="scrollbar-hide relative flex size-full snap-x snap-mandatory flex-row gap-2 overflow-x-scroll pr-[var(--client-layout-margin)]"
         ref={SliderRef}
       >
         {DefaultItems.map((item, index) => (
