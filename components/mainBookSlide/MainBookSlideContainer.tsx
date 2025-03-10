@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import ArrowHeadIcon from "@/public/icons/arrowHeadIcon.svg";
 import BookItem from "./BookItem";
 import { Book } from "@/function/server/getBirtdayBook";
+import { isMobile } from "@/function/common";
 
 type Props = {
   className?: string;
@@ -44,7 +45,6 @@ const MainBookSlideContainer = ({ className, books, setConfettiWind, ...props }:
     setConfettiWind(0.1);
   };
 
-  // 스크롤 이벤트 핸들러
   const handleScroll = () => {
     if (slideContainerRef.current && booksData) {
       const { scrollLeft, scrollWidth, clientWidth } = slideContainerRef.current;
@@ -55,9 +55,16 @@ const MainBookSlideContainer = ({ className, books, setConfettiWind, ...props }:
 
       if (currentIndex !== prevScrollIndex) {
         // 새로운 단계에 도달했을 때만 배열 업데이트
-        setBooksData((prevItems) => rotateArray(prevItems));
+        if (currentIndex > prevScrollIndex) {
+          // 오른쪽으로 스크롤: 첫 번째 요소를 뒤로 이동
+          slideLeftHandler();
+        } else if (currentIndex < prevScrollIndex) {
+          // 왼쪽으로 스크롤: 마지막 요소를 앞으로 이동
+          slideRightHandler();
+        }
         setPrevScrollIndex(currentIndex); // 이전 인덱스 업데이트
       }
+
       if (currentIndex > prevScrollIndex) {
         setConfettiWind(-0.1);
       } else if (currentIndex < prevScrollIndex) {
@@ -66,15 +73,11 @@ const MainBookSlideContainer = ({ className, books, setConfettiWind, ...props }:
     }
   };
 
-  // 배열 회전
-  const rotateArray = (array: Book[] | undefined) => {
-    if (!array) return;
-    return [...array.slice(1), array[0]]; // 첫 번째 요소를 마지막으로 이동
-  };
-
   return (
     <div
-      className={`scrollbar-hide group relative size-full max-w-full overflow-auto ${className || ""}`}
+      className={`${isMobile() ? "" : "scrollbar-custom"} group relative size-full max-w-full overflow-auto ${
+        className || ""
+      }`}
       {...props}
       ref={slideContainerRef}
       onScroll={handleScroll}

@@ -5,3 +5,7 @@ export const formatDateToKorean = (date: Date) => {
 
   return `${year}년 ${month}월 ${day}일`;
 };
+
+export const isMobile = () => {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+};
