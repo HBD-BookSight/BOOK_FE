@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "s3-alpha-sig.figma.com",
       },
+      {
+        protocol: "https",
+        hostname: "image.aladin.co.kr",
+        pathname: "/product/**", // 경로 패턴 설정
+      },
     ], // 책사진 도메인 허용
   },
   webpack: (config) => {
