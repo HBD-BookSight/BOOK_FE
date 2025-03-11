@@ -5,7 +5,7 @@ const KakaoInfoTip = () => {
   return (
     <label
       htmlFor="toggle"
-      className="relative flex h-5 min-w-0 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-[#FEE500] text-[#000000]"
+      className="relative flex h-5 min-w-5 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-[#FEE500] text-[#000000]"
     >
       <input type="checkbox" id="toggle" className="peer hidden" />
       <div className="flex size-5 items-center justify-center rounded-md">
