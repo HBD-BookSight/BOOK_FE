@@ -3,12 +3,12 @@ import React, { Dispatch, HTMLAttributes, SetStateAction, useEffect, useRef, use
 import { motion } from "framer-motion";
 import ArrowHeadIcon from "@/public/icons/arrowHeadIcon.svg";
 import BookItem from "./BookItem";
-import { Book } from "@/function/server/getBirtdayBook";
 import { isMobile } from "@/function/common";
+import { CSVBook } from "@/types/api";
 
 type Props = {
   className?: string;
-  books: Book[];
+  books: CSVBook[];
   setConfettiWind: Dispatch<SetStateAction<number>>;
 } & HTMLAttributes<HTMLDivElement>;
 
@@ -16,7 +16,8 @@ const MainBookSlideContainer = ({ className, books, setConfettiWind, ...props }:
   const [slideViewSize, setSlideViewSize] = useState<number>();
   const [prevScrollIndex, setPrevScrollIndex] = useState<number>(0);
   const slideContainerRef = useRef<HTMLDivElement>(null);
-  const [booksData, setBooksData] = useState<Array<Book> | undefined>(books);
+  const [booksData, setBooksData] = useState<Array<CSVBook> | undefined>(books);
+  const [isMobileState, setIsMobileState] = useState(false);
 
   //슬라이드 뷰 크기 조정용
   useEffect(() => {
@@ -73,9 +74,14 @@ const MainBookSlideContainer = ({ className, books, setConfettiWind, ...props }:
     }
   };
 
+  //모바일 여부 체크(클라이언트 컴포넌트도 서버에서 먼저 렌더링되서 상태가 아닌경우 무조건 false를 반환함)
+  useEffect(() => {
+    setIsMobileState(isMobile());
+  }, []);
+
   return (
     <div
-      className={`${isMobile() ? "" : "scrollbar-custom"} group relative size-full max-w-full overflow-auto ${
+      className={`${isMobileState ? "" : "scrollbar-custom"} group relative size-full max-w-full overflow-auto ${
         className || ""
       }`}
       {...props}
