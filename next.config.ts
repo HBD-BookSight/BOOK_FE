@@ -19,6 +19,11 @@ const nextConfig: NextConfig = {
         hostname: "image.aladin.co.kr",
         pathname: "/product/**", // 경로 패턴 설정
       },
+      {
+        protocol: "https",
+        hostname: "search1.kakaocdn.net",
+        pathname: "/thumb/**", // 경로 패턴 설정
+      },
     ], // 책사진 도메인 허용
   },
   webpack: (config) => {
