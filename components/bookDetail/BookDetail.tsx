@@ -1,26 +1,70 @@
 "use client";
-import { useParams } from "next/navigation";
-import React, { HTMLAttributes } from "react";
+import React, { HTMLAttributes, useEffect, useState } from "react";
 import BookDetailImageSection from "./BookDetailImageSection";
 import BookTitleSection from "./BookTitleSection";
 import BookDetailSection from "./BookDetailSection";
 import RecommandedItem from "./RecommandedItem";
+import { CSVBook, KaKaoBookResponse } from "@/types/api";
 
-type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
-const BookDetail = ({ className, ...props }: Readonly<Props>) => {
-  const { isbn } = useParams();
-  const StringIsbn = String(isbn);
-  const imageUrl =
-    "https://s3-alpha-sig.figma.com/img/6968/9fe6/099879556d8a4fa78e4f47da472f3ccc?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=DG5-W8XYicpyjSur7jnZ7k5PmgDY8qjFQzbN2YrPxRHG9mcji3pRUX2zBBPczIgT21eOIuJDnSzEWW6cTDEkWcfjdKUJzYoaGbVJsrYWPZahVZ4OIFek970Jr~4RCYVJWlvzkNiOn2wH4woAfST1dx7uqnQmIQcS0PlX1CUNCQVJw-MobnwPgAENstFrQqjQ8ulbH9EREhzUfE0SWG~HptvljbyD6903xVYVwag6iHvSbxPv7xvvLOdst5Zl~8xEy7jNDrjC0jxazCtPJTTn2bCM-2wgEv85qh2hh7jII8iJBT079ArQwksJOHR6Vwm0nU6XaVvkDxXn~lbop2Qy9w__";
+type Props = { className?: string; book?: KaKaoBookResponse; isbn: number } & HTMLAttributes<HTMLDivElement>;
+type BookDetailData = {
+  title?: string;
+  authors?: string;
+  publisher?: string;
+  datetime?: Date;
+  imageUrl?: string;
+  url?: string;
+  contents?: string;
+};
+const BookDetail = ({ className, book, isbn, ...props }: Readonly<Props>) => {
+  const [bookState, setBookState] = useState<BookDetailData>();
+  useEffect(() => {
+    if (!bookState && !!book?.documents.length) {
+      setBookState({
+        title: book.documents[0].title,
+        authors: book.documents[0].authors.join(", "),
+        publisher: book.documents[0].publisher,
+        datetime: new Date(book?.documents[0].datetime),
+        imageUrl: book.documents[0].thumbnail,
+        url: book.documents[0].url,
+        contents: book.documents[0].contents,
+      });
+    }
+  }, [book, bookState]);
+
+  useEffect(() => {
+    //카카오 검색데이터 없을시 세션 스토리지에서 제목을 가져옴
+    if (!bookState && !book?.documents.length) {
+      const sessionStorageData = sessionStorage.getItem(isbn.toString());
+      if (sessionStorageData) {
+        const bookData: CSVBook = JSON.parse(sessionStorageData);
+        setBookState({
+          title: bookData.TITLE_NM,
+          authors: bookData.AUTHR_NM,
+          publisher: bookData.PUBLISHER_NM,
+          datetime: new Date(bookData.TWO_PBLICTE_DE),
+          imageUrl: bookData.IMAGE_URL,
+          url: undefined,
+          contents: bookData.BOOK_INTRCN_CN,
+        });
+      }
+    }
+  }, [book, bookState, isbn]);
+
   return (
     <div className={`relative flex size-full flex-col px-[var(--client-layout-margin)] ${className || ""}`} {...props}>
-      <BookDetailImageSection imageUrl={imageUrl} className="my-6" />
-      <BookTitleSection bookName="책이름" birthDayDate={new Date()} isbn={StringIsbn} className="mb-10" />
+      <BookDetailImageSection imageUrl={bookState?.imageUrl} className="my-6" />
+      <BookTitleSection
+        bookName={bookState?.title || "책 이름(정보 미제공)"}
+        birthDayDate={bookState?.datetime}
+        url={bookState?.url}
+        className="mb-10"
+      />
       <BookDetailSection
-        author="작가 이름"
-        pulisher="출판사 이름"
-        description="asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdsdfasdfasdfasdfasdfasdfasdfaasdsdfasdfasdfasdfasdfasdfasdfassdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfafasdf"
-        viewMoreUrl="/a/"
+        author={bookState?.authors || "저자 이름(정보 미제공)"}
+        pulisher={bookState?.publisher || "출판사(정보 미제공)"}
+        description={bookState?.contents || "책 소개(정보 미제공)"}
+        viewMoreUrl={bookState?.url}
         className="mb-10"
       />
       <section>
