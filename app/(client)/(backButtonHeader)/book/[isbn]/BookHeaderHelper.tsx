@@ -21,8 +21,8 @@ const BookHeaderHelper = ({ bookName, hasData, isbn }: Readonly<Props>) => {
   useEffect(() => {
     if (typeof bookNameState !== "string") return;
     setTitle(
-      <div className="flex flex-row items-center justify-center">
-        {bookNameState}
+      <div className="flex size-fit min-w-0 max-w-[50vw] flex-row items-center justify-start">
+        <span className="truncate">{bookNameState}</span>
         {hasData && <KakaoInfoTip />}
       </div>
     );

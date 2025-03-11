@@ -22,11 +22,11 @@ const BackbuttonHeader = ({ className, ...etc }: Readonly<Props>) => {
       >
         <BackArrow className="w-12 text-[var(--sub-color)]" />
       </button>
-      <div className="flex flex-col items-center justify-center gap-2">
+      <div className="flex flex-col items-center justify-center gap-2 overflow-hidden">
         <h1 className="text-lg font-semibold">{title}</h1>
         {subtitle && <h2 className="text-sm font-normal text-[var(--sub-color)]">{subtitle}</h2>}
       </div>
-      <button className="w-12">{etcButton && etcButton}</button>
+      <button className="min-w-12">{etcButton && etcButton}</button>
     </header>
   );
 };
