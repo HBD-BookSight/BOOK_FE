@@ -53,7 +53,7 @@ const BookDetail = ({ className, book, isbn, ...props }: Readonly<Props>) => {
 
   return (
     <div className={`relative flex size-full flex-col px-[var(--client-layout-margin)] ${className || ""}`} {...props}>
-      <BookDetailImageSection imageUrl={bookState?.imageUrl} className="my-6" />
+      <BookDetailImageSection imageUrl={bookState?.imageUrl} birthDay={bookState?.datetime} className="my-6" />
       <BookTitleSection
         bookName={bookState?.title || "책 이름(정보 미제공)"}
         birthDayDate={bookState?.datetime}
