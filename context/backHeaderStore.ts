@@ -2,8 +2,8 @@ import { ReactNode } from "react";
 import { create } from "zustand";
 
 type BackHeaderStore = {
-  title: string;
-  setTitle: (title: string) => void;
+  title: ReactNode;
+  setTitle: (title: ReactNode) => void;
   subtitle: string;
   setSubTitle: (title: string) => void;
   etcButton: ReactNode;
@@ -14,7 +14,7 @@ type BackHeaderStore = {
 
 const useBackHeaderStore = create<BackHeaderStore>((set) => ({
   title: "",
-  setTitle: (title: string) => set({ title }),
+  setTitle: (title: ReactNode) => set({ title }),
   subtitle: "",
   setSubTitle: (subtitle: string) => set({ subtitle }),
   etcButton: null,
