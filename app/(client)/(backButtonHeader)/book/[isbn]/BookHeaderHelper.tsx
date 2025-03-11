@@ -1,22 +1,37 @@
 "use client";
 import { useBackHeader } from "@/context/backHeaderStore";
-import { useParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ShareIcon from "@/public/icons/shareIcon.svg";
+import KakaoInfoTip from "@/components/kakaoInfoTip/KakaoInfoTip";
 
-const BookHeaderHelper = () => {
-  const { isbn } = useParams();
+type Props = { bookName?: string; isbn: number; hasData: boolean };
+const BookHeaderHelper = ({ bookName, hasData, isbn }: Readonly<Props>) => {
   const { setTitle, setEtcButton } = useBackHeader();
+  const [bookNameState, setBookNameState] = useState(bookName);
+  useEffect(() => {
+    //카카오 검색데이터 없을시 세션 스토리지에서 제목을 가져옴
+    if (!bookName) {
+      const bookName = sessionStorage.getItem(isbn.toString());
+      if (bookName) {
+        setBookNameState(JSON.parse(bookName).TITLE_NM);
+      }
+    }
+  }, [bookName, isbn]);
 
   useEffect(() => {
-    if (typeof isbn !== "string") return;
-    setTitle(isbn);
+    if (typeof bookNameState !== "string") return;
+    setTitle(
+      <div className="flex flex-row items-center justify-center">
+        {bookNameState}
+        {hasData && <KakaoInfoTip />}
+      </div>
+    );
     setEtcButton(<ShareIcon className="text-[var(--sub-color)]" />);
     return () => {
       setTitle("");
       setEtcButton(null);
     };
-  }, [setTitle, setEtcButton, isbn]);
+  }, [setTitle, setEtcButton, bookNameState, hasData]);
   return null;
 };
 
