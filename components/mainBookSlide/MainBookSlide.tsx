@@ -2,14 +2,19 @@
 import React, { HTMLAttributes, useEffect, useRef, useState } from "react";
 import BookDescription from "./BookDescription";
 import ReactConfetti from "react-confetti";
-import { Book } from "@/function/server/getBirtdayBook";
 import MainBookSlideContainer from "./MainBookSlideContainer";
+import { CSVBook } from "@/types/api";
 
-type Props = { className?: string; books: Book[] } & HTMLAttributes<HTMLDivElement>;
+type Props = { className?: string; books: CSVBook[] } & HTMLAttributes<HTMLDivElement>;
 const MainBookSlide = ({ className, books, ...props }: Readonly<Props>) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [confettiWind, setConfettiWind] = useState<number>(0);
+
+  // 카카오 api에 값이 없을경우를 대비해 최소한의 정보를 세션 스토리지에 저장(5mb저장 주의!!)
+  useEffect(() => {
+    books.forEach((book) => sessionStorage.setItem(book.ISBN_THIRTEEN_NO, JSON.stringify(book)));
+  }, [books]);
 
   //전체 크기 조정용
   useEffect(() => {
