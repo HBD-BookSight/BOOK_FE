@@ -1,3 +1,5 @@
+import { KaKaoBookResponse } from "@/types/api";
+
 export const formatDateToKorean = (date: Date) => {
   const year = date.getFullYear();
   const month = date.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줍니다.
@@ -8,4 +10,20 @@ export const formatDateToKorean = (date: Date) => {
 
 export const isMobile = () => {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+};
+
+export const handleFetchKaKaoData = async (
+  query: string | undefined,
+  target: "title" | "isbn" | "publisher" | "person"
+) => {
+  if (!query) return;
+  const response = await fetch(`${process.env.NEXT_PUBLIC_KAKAO_SEARCH_API_URL}/book?target=${target}&query=${query}`, {
+    method: "GET",
+    headers: {
+      Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_KAKAO_SEARCH_API_KEY}`,
+    },
+  });
+  if (!response.ok) return;
+  const data: KaKaoBookResponse = await response.json();
+  return data;
 };
