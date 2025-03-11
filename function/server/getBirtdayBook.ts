@@ -1,35 +1,16 @@
 import fs from "fs";
 import path from "path";
 import csv from "csv-parser";
+import { CSVBook } from "@/types/api";
 
-export type Book = {
-  SEQ_NO: string;
-  ISBN_THIRTEEN_NO: string;
-  VLM_NM: string;
-  TITLE_NM: string;
-  AUTHR_NM: string;
-  PUBLISHER_NM: string;
-  PBLICTE_DE: string;
-  ADTION_SMBL_NM: string;
-  PRC_VALUE: string;
-  IMAGE_URL: string;
-  BOOK_INTRCN_CN: string;
-  KDC_NM: string;
-  TITLE_SBST_NM: string;
-  AUTHR_SBST_NM: string;
-  TWO_PBLICTE_DE: string;
-  INTNT_BOOKST_BOOK_EXST_AT: string;
-  PORTAL_SITE_BOOK_EXST_AT: string;
-  ISBN_NO: string;
-};
-const getBirtdayBook = async (): Promise<Book[]> => {
+const getBirtdayBook = async (): Promise<CSVBook[]> => {
   const filePath = path.join(process.cwd(), "public", "data", "NL_BO_SPECIES_MASTER_NEW_202112.csv");
   try {
-    const result: Book[] | null = await new Promise((resolve, reject) => {
+    const result: CSVBook[] | null = await new Promise((resolve, reject) => {
       const month = (new Date().getMonth() + 1).toString().padStart(2, "0");
       const day = new Date().getDate().toString().padStart(2, "0");
       const toDayDate = `${month}-${day}`;
-      const bookData: Book[] = [];
+      const bookData: CSVBook[] = [];
       const stream = fs
         .createReadStream(filePath)
         .pipe(csv())
