@@ -22,6 +22,7 @@ export const handleFetchKaKaoData = async (
     headers: {
       Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_KAKAO_SEARCH_API_KEY}`,
     },
+    cache: target === "isbn" ? "force-cache" : "default", //정적인 정보라 카카오가 수정하지 않을것임을 감안하고 캐싱
   });
   if (!response.ok) return;
   const data: KaKaoBookResponse = await response.json();
