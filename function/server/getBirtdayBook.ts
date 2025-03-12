@@ -7,9 +7,19 @@ const getBirtdayBook = async (): Promise<CSVBook[]> => {
   const filePath = path.join(process.cwd(), "public", "data", "NL_BO_SPECIES_MASTER_NEW_202112.csv");
   try {
     const result: CSVBook[] | null = await new Promise((resolve, reject) => {
-      const month = (new Date().getMonth() + 1).toString().padStart(2, "0");
-      const day = new Date().getDate().toString().padStart(2, "0");
+      const now = new Date();
+      const koreaTime = new Date(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDate(),
+        now.getUTCHours() + 9,
+        now.getUTCMinutes(),
+        now.getUTCSeconds()
+      );
+      const month = (koreaTime.getMonth() + 1).toString().padStart(2, "0");
+      const day = koreaTime.getDate().toString().padStart(2, "0");
       const toDayDate = `${month}-${day}`;
+      console.log(toDayDate);
       const bookData: CSVBook[] = [];
       const stream = fs
         .createReadStream(filePath)
