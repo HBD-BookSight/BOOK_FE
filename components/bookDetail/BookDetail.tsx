@@ -1,70 +1,37 @@
-"use client";
-import React, { HTMLAttributes, useEffect, useState } from "react";
+import React, { HTMLAttributes } from "react";
 import BookDetailImageSection from "./BookDetailImageSection";
 import BookTitleSection from "./BookTitleSection";
 import BookDetailSection from "./BookDetailSection";
 import RecommandedItem from "./RecommandedItem";
-import { CSVBook, KaKaoBookResponse } from "@/types/api";
+import { SuspenseResource } from "@/app/(client)/(backButtonHeader)/book/[isbn]/page";
+import { redirect } from "next/navigation";
 
-type Props = { className?: string; book?: KaKaoBookResponse; isbn: number } & HTMLAttributes<HTMLDivElement>;
-type BookDetailData = {
-  title?: string;
-  authors?: string;
-  publisher?: string;
-  datetime?: Date;
-  imageUrl?: string;
-  url?: string;
-  contents?: string;
-};
-const BookDetail = ({ className, book, isbn, ...props }: Readonly<Props>) => {
-  const [bookState, setBookState] = useState<BookDetailData>();
-  useEffect(() => {
-    if (!bookState && !!book?.documents.length) {
-      setBookState({
-        title: book.documents[0].title,
-        authors: book.documents[0].authors.join(", "),
-        publisher: book.documents[0].publisher,
-        datetime: new Date(book?.documents[0].datetime),
-        imageUrl: book.documents[0].thumbnail,
-        url: book.documents[0].url,
-        contents: book.documents[0].contents,
-      });
-    }
-  }, [book, bookState]);
-
-  useEffect(() => {
-    //카카오 검색데이터 없을시 세션 스토리지에서 제목을 가져옴
-    if (!bookState && !book?.documents.length) {
-      const sessionStorageData = sessionStorage.getItem(isbn.toString());
-      if (sessionStorageData) {
-        const bookData: CSVBook = JSON.parse(sessionStorageData);
-        setBookState({
-          title: bookData.TITLE_NM,
-          authors: bookData.AUTHR_NM,
-          publisher: bookData.PUBLISHER_NM,
-          datetime: new Date(bookData.TWO_PBLICTE_DE),
-          imageUrl: bookData.IMAGE_URL,
-          url: undefined,
-          contents: bookData.BOOK_INTRCN_CN,
-        });
-      }
-    }
-  }, [book, bookState, isbn]);
+type Props = {
+  className?: string;
+  suspenseResource: SuspenseResource;
+  isbn: number;
+  hasData?: boolean;
+} & HTMLAttributes<HTMLDivElement>;
+const BookDetail = ({ className, suspenseResource, isbn, hasData = false, ...props }: Readonly<Props>) => {
+  const bookData = suspenseResource.read().documents[0];
+  if (!bookData && !hasData) {
+    redirect("/birth-day/" + isbn);
+  }
 
   return (
     <div className={`relative flex size-full flex-col px-[var(--client-layout-margin)] ${className || ""}`} {...props}>
-      <BookDetailImageSection imageUrl={bookState?.imageUrl} birthDay={bookState?.datetime} className="my-6" />
+      <BookDetailImageSection imageUrl={bookData?.thumbnail} birthDay={new Date(bookData?.datetime)} className="my-6" />
       <BookTitleSection
-        bookName={bookState?.title || "책 이름(정보 미제공)"}
-        birthDayDate={bookState?.datetime}
-        url={bookState?.url}
+        bookName={bookData?.title || "책 이름(정보 미제공)"}
+        birthDayDate={new Date(bookData?.datetime)}
+        url={bookData?.url}
         className="mb-10"
       />
       <BookDetailSection
-        author={bookState?.authors || "저자 이름(정보 미제공)"}
-        pulisher={bookState?.publisher || "출판사(정보 미제공)"}
-        description={bookState?.contents || "책 소개(정보 미제공)"}
-        viewMoreUrl={bookState?.url}
+        author={bookData?.authors.join(", ") || "저자 이름(정보 미제공)"}
+        pulisher={bookData?.publisher || "출판사(정보 미제공)"}
+        description={bookData?.contents || "책 소개(정보 미제공)"}
+        viewMoreUrl={bookData?.url}
         className="mb-10"
       />
       <section>
