@@ -11,7 +11,7 @@ type Props = {
 } & HTMLAttributes<HTMLAnchorElement>;
 const BookItem = ({ className, isbn, imageUrl, ind, bookLength, ...props }: Readonly<Props>) => {
   return (
-    <Link href={`/book/${isbn}`} className={`relative flex items-end justify-end ${className || ""}`} {...props}>
+    <Link href={`/birth-day/${isbn}`} className={`relative flex items-end justify-end ${className || ""}`} {...props}>
       <div
         className={`absolute aspect-[3/4] ${ind !== bookLength - 1 ? "h-[293px] w-[194px]" : "h-[341px] w-[235px]"}`}
       >

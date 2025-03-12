@@ -13,7 +13,7 @@ type Props = {
 const BookItem = ({ className, isbn, imageUrl, bookName, author, publisher, ...props }: Readonly<Props>) => {
   return (
     <Link
-      href={`/book/${isbn}`}
+      href={`/birth-day/${isbn}`}
       className={`relative flex aspect-[3/4] size-full items-end justify-end ${className || ""}`}
       {...props}
     >
