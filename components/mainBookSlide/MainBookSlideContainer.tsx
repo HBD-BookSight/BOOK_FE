@@ -1,5 +1,5 @@
 "use client";
-import React, { Dispatch, HTMLAttributes, SetStateAction, useEffect, useRef, useState } from "react";
+import React, { Dispatch, HTMLAttributes, SetStateAction, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import ArrowHeadIcon from "@/public/icons/arrowHeadIcon.svg";
 import BookItem from "./BookItem";
@@ -20,7 +20,7 @@ const MainBookSlideContainer = ({ className, books, setConfettiWind, ...props }:
   const [isMobileState, setIsMobileState] = useState(false);
 
   //슬라이드 뷰 크기 조정용
-  useEffect(() => {
+  useLayoutEffect(() => {
     const slideViewUpdateSize = () => {
       if (slideContainerRef.current) {
         setSlideViewSize(slideContainerRef.current.offsetWidth);

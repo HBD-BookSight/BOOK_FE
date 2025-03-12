@@ -1,5 +1,5 @@
 "use client";
-import React, { HTMLAttributes, useEffect, useRef, useState } from "react";
+import React, { HTMLAttributes, useEffect, useLayoutEffect, useRef, useState } from "react";
 import BookDescription from "./BookDescription";
 import ReactConfetti from "react-confetti";
 import MainBookSlideContainer from "./MainBookSlideContainer";
@@ -33,7 +33,7 @@ const MainBookSlide = ({ className, books, ...props }: Readonly<Props>) => {
   }, [books]);
 
   //전체 크기 조정용
-  useEffect(() => {
+  useLayoutEffect(() => {
     const sectionUpdateSize = () => {
       if (sectionRef.current) {
         setSize({
