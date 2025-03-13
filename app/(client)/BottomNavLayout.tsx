@@ -17,7 +17,7 @@ const BottomNavLayout = () => {
             transition={{ duration: 0.5, ease: "easeInOut" }}
             className="absolute inset-y-0 z-40 mx-auto size-full"
           >
-            <SearchBottomPanel />
+            <SearchBottomPanel setIsSearchOpen={setIsSearchOpen} />
           </motion.div>
         )}
       </AnimatePresence>
