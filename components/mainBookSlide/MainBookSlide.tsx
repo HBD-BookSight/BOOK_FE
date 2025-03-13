@@ -11,27 +11,6 @@ const MainBookSlide = ({ className, books, ...props }: Readonly<Props>) => {
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [confettiWind, setConfettiWind] = useState<number>(0);
 
-  // 카카오 api에 값이 없을경우를 대비해 최소한의 정보를 세션 스토리지에 저장(5mb저장 주의!!)
-  useEffect(() => {
-    if (sessionStorage.length > 1) {
-      const key = sessionStorage.key(0);
-      if (!key) return;
-      const value = sessionStorage.getItem(key);
-      if (!value) return;
-      const book: CSVBook = JSON.parse(value); //하나 골라서 날짜 체크
-      const day = new Date(book.TWO_PBLICTE_DE).getDate();
-      const month = new Date(book.TWO_PBLICTE_DE).getMonth();
-      //날짜 체크후 불일치시 저장소 삭제
-      if (day !== new Date().getDate() || month !== new Date().getMonth()) {
-        sessionStorage.clear();
-      }
-    }
-    //저장소가 비어있으면 새 정보로 저장
-    if (sessionStorage.length < 1) {
-      books.forEach((book) => sessionStorage.setItem(book.ISBN_THIRTEEN_NO, JSON.stringify(book)));
-    }
-  }, [books]);
-
   //전체 크기 조정용
   useLayoutEffect(() => {
     const sectionUpdateSize = () => {
@@ -69,7 +48,7 @@ const MainBookSlide = ({ className, books, ...props }: Readonly<Props>) => {
         style={{ zIndex: 0, display: "absolute" }}
       />
       <BookDescription createdAt={new Date()} className="z-10 px-[var(--client-layout-margin)]" />
-      <MainBookSlideContainer books={books} setConfettiWind={setConfettiWind} />
+      <MainBookSlideContainer books={books.slice(0, 6)} setConfettiWind={setConfettiWind} />
     </section>
   );
 };
