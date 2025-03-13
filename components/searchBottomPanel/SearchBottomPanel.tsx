@@ -1,14 +1,17 @@
-import { HTMLAttributes } from "react";
+import { Dispatch, HTMLAttributes, SetStateAction } from "react";
 import SearchBar from "./SearchBar";
 
-type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
-const SearchBottomPanel = ({ className, ...props }: Readonly<Props>) => {
+type Props = {
+  className?: string;
+  setIsSearchOpen: Dispatch<SetStateAction<boolean>>;
+} & HTMLAttributes<HTMLDivElement>;
+const SearchBottomPanel = ({ className, setIsSearchOpen, ...props }: Readonly<Props>) => {
   return (
     <section
       className={`absolute bottom-0 z-[40] size-full bg-[#FFFFFFD9] backdrop-blur-[5px] ${className || ""}`}
       {...props}
     >
-      <SearchBar />
+      <SearchBar setIsSearchOpen={setIsSearchOpen} />
     </section>
   );
 };
