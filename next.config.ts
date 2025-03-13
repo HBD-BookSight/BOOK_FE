@@ -8,6 +8,9 @@ const withSerwist = withSerwistInit({
 });
 
 const nextConfig: NextConfig = {
+  publicRuntimeConfig: {
+    AUTH0_BASE_URL: process.env.AUTH0_BASE_URL || `https://${process.env.VERCEL_URL}`,
+  },
   images: {
     remotePatterns: [
       {
@@ -16,6 +19,11 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "image.aladin.co.kr",
+        pathname: "/product/**", // 경로 패턴 설정
+      },
+      {
+        protocol: "http",
         hostname: "image.aladin.co.kr",
         pathname: "/product/**", // 경로 패턴 설정
       },
