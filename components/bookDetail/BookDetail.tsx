@@ -3,20 +3,30 @@ import BookDetailImageSection from "./BookDetailImageSection";
 import BookTitleSection from "./BookTitleSection";
 import BookDetailSection from "./BookDetailSection";
 import RecommandedItem from "./RecommandedItem";
-import { SuspenseResource } from "@/app/(client)/(backButtonHeader)/book/[isbn]/page";
-import { redirect } from "next/navigation";
+import { CsvSuspenseResource } from "@/app/(client)/(backButtonHeader)/birth-day/[isbn]/page";
+import { KakaoSuspenseResource } from "@/app/(client)/(backButtonHeader)/book/[isbn]/page";
 
-type Props = {
+type Props<T extends CsvSuspenseResource | KakaoSuspenseResource> = {
   className?: string;
-  suspenseResource: SuspenseResource;
-  isbn: number;
-  hasData?: boolean;
+  suspenseResource: T;
 } & HTMLAttributes<HTMLDivElement>;
-const BookDetail = ({ className, suspenseResource, isbn, hasData = false, ...props }: Readonly<Props>) => {
-  const bookData = suspenseResource.read().documents[0];
-  if (!bookData && !hasData) {
-    redirect("/birth-day/" + isbn);
-  }
+const BookDetail = <T extends CsvSuspenseResource | KakaoSuspenseResource>({
+  className,
+  suspenseResource,
+  ...props
+}: Readonly<Props<T>>) => {
+  const result = suspenseResource.read();
+  const bookData = Array.isArray(result)
+    ? {
+        thumbnail: result[0].IMAGE_URL,
+        datetime: result[0].TWO_PBLICTE_DE,
+        title: result[0].TITLE_NM,
+        url: "",
+        authors: result[0].AUTHR_NM.split(", "),
+        publisher: result[0].PUBLISHER_NM,
+        contents: result[0].BOOK_INTRCN_CN,
+      }
+    : result.documents[0];
 
   return (
     <div className={`relative flex size-full flex-col px-[var(--client-layout-margin)] ${className || ""}`} {...props}>
