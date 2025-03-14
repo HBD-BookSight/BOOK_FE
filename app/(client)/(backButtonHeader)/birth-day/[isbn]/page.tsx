@@ -11,7 +11,7 @@ const BirthDayBookDetailpage = async ({ params }: { params: Promise<{ isbn?: num
     <>
       <BookHeaderHelper bookData={undefined} isbn={isbn!} />
       <main className="flex size-full flex-1 items-center gap-8">
-        <Suspense fallback={<LoadingSpinner className="h-[80vw] w-full" />}>
+        <Suspense fallback={<LoadingSpinner className="h-[50vw] w-full" />}>
           <BookDetail<CsvSuspenseResource> suspenseResource={suspenseResource} />
         </Suspense>
       </main>
@@ -27,7 +27,6 @@ export type CsvSuspenseResource = {
 const fetchCsvBookDataSuspense = (isbn?: number): CsvSuspenseResource => {
   let data: CSVBook[] | undefined;
   let promise: Promise<CSVBook[] | undefined>;
-  console.log("fetchCsvBookDataSuspense요청은 하니?");
   return {
     read: () => {
       if (data) return data;
@@ -44,7 +43,6 @@ const fetchCsvData = async (isbn?: number) => {
     const response = await fetch(`${baseUrl}/api/book?isbn=` + isbn, { cache: "force-cache" });
     if (!response.ok) throw new Error("Failed to fetch data");
     const data = await response.json();
-    console.log("fetchCsvData요청은 하니?");
     const keys = Object.keys(data.data);
     const parseData: CSVBook[] = keys.map((key) => data.data[key]);
     return parseData;

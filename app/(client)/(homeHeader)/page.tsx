@@ -11,7 +11,7 @@ export const revalidate = 31536000;
 const Home = () => {
   return (
     <main className="relative flex size-full flex-col items-center py-5">
-      <Suspense fallback={<LoadingSpinner />}>
+      <Suspense fallback={<LoadingSpinner className="h-[30vw] w-full" />}>
         <MainBookSlideContainer />
       </Suspense>
       <MainScheduleSlide className="mb-5" />
