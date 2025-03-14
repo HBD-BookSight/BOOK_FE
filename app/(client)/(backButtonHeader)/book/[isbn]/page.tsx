@@ -14,7 +14,7 @@ const BookDetailpage = async ({ params }: { params: Promise<{ isbn?: number }> }
       <BookHeaderHelperContainer suspenseResource={suspenseResource} isbn={isbn} />
       <main className="flex size-full flex-1 items-center gap-8">
         <Suspense fallback={<LoadingSpinner className="h-[80vw] w-full" />}>
-          <BookDetail suspenseResource={suspenseResource} />
+          <BookDetail<KakaoSuspenseResource> suspenseResource={suspenseResource} />
         </Suspense>
       </main>
     </>
