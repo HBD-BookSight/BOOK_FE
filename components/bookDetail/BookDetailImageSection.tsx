@@ -14,7 +14,7 @@ const BookDetailImageSection = ({ className, imageUrl, birthDay, ...props }: Rea
       {...props}
     >
       {imageUrl ? (
-        <Image alt="book" src={imageUrl} className={`relative size-full rounded-2xl`} fill />
+        <Image alt="book" src={imageUrl} className={`relative size-full rounded-2xl`} fill sizes="163px" />
       ) : (
         <div className="relative flex size-full items-center justify-center rounded-2xl bg-gray-200">사진 미제공</div>
       )}
