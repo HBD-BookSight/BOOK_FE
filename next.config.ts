@@ -9,7 +9,7 @@ const withSerwist = withSerwistInit({
 
 const nextConfig: NextConfig = {
   publicRuntimeConfig: {
-    VERCEL_PROJECT_PRODUCTION_URL: process.env.VERCEL_PROJECT_PRODUCTION_URL,
+    VERCEL_PROJECT_PRODUCTION_URL: "https://" + process.env.VERCEL_PROJECT_PRODUCTION_URL || "http://localhost:3000",
   },
   images: {
     remotePatterns: [
@@ -20,17 +20,17 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "image.aladin.co.kr",
-        pathname: "/product/**", // 경로 패턴 설정
+        pathname: "/product/**",
       },
       {
         protocol: "http",
         hostname: "image.aladin.co.kr",
-        pathname: "/product/**", // 경로 패턴 설정
+        pathname: "/product/**",
       },
       {
         protocol: "https",
         hostname: "search1.kakaocdn.net",
-        pathname: "/thumb/**", // 경로 패턴 설정
+        pathname: "/thumb/**",
       },
     ], // 책사진 도메인 허용
   },
