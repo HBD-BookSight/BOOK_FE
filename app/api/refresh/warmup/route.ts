@@ -2,7 +2,7 @@ import getBirthdayBook from "@/function/server/getBirtdayBook";
 import { NextResponse } from "next/server";
 
 // revalidate API가 호출하여 getBirthdayBook를 미리 실행시켜 캐싱하는 API
-export async function GET(req: Request) {
+export async function POST(req: Request) {
   if (req.headers.get("Authorization") !== `Bearer ${process.env.CRON_SECRET}`) {
     console.log("인증되지 않은 요청");
     return NextResponse.json({ message: "인증되지 않은 요청" }, { status: 401 });
