@@ -14,7 +14,7 @@ export async function GET(req: Request) {
     const { publicRuntimeConfig } = getConfig();
     const baseUrl = publicRuntimeConfig.VERCEL_PROJECT_PRODUCTION_URL;
     if (!baseUrl) throw new Error("VERCEL_PROJECT_PRODUCTION_URL이 버셀에서 주입되지 않았습니다");
-    await fetch(baseUrl);
+    await fetch(baseUrl, { cache: "no-cache" });
 
     return NextResponse.json({ message: "재검증 및 워밍업 완료" });
   } catch (error) {
