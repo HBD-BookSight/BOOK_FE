@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { HTMLAttributes } from "react";
+import EmptyImage from "../common/EmptyImage";
 
 type Props = {
   className?: string;
@@ -17,7 +18,7 @@ const RecommandedItem = ({ className, imageUrl, sourceName, sourceUrl, title, ..
         {...props}
       >
         <div className="relative mb-6 aspect-video w-full">
-          <Image alt="recommandContents" src={imageUrl} fill className="rounded-2xl" />
+          {imageUrl ? <Image alt="recommandContents" src={imageUrl} fill className="rounded-2xl" /> : <EmptyImage />}
         </div>
         <p className="mb-2 text-sm font-bold text-[var(--highlight-color)]">{sourceName}</p>
         <h3 className="relative line-clamp-2 size-full break-words font-medium">{title}</h3>

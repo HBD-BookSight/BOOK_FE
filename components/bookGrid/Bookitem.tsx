@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { HTMLAttributes } from "react";
+import EmptyImage from "../common/EmptyImage";
 
 type Props = {
   className?: string;
@@ -20,7 +21,7 @@ const BookItem = ({ className, imageUrl, bookName, author, publisher, ...props }
           sizes="295px"
         />
       ) : (
-        <div className="relative flex size-full items-center justify-center rounded-2xl bg-gray-200">사진 미제공</div>
+        <EmptyImage />
       )}
       <div className="pointer-events-none absolute size-full rounded-2xl bg-gradient-to-t from-black to-transparent">
         <div className="relative bottom-0 flex size-full flex-col justify-end px-4 pb-6 text-white">
