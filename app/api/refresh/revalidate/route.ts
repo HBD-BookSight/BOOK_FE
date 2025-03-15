@@ -18,13 +18,13 @@ export async function GET(req: Request) {
     const warmupResponse = await fetch(`${baseUrl}/api/refresh/warmup`, {
       headers: {
         Authorization: `Bearer ${process.env.CRON_SECRET}`,
+        cache: "no-store",
       },
     });
     if (!warmupResponse.ok) {
       throw new Error("워밍업 요청 실패");
     }
-    const warmupResult = await warmupResponse.json();
-    console.log("워밍업 완료, 태그 무효화 성공", warmupResult);
+    console.log("태그 무효화 성공, 워밍업 요청 성공(완료 성공 아님)");
     return NextResponse.json({ message: "워밍업 완료, 태그 무효화 성공" });
   } catch (error) {
     const errMessage = error instanceof Error ? error.message : "오류 발생";

@@ -10,7 +10,7 @@ export async function GET(req: Request) {
   try {
     await new Promise((resolve) => setTimeout(resolve, 1000)); // 서버가 인식하는데 시간이 필요할지 모르므로
     await getBirthdayBook();
-    return NextResponse.json({ message: "재검증 및 워밍업 완료" });
+    return NextResponse.json({ message: "워밍업 캐싱 완료" });
   } catch (error) {
     const errMessage = error instanceof Error ? error.message : "오류 발생";
     console.log("오류 발생", errMessage);
