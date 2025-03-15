@@ -10,7 +10,7 @@ const MAX_EXECUTION_TIME = 9000; // 9초
 const CHECK_INTERVAL = 1000; // 1초마다 시간 체크
 
 const now = new Date();
-const getBirtdayBook = unstable_cache(
+const getBirthdayBook = unstable_cache(
   async (): Promise<CSVBook[]> => {
     const filePath = path.join(process.cwd(), "public", "data", "NL_BO_SPECIES_MASTER_NEW_202112.csv");
     try {
@@ -89,4 +89,4 @@ const getBirtdayBook = unstable_cache(
   }
 );
 
-export default getBirtdayBook;
+export default getBirthdayBook;

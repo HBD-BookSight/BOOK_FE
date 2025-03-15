@@ -2,7 +2,7 @@ import LoadingSpinner from "@/components/common/LoadingSpinner";
 import MainBookSlide from "@/components/mainBookSlide/MainBookSlide";
 import MainScheduleSlide from "@/components/mainScheduleSlide/MainScheduleSlide";
 import PromotionContract from "@/components/promotionContract/PromotionContract";
-import getBirtdayBook from "@/function/server/getBirtdayBook";
+import getBirthdayBook from "@/function/server/getBirtdayBook";
 import { Suspense } from "react";
 import BirthDayBookSaveHelper from "./BirthDayBookSaveHelper";
 
@@ -21,7 +21,7 @@ const Home = () => {
 export default Home;
 
 const MainBookSlideContainer = async () => {
-  const data = await getBirtdayBook();
+  const data = await getBirthdayBook();
   return (
     <>
       <BirthDayBookSaveHelper books={data} />
