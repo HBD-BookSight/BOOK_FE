@@ -9,7 +9,9 @@ const withSerwist = withSerwistInit({
 
 const nextConfig: NextConfig = {
   publicRuntimeConfig: {
-    VERCEL_PROJECT_PRODUCTION_URL: "https://" + process.env.VERCEL_PROJECT_PRODUCTION_URL || "http://localhost:3000",
+    VERCEL_PROJECT_PRODUCTION_URL: process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "http://localhost:3000",
   },
   images: {
     remotePatterns: [
