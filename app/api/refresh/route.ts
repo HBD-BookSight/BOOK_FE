@@ -1,5 +1,4 @@
 import getBirthdayBook from "@/function/server/getBirtdayBook";
-import { revalidateTag } from "next/cache";
 import getConfig from "next/config";
 import { NextResponse } from "next/server";
 
@@ -10,8 +9,6 @@ export async function GET(req: Request) {
     return NextResponse.json({ message: "인증되지 않은 요청" }, { status: 401 });
   }
   try {
-    // 태그 재검증
-    revalidateTag("birth-day-book-data");
     // 페이지 워밍업 요청
     const { publicRuntimeConfig } = getConfig();
     const baseUrl = publicRuntimeConfig.VERCEL_PROJECT_PRODUCTION_URL;
