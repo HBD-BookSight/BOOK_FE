@@ -1,4 +1,5 @@
 import { revalidateTag } from "next/cache";
+import getConfig from "next/config";
 import { NextResponse } from "next/server";
 
 // 특정 태그를 재검증 시키는 크론잡용 API
@@ -10,7 +11,8 @@ export async function GET(req: Request) {
     // 태그 재검증
     revalidateTag("birth-day-book-data");
     // 페이지 워밍업 요청
-    const baseUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+    const { publicRuntimeConfig } = getConfig();
+    const baseUrl = publicRuntimeConfig.VERCEL_PROJECT_PRODUCTION_URL;
     if (!baseUrl) throw new Error("VERCEL_PROJECT_PRODUCTION_URL이 버셀에서 주입되지 않았습니다");
     await fetch(baseUrl);
 

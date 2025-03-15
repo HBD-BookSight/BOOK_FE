@@ -3,6 +3,7 @@ import BookHeaderHelper from "../../book/[isbn]/BookHeaderHelper";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
 import { CSVBook } from "@/types/api";
 import BookDetail from "@/components/bookDetail/BookDetail";
+import getConfig from "next/config";
 
 const BirthDayBookDetailpage = async ({ params }: { params: Promise<{ isbn?: number }> }) => {
   const { isbn } = await params;
@@ -39,7 +40,8 @@ const fetchCsvBookDataSuspense = (isbn?: number): CsvSuspenseResource => {
 const fetchCsvData = async (isbn?: number) => {
   if (!isbn) throw new Error("ISBN is required");
   try {
-    const baseUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+    const { publicRuntimeConfig } = getConfig();
+    const baseUrl = publicRuntimeConfig.VERCEL_PROJECT_PRODUCTION_URL;
     const response = await fetch(`${baseUrl}/api/book?isbn=` + isbn, { cache: "force-cache" });
     if (!response.ok) throw new Error("Failed to fetch data");
     const data = await response.json();
