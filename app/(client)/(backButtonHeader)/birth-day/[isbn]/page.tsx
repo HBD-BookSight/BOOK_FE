@@ -39,7 +39,7 @@ const fetchCsvBookDataSuspense = (isbn?: number): CsvSuspenseResource => {
 const fetchCsvData = async (isbn?: number) => {
   if (!isbn) throw new Error("ISBN is required");
   try {
-    const baseUrl = process.env.AUTH0_BASE_URL || `https://${process.env.VERCEL_URL}`;
+    const baseUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL;
     const response = await fetch(`${baseUrl}/api/book?isbn=` + isbn, { cache: "force-cache" });
     if (!response.ok) throw new Error("Failed to fetch data");
     const data = await response.json();

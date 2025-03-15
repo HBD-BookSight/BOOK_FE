@@ -10,7 +10,8 @@ export async function GET(req: Request) {
     // 태그 재검증
     revalidateTag("birth-day-book-data");
     // 페이지 워밍업 요청
-    const baseUrl = process.env.AUTH0_BASE_URL || `https://${process.env.VERCEL_URL}`;
+    const baseUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+    if (!baseUrl) throw new Error("VERCEL_PROJECT_PRODUCTION_URL이 버셀에서 주입되지 않았습니다");
     await fetch(baseUrl);
 
     return NextResponse.json({ message: "재검증 및 워밍업 완료" });

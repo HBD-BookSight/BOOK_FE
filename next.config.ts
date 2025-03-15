@@ -9,7 +9,7 @@ const withSerwist = withSerwistInit({
 
 const nextConfig: NextConfig = {
   publicRuntimeConfig: {
-    AUTH0_BASE_URL: process.env.AUTH0_BASE_URL || `https://${process.env.VERCEL_URL}`,
+    VERCEL_PROJECT_PRODUCTION_URL: process.env.VERCEL_PROJECT_PRODUCTION_URL,
   },
   images: {
     remotePatterns: [
