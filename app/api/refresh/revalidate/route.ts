@@ -12,20 +12,19 @@ export async function GET(req: Request) {
     // 태그 무효화
     revalidateTag("birth-day-book-data");
     console.log("태그 무효화 성공");
-    await new Promise((resolve) => setTimeout(resolve, 8000)); // 서버가 인식하는데 시간이 필요할지 모르므로
     const { publicRuntimeConfig } = getConfig();
     const baseUrl = publicRuntimeConfig.VERCEL_PROJECT_PRODUCTION_URL;
-    const warmupResponse = await fetch(`${baseUrl}/api/refresh/warmup`, {
+    await fetch(`${baseUrl}/api/refresh/warmup`, {
+      method: "POST", // GET 대신 POST 사용하여 캐싱 방지
       headers: {
         Authorization: `Bearer ${process.env.CRON_SECRET}`,
-        cache: "no-store",
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        Pragma: "no-cache",
+        Expires: "0",
       },
     });
-    if (!warmupResponse.ok) {
-      throw new Error("워밍업 요청 실패");
-    }
     console.log("태그 무효화 성공, 워밍업 요청 성공(완료 성공 아님)");
-    return NextResponse.json({ message: "워밍업 완료, 태그 무효화 성공" });
+    return NextResponse.json({ message: "태그 무효화 성공, 워밍업 요청 성공(완료 성공 아님)" });
   } catch (error) {
     const errMessage = error instanceof Error ? error.message : "오류 발생";
     console.log("오류 발생", errMessage);
