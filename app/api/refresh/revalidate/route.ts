@@ -14,15 +14,7 @@ export async function GET(req: Request) {
     console.log("태그 무효화 성공");
     const { publicRuntimeConfig } = getConfig();
     const baseUrl = publicRuntimeConfig.VERCEL_PROJECT_PRODUCTION_URL;
-    await fetch(`${baseUrl}/api/refresh/warmup`, {
-      method: "POST", // GET 대신 POST 사용하여 캐싱 방지
-      headers: {
-        Authorization: `Bearer ${process.env.CRON_SECRET}`,
-        "Cache-Control": "no-cache, no-store, must-revalidate",
-        Pragma: "no-cache",
-        Expires: "0",
-      },
-    });
+    await fetch(`${baseUrl}/`);
     console.log("태그 무효화 성공, 워밍업 요청 성공(완료 성공 아님)");
     return NextResponse.json({ message: "태그 무효화 성공, 워밍업 요청 성공(완료 성공 아님)" });
   } catch (error) {
