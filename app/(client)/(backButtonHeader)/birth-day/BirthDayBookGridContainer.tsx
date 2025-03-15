@@ -53,12 +53,16 @@ const BirthDayBookGridContainer = () => {
 export default BirthDayBookGridContainer;
 
 const fetchInfiniteCsvData = async ({ pageParam }: { pageParam: number }) => {
-  const isbns: string[] = sessionStorage.getItem("ISBN")
-    ? JSON.parse(sessionStorage.getItem("ISBN") || "").slice(pageParam, pageParam + 6)
-    : [];
+  const allIsbns: string[] = JSON.parse(sessionStorage.getItem("ISBN") || "[]");
+  const isbns = allIsbns.slice(pageParam, pageParam + 6);
   const response = await fetch("/api/book?" + isbns.map((isbn) => `isbn=${isbn}`).join("&"));
   const data = await response.json();
   const keys = Object.keys(data.data);
   const parseData: CSVBook[] = keys.map((key) => data.data[key]);
-  return { data: parseData, nextCursor: pageParam + 6 };
+
+  const hasNextPage = pageParam + 6 < allIsbns.length;
+  return {
+    data: parseData,
+    nextCursor: hasNextPage ? pageParam + 6 : undefined,
+  };
 };
