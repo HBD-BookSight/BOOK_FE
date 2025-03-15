@@ -5,8 +5,11 @@ import EmptyImage from "../common/EmptyImage";
 
 type Props = { className?: string; imageUrl?: string; birthDay?: Date } & HTMLAttributes<HTMLDivElement>;
 const BookDetailImageSection = ({ className, imageUrl, birthDay, ...props }: Readonly<Props>) => {
-  const birthDayDate = birthDay?.getDate();
-  const birthDayMonth = birthDay?.getMonth();
+  const now = new Date();
+  const kstNow = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+  const isBirthday =
+    birthDay && birthDay.getUTCDate() === kstNow.getUTCDate() && birthDay.getUTCMonth() === kstNow.getUTCMonth();
+
   return (
     <section
       className={`relative mx-auto flex aspect-[3/4] size-full max-w-[163px] items-center justify-center ${
@@ -19,7 +22,7 @@ const BookDetailImageSection = ({ className, imageUrl, birthDay, ...props }: Rea
       ) : (
         <EmptyImage />
       )}
-      {birthDayDate === new Date().getDate() && birthDayMonth === new Date().getMonth() && (
+      {isBirthday && (
         <Image alt="bithDayCake" src={birthDayCake} width={40} height={40} className="absolute -bottom-2 -right-2" />
       )}
     </section>

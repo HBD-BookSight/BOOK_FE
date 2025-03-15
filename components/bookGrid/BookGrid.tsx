@@ -7,6 +7,9 @@ import birthDayCake from "@/public/birthDayCake.png";
 
 type Props<T extends CSVBook[] | Book[]> = { className?: string; books: T } & HTMLAttributes<HTMLDivElement>;
 const BookGrid = <T extends CSVBook[] | Book[]>({ className, books, ...props }: Readonly<Props<T>>) => {
+  const now = new Date();
+  const kstNow = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+
   return (
     <section
       className={`relative grid w-full grid-cols-2 gap-[10px] p-[var(--client-layout-margin)] ${className || ""}`}
@@ -31,8 +34,9 @@ const BookGrid = <T extends CSVBook[] | Book[]>({ className, books, ...props }: 
               author={item.authors.join(", ")}
             />
 
-            {new Date(item.datetime).getDate() === new Date().getDate() &&
-              new Date(item.datetime).getMonth() === new Date().getMonth() && (
+            {item.datetime &&
+              new Date(item.datetime).getUTCDate() === kstNow.getUTCDate() &&
+              new Date(item.datetime).getUTCMonth() === kstNow.getUTCMonth() && (
                 <div className="absolute -bottom-1 -right-1 aspect-square w-[10vw]">
                   <Image alt="bithDayCake" src={birthDayCake} fill sizes="100px" />
                 </div>
