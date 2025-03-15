@@ -11,7 +11,7 @@ export async function GET(req: Request) {
     revalidateTag("birth-day-book-data");
     // 페이지 워밍업 요청
     //const { publicRuntimeConfig } = getConfig();
-    const baseUrl = "https://" + process.env.VERCEL_URL; //publicRuntimeConfig.VERCEL_PROJECT_PRODUCTION_URL;
+    const baseUrl = "https://book-front-nine.vercel.app/"; //publicRuntimeConfig.VERCEL_PROJECT_PRODUCTION_URL;
     if (!baseUrl) throw new Error("VERCEL_PROJECT_PRODUCTION_URL이 버셀에서 주입되지 않았습니다");
     await fetch(baseUrl, { cache: "no-cache" });
 
