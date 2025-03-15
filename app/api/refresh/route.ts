@@ -13,9 +13,9 @@ export async function GET(req: Request) {
     const baseUrl = process.env.AUTH0_BASE_URL || `https://${process.env.VERCEL_URL}`;
     await fetch(baseUrl);
 
-    NextResponse.json({ message: "재검증 및 워밍업 완료" });
+    return NextResponse.json({ message: "재검증 및 워밍업 완료" });
   } catch (error) {
     const errMessage = error instanceof Error ? error.message : "오류 발생";
-    NextResponse.json({ message: "오류 발생", error: errMessage }, { status: 500 });
+    return NextResponse.json({ message: "오류 발생", error: errMessage }, { status: 500 });
   }
 }
