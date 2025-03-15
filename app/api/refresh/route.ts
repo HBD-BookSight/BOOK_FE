@@ -12,7 +12,7 @@ export async function GET(req: Request) {
     revalidateTag("birth-day-book-data");
     // 페이지 워밍업 요청
     const { publicRuntimeConfig } = getConfig();
-    const baseUrl = publicRuntimeConfig.VERCEL_PROJECT_PRODUCTION_URL;
+    const baseUrl = "http://" + process.env.VERCEL_URL; //publicRuntimeConfig.VERCEL_PROJECT_PRODUCTION_URL;
     if (!baseUrl) throw new Error("VERCEL_PROJECT_PRODUCTION_URL이 버셀에서 주입되지 않았습니다");
     await fetch(baseUrl, { cache: "no-cache" });
 
