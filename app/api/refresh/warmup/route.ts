@@ -8,6 +8,7 @@ export async function GET(req: Request) {
     return NextResponse.json({ message: "인증되지 않은 요청" }, { status: 401 });
   }
   try {
+    await new Promise((resolve) => setTimeout(resolve, 1000)); // 서버가 인식하는데 시간이 필요할지 모르므로
     await getBirthdayBook();
     return NextResponse.json({ message: "재검증 및 워밍업 완료" });
   } catch (error) {

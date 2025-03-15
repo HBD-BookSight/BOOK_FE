@@ -12,7 +12,7 @@ export async function GET(req: Request) {
     // 태그 무효화
     revalidateTag("birth-day-book-data");
     console.log("태그 무효화 성공");
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // 1초 대기 서버가 인식하는데 시간이 필요할지 모르므로
+    await new Promise((resolve) => setTimeout(resolve, 8000)); // 서버가 인식하는데 시간이 필요할지 모르므로
     const { publicRuntimeConfig } = getConfig();
     const baseUrl = publicRuntimeConfig.VERCEL_PROJECT_PRODUCTION_URL;
     const warmupResponse = await fetch(`${baseUrl}/api/refresh/warmup`, {
