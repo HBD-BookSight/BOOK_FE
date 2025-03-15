@@ -5,8 +5,7 @@ import { CSVBook } from "@/types/api";
 import BookDetail from "@/components/bookDetail/BookDetail";
 import getConfig from "next/config";
 
-const ONE_DAY_IN_SECONDS = 24 * 60 * 60;
-export const revalidate = ONE_DAY_IN_SECONDS; // 캐시를 너무 오래 저장하면 더 중요한 캐시 정보(getBirthdayBook 함수처럼 무거운거)가 제거될 수 있으므로 생일도서가 변경되는 24시간만 유효하도록 설정함
+export const revalidate = 86400; // 캐시를 너무 오래 저장하면 더 중요한 캐시 정보(getBirthdayBook 함수처럼 무거운거)가 제거될 수 있으므로 생일도서가 변경되는 24시간만 유효하도록 설정함
 
 const BirthDayBookDetailpage = async ({ params }: { params: Promise<{ isbn?: number }> }) => {
   const { isbn } = await params;
