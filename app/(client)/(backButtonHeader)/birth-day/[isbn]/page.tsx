@@ -4,6 +4,7 @@ import LoadingSpinner from "@/components/common/LoadingSpinner";
 import { CSVBook } from "@/types/api";
 import BookDetail from "@/components/bookDetail/BookDetail";
 import getConfig from "next/config";
+import { unstable_cache } from "next/cache";
 
 export const revalidate = 86400; // 캐시를 너무 오래 저장하면 더 중요한 캐시 정보(getBirthdayBook 함수처럼 무거운거)가 제거될 수 있으므로 생일도서가 변경되는 24시간만 유효하도록 설정함
 
@@ -30,10 +31,13 @@ export type CsvSuspenseResource = {
 const fetchCsvBookDataSuspense = (isbn?: number): CsvSuspenseResource => {
   let data: CSVBook[] | undefined;
   let promise: Promise<CSVBook[] | undefined>;
+  const cachedFetchCsvData = unstable_cache(async (isbn?: number) => fetchCsvData(isbn), [String(isbn)], {
+    revalidate: 86400,
+  });
   return {
     read: () => {
       if (data) return data;
-      if (!promise) promise = fetchCsvData(isbn).then((result) => (data = result));
+      if (!promise) promise = cachedFetchCsvData(isbn).then((result) => (data = result));
       throw promise;
     },
   };

@@ -4,6 +4,7 @@ import BookDetail from "@/components/bookDetail/BookDetail";
 import { handleFetchKaKaoData } from "@/function/common";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
 import { KaKaoBookResponse } from "@/types/api";
+import { unstable_cache } from "next/cache";
 
 export const revalidate = 86400; // 캐시를 너무 오래 저장하면 더 중요한 캐시 정보(getBirthdayBook 함수처럼 무거운거)가 제거될 수 있으므로 생일도서가 변경되는 24시간만 유효하도록 설정함
 
@@ -35,10 +36,15 @@ export type KakaoSuspenseResource = {
 const fetchKaKaoBookSuspense = (isbn?: number): KakaoSuspenseResource => {
   let data: KaKaoBookResponse | undefined;
   let promise: Promise<KaKaoBookResponse | undefined>;
+  const cachedFetchKaKaoData = unstable_cache(
+    async (isbn?: string) => handleFetchKaKaoData(isbn, "isbn"),
+    [String(isbn)],
+    { revalidate: 86400 }
+  );
   return {
     read: () => {
       if (data) return data;
-      if (!promise) promise = handleFetchKaKaoData(isbn?.toString(), "isbn").then((result) => (data = result));
+      if (!promise) promise = cachedFetchKaKaoData(isbn?.toString()).then((result) => (data = result));
       throw promise;
     },
   };
