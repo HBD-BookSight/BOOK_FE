@@ -48,7 +48,9 @@ const fetchCsvData = async (isbn?: number) => {
   try {
     const { publicRuntimeConfig } = getConfig();
     const baseUrl = publicRuntimeConfig.VERCEL_PROJECT_PRODUCTION_URL;
-    const response = await fetch(`${baseUrl}/api/book?isbn=` + isbn, { cache: "force-cache" });
+    const response = await fetch(`${baseUrl}/api/book?isbn=` + isbn, {
+      next: { revalidate: 86400 },
+    });
     if (!response.ok) throw new Error("Failed to fetch data");
     const data = await response.json();
     const keys = Object.keys(data.data);
