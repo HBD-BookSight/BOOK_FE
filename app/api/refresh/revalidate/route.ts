@@ -16,7 +16,7 @@ export async function GET(req: Request) {
     const { publicRuntimeConfig } = getConfig();
     const baseUrl = publicRuntimeConfig.VERCEL_PROJECT_PRODUCTION_URL;
     //웜업 요청
-    await fetch(`${baseUrl}/`);
+    fetch(`${baseUrl}`, { cache: "no-cache" });
     console.log("태그 무효화 성공, 워밍업 요청 성공(완료 성공 아님)");
     return NextResponse.json({ message: "태그 무효화 성공, 워밍업 요청 성공(완료 성공 아님)" });
   } catch (error) {
