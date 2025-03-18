@@ -1,11 +1,11 @@
 "use client";
 import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
-import CommonSelectBox from "@/components/common/CommonSelectBox";
 import { usePopupActon } from "@/context/popupStore";
 import { forwardRef, HTMLAttributes, useImperativeHandle } from "react";
-import { FieldValues, useFieldArray, useForm } from "react-hook-form";
+import { Controller, FieldValues, useFieldArray, useForm } from "react-hook-form";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
+import CommonDropDown from "@/components/common/CommonDropDown";
 
 type Props = { className?: string; defaultValues?: AdminPublisherInputs } & HTMLAttributes<HTMLDivElement>;
 export type AdminPublisherInputs = {
@@ -76,10 +76,18 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(({ className
                 id={`url${index}`}
                 {...register(`urls.${index}.value`, { required: "입력이 필요합니다" })}
               />
-              <CommonSelectBox
-                optionItems={["Link", "Youtube", "Profile", "Homepage", "Blog"]}
-                className="flex-1"
-                {...register(`urls.${index}.type`, { required: "입력이 필요합니다" })}
+
+              <Controller
+                name={`urls.${index}.type`}
+                control={control}
+                rules={{ required: "입력이 필요합니다" }}
+                render={({ field }) => (
+                  <CommonDropDown
+                    {...field}
+                    className="flex-1"
+                    optionItems={["Link", "Youtube", "Profile", "Homepage", "Blog"]}
+                  />
+                )}
               />
               <button
                 type="button"

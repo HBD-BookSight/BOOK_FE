@@ -3,18 +3,19 @@ import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
 import { usePopupActon } from "@/context/popupStore";
 import { forwardRef, HTMLAttributes, useEffect, useImperativeHandle } from "react";
-import { FieldValues, useFieldArray, useForm } from "react-hook-form";
+import { Controller, FieldValues, useFieldArray, useForm } from "react-hook-form";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
 import CommonSelectBox from "@/components/common/CommonSelectBox";
 import CommonToggleSwitch from "@/components/common/CommonToggleSwitch";
+import CommonDropDown from "@/components/common/CommonDropDown";
 
 type Props = { className?: string; defaultValues?: AdminEventInputs } & HTMLAttributes<HTMLDivElement>;
 export type AdminEventInputs = {
   urls: { value: string; type: "Video" | "Article" | "Podcast" | "Link" }[];
   eventTitle: string;
   eventHost: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: Date | string;
+  endDate: Date | string;
   location: "Online" | "Offline" | "Online/Offline";
   eventType: string;
   eventFlag: "Solo" | "Group" | "etc";
@@ -31,11 +32,18 @@ export type AdminEventFormRef = {
   handleSubmit: () => void;
 };
 const AdminEventForm = forwardRef<AdminEventFormRef, Props>(({ className, defaultValues, ...props }, ref) => {
+  console.log(defaultValues?.startDate);
   const { register, handleSubmit, control, setValue, watch } = useForm<AdminEventInputs>({
     mode: "onSubmit",
-    defaultValues: defaultValues || {
-      urls: [{ value: "", type: "Video" }],
-    },
+    defaultValues: defaultValues
+      ? {
+          ...defaultValues,
+          startDate: new Date(defaultValues.startDate).toISOString().split("T")[0],
+          endDate: new Date(defaultValues.endDate).toISOString().split("T")[0],
+        }
+      : {
+          urls: [{ value: "", type: "Video" }],
+        },
   });
   const { closePopup } = usePopupActon();
   const { fields, append, remove } = useFieldArray({
@@ -84,10 +92,13 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(({ className, defaul
                 id={`url${index}`}
                 {...register(`urls.${index}.value`, { required: "입력이 필요합니다" })}
               />
-              <CommonSelectBox
-                optionItems={["Video", "Article", "Podcast", "Link"]}
-                className="flex-1"
-                {...register(`urls.${index}.type`, { required: "입력이 필요합니다" })}
+              <Controller
+                name={`urls.${index}.type`}
+                control={control}
+                rules={{ required: "입력이 필요합니다" }}
+                render={({ field }) => (
+                  <CommonDropDown {...field} className="flex-1" optionItems={["Video", "Article", "Podcast", "Link"]} />
+                )}
               />
               <button
                 type="button"
@@ -137,10 +148,13 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(({ className, defaul
           <CommonLabel htmlFor="location" className="text-[var(--highlight-color)]">
             Location*
           </CommonLabel>
-          <CommonSelectBox
-            optionItems={["Online", "Offline", "Online/Offline"]}
-            className="flex-1"
-            {...register(`location`, { required: "입력이 필요합니다" })}
+          <Controller
+            name={`location`}
+            control={control}
+            rules={{ required: "입력이 필요합니다" }}
+            render={({ field }) => (
+              <CommonDropDown {...field} className="flex-1" optionItems={["Online", "Offline", "Online/Offline"]} />
+            )}
           />
         </div>
         <div>
