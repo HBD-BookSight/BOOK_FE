@@ -18,9 +18,10 @@ const BottomNav = ({ className, isSearchOpen, setSearchOpen, ...props }: Readonl
   const pathname = usePathname();
 
   useEffect(() => {
+    const regex = /^\/explore(\/|$)/;
     if (pathname === "/") {
       setTab("home");
-    } else if (pathname === "/explore") {
+    } else if (regex.test(pathname)) {
       setTab("explore");
     } else if (isSearchOpen) {
       setTab("search");
