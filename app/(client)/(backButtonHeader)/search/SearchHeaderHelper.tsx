@@ -5,7 +5,7 @@ const SearchHeaderHelper = ({ query }: { query: string }) => {
   const { setTitle } = useBackHeader();
 
   useEffect(() => {
-    setTitle(query);
+    setTitle(<h1 className="text-lg font-semibold">{query}</h1>);
     return () => {
       setTitle("");
     };

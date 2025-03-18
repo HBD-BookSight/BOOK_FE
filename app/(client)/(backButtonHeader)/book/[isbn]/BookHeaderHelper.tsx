@@ -22,10 +22,10 @@ const BookHeaderHelper = ({ isbn, bookData }: Readonly<Props>) => {
   useEffect(() => {
     if (typeof bookNameState !== "string") return;
     setTitle(
-      <div className="flex size-fit min-w-0 max-w-[50vw] flex-row items-center justify-start">
+      <h1 className="flex max-w-[50vw] flex-row items-center justify-start text-lg font-semibold lg:max-w-[40vw]">
         <span className="truncate">{bookNameState}</span>
         {bookData?.isbn && <KakaoInfoTip />}
-      </div>
+      </h1>
     );
 
     const sharedHandler = () => {
