@@ -1,7 +1,13 @@
 import { ReactNode } from "react";
 import { create } from "zustand";
 
+export enum ModalType {
+  POPUP = "popup",
+  BOTTOMSHEET = "bottomsheet",
+}
+
 type PopupState = {
+  type: ModalType;
   content: ReactNode | null;
   isOpen: boolean;
   cancleCallback: () => void | undefined;
@@ -12,22 +18,25 @@ type PopupActions = {
   openPopup: (
     content: ReactNode,
     cancleCallback?: () => void | undefined,
-    confirmCallback?: () => void | undefined
+    confirmCallback?: () => void | undefined,
+    type?: ModalType
   ) => void;
   closePopup: (cancleCallback?: () => void) => void;
 };
 
 const usePopupModalStore = create<PopupState & PopupActions>((set) => ({
+  type: ModalType.POPUP,
   content: null,
   isOpen: false,
   cancleCallback: () => undefined,
   confirmCallback: () => undefined,
 
-  openPopup: (content: ReactNode, cancleCallback?: () => void, confirmCallback?: () => void) => {
-    set({ content, isOpen: true, cancleCallback, confirmCallback });
+  openPopup: (content: ReactNode, cancleCallback?: () => void, confirmCallback?: () => void, type?: ModalType) => {
+    set({ content, isOpen: true, cancleCallback, confirmCallback, type: type || ModalType.POPUP });
   },
   closePopup: () => {
     set({
+      type: ModalType.POPUP,
       content: null,
       isOpen: false,
       cancleCallback: undefined,
@@ -44,12 +53,13 @@ const usePopupModalStore = create<PopupState & PopupActions>((set) => ({
  * @returns confirmCallback - 확인 버튼을 누를 때 추가적인 작업이 필요하다면 이 콜백을 사용합니다. 콜백핸들러 설정은 usePopupActon()의 openPopup에서 처리함
  */
 export const usePopupState = () => {
+  const type = usePopupModalStore((state) => state.type);
   const content = usePopupModalStore((state) => state.content);
   const isOpen = usePopupModalStore((state) => state.isOpen);
   const closeCallback = usePopupModalStore((state) => state.cancleCallback);
   const confirmCallback = usePopupModalStore((state) => state.confirmCallback);
 
-  return { content, isOpen, closeCallback, confirmCallback };
+  return { type, content, isOpen, closeCallback, confirmCallback };
 };
 
 /**
