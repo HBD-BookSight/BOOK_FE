@@ -1,5 +1,5 @@
 "use client";
-import { usePageData } from "@/context/PageDataProvider";
+import { useAdminPageData } from "@/context/AdminPageDataProvider";
 import React, { HTMLAttributes } from "react";
 import MemoizedAdminRowListItem from "./AdminRowListItem";
 
@@ -8,7 +8,7 @@ type Props = {
   className?: string;
 } & HTMLAttributes<HTMLDivElement>;
 const AdminRowList = <T,>({ className, keys, ...props }: Readonly<Props>) => {
-  const { data, setSelectRow, selectRow } = usePageData<T>();
+  const { data, setSelectRow, selectRow } = useAdminPageData<T>();
 
   return (
     <div className={`relative flex flex-1 flex-col overflow-auto ${className || ""}`} {...props}>

@@ -2,7 +2,7 @@ import AdminPaginationController from "@/components/adminPaginationController/Ad
 import AdminRowControllerContainer from "@/components/adminRowController/AdminRowControllerContainer";
 import AdminRowList from "@/components/adminRowList/AdminRowList";
 import { AdminEventInputs } from "@/components/popupProvider/adminForm/AdminEventForm";
-import PageDataProvider from "@/context/PageDataProvider";
+import AdminPageDataProvider from "@/context/AdminPageDataProvider";
 import { redirect } from "next/navigation";
 
 const Event = async ({ searchParams }: { searchParams: Promise<{ keyword?: string }> }) => {
@@ -14,7 +14,7 @@ const Event = async ({ searchParams }: { searchParams: Promise<{ keyword?: strin
   console.log("searchParams 테스트", keyword);
 
   return (
-    <PageDataProvider<AdminEventInputs[]>
+    <AdminPageDataProvider<AdminEventInputs[]>
       initialData={[
         {
           urls: [{ value: "asdassdfasdf", type: "Video" }],
@@ -46,7 +46,7 @@ const Event = async ({ searchParams }: { searchParams: Promise<{ keyword?: strin
         ]}
       ></AdminRowList>
       <AdminPaginationController />
-    </PageDataProvider>
+    </AdminPageDataProvider>
   );
 };
 

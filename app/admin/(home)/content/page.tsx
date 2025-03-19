@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import AdminRowControllerContainer from "../../../../components/adminRowController/AdminRowControllerContainer";
-import PageDataProvider from "@/context/PageDataProvider";
+import AdminPageDataProvider from "@/context/AdminPageDataProvider";
 import AdminRowList from "@/components/adminRowList/AdminRowList";
 import { AdminContentInputs } from "@/components/popupProvider/adminForm/AdminContentForm";
 import AdminPaginationController from "@/components/adminPaginationController/AdminPaginationController";
@@ -14,7 +14,7 @@ const Content = async ({ searchParams }: { searchParams: Promise<{ keyword?: str
   console.log("searchParams 테스트", keyword);
 
   return (
-    <PageDataProvider<AdminContentInputs[]>
+    <AdminPageDataProvider<AdminContentInputs[]>
       initialData={[
         { isbns: [{ value: 123123123 }], urls: [{ value: "asdassdfasdf", type: "Video" }] },
         { isbns: [{ value: 123 }, { value: 123 }], urls: [{ value: "123", type: "Video" }] },
@@ -37,7 +37,7 @@ const Content = async ({ searchParams }: { searchParams: Promise<{ keyword?: str
         ]}
       ></AdminRowList>
       <AdminPaginationController />
-    </PageDataProvider>
+    </AdminPageDataProvider>
   );
 };
 

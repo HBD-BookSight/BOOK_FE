@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import PageDataProvider from "@/context/PageDataProvider";
+import AdminPageDataProvider from "@/context/AdminPageDataProvider";
 import AdminRowControllerContainer from "@/components/adminRowController/AdminRowControllerContainer";
 import AdminRowList from "@/components/adminRowList/AdminRowList";
 import AdminPaginationController from "@/components/adminPaginationController/AdminPaginationController";
@@ -14,7 +14,7 @@ const Publisher = async ({ searchParams }: { searchParams: Promise<{ keyword?: s
   console.log("searchParams 테스트", keyword);
 
   return (
-    <PageDataProvider<AdminPublisherInputs[]>
+    <AdminPageDataProvider<AdminPublisherInputs[]>
       initialData={[
         {
           publisherName: "test",
@@ -42,7 +42,7 @@ const Publisher = async ({ searchParams }: { searchParams: Promise<{ keyword?: s
         ]}
       ></AdminRowList>
       <AdminPaginationController />
-    </PageDataProvider>
+    </AdminPageDataProvider>
   );
 };
 

@@ -18,7 +18,7 @@ type Props<T> = {
  * 해당 프로바이더 사용시 제너릭 인터페이스 주입필요
  * @example <PageDataProvider<Interface> initialData={data}>
  */
-const PageDataProvider = <T,>({ children, initialData }: Props<T>) => {
+const AdminPageDataProvider = <T,>({ children, initialData }: Props<T>) => {
   const [selectRow, setSelectRow] = useState<number>();
   const [currentPage, setCurrentPage] = useState<number>(1);
   return (
@@ -28,9 +28,9 @@ const PageDataProvider = <T,>({ children, initialData }: Props<T>) => {
   );
 };
 
-export default PageDataProvider;
+export default AdminPageDataProvider;
 
-export const usePageData = <T,>() => {
+export const useAdminPageData = <T,>() => {
   const context = useContext(PageDataContext);
   if (context === undefined) {
     throw new Error("PageDataProvider 자식요소에서 사용해야 합니다.");

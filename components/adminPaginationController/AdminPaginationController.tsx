@@ -1,11 +1,11 @@
 "use client";
-import { usePageData } from "@/context/PageDataProvider";
+import { useAdminPageData } from "@/context/AdminPageDataProvider";
 import React, { HTMLAttributes, ReactNode } from "react";
 import ArrowHeadIcon from "@/public/icons/arrowHeadIcon.svg";
 
 type Props = { className?: string; children?: ReactNode } & HTMLAttributes<HTMLDivElement>;
 const AdminPaginationController = ({ className, ...props }: Readonly<Props>) => {
-  const { data, currentPage, setCurrentPage } = usePageData();
+  const { data, currentPage, setCurrentPage } = useAdminPageData();
   const resultLength = Array.isArray(data) ? data.length : 0;
   const pageLength = Math.ceil(resultLength / 20);
   return (
