@@ -37,7 +37,7 @@ const BookGrid = <T extends CSVBook[] | Book[]>({ className, books, ...props }: 
             {item.datetime &&
               new Date(item.datetime).getUTCDate() === kstNow.getUTCDate() &&
               new Date(item.datetime).getUTCMonth() === kstNow.getUTCMonth() && (
-                <div className="absolute -bottom-1 -right-1 aspect-square w-[10vw]">
+                <div className="absolute -bottom-1 -right-1 aspect-square w-[30%]">
                   <Image alt="bithDayCake" src={birthDayCake} fill sizes="100px" />
                 </div>
               )}
