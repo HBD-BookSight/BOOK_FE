@@ -2,6 +2,7 @@ import "./clientLayout.css";
 import { ReactNode } from "react";
 import BottomNavLayout from "./BottomNavLayout";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import PopupProvider from "@/components/popupProvider/PopupProvider";
 const ClientLayout = ({
   children,
 }: Readonly<{
@@ -14,6 +15,7 @@ const ClientLayout = ({
       <ReactQueryDevtools initialIsOpen={false} />
       <div className="relative mx-auto flex size-full flex-1 flex-col">{children}</div>
       <BottomNavLayout />
+      <PopupProvider />
     </body>
   );
 };
