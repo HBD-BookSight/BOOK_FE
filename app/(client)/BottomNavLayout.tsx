@@ -14,8 +14,8 @@ const BottomNavLayout = () => {
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="absolute inset-y-0 z-40 mx-auto size-full"
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="fixed inset-y-0 z-40 mx-auto size-full"
           >
             <SearchBottomPanel setIsSearchOpen={setIsSearchOpen} />
           </motion.div>
