@@ -2,7 +2,10 @@
 import React from "react";
 import CommonPillButton from "../common/CommonPillButton";
 import TriangleArrow from "@/public/icons/triangleArrowIcon.svg";
-import { ContentsFilterType, usePublisherPageFilterControllerData } from "@/context/PublisherPageDataProvider";
+import {
+  ContentsFilterType,
+  usePublisherPageFilterControllerData,
+} from "@/app/(client)/(exploreHeader)/explore/publisher/PublisherPageDataProvider";
 import { ModalType, usePopupAction } from "@/context/popupStore";
 import BottomSheetModal from "../popupProvider/BottomSheetModal";
 import AlphabetFilterSelector from "../popupProvider/alphabetFilterSelector/AlphabetFilterSelector";

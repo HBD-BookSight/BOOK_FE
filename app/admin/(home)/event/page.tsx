@@ -2,7 +2,7 @@ import AdminPaginationController from "@/components/adminPaginationController/Ad
 import AdminRowControllerContainer from "@/components/adminRowController/AdminRowControllerContainer";
 import AdminRowList from "@/components/adminRowList/AdminRowList";
 import { AdminEventInputs } from "@/components/popupProvider/adminForm/AdminEventForm";
-import AdminPageDataProvider from "@/context/AdminPageDataProvider";
+import AdminPageDataProvider from "@/app/admin/AdminPageDataProvider";
 import { redirect } from "next/navigation";
 
 const Event = async ({ searchParams }: { searchParams: Promise<{ keyword?: string }> }) => {

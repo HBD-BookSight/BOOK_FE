@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import AdminPageDataProvider from "@/context/AdminPageDataProvider";
+import AdminPageDataProvider from "@/app/admin/AdminPageDataProvider";
 import AdminRowControllerContainer from "@/components/adminRowController/AdminRowControllerContainer";
 import AdminRowList from "@/components/adminRowList/AdminRowList";
 import AdminPaginationController from "@/components/adminPaginationController/AdminPaginationController";

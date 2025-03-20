@@ -1,5 +1,5 @@
 "use client";
-import { useAdminPageData } from "@/context/AdminPageDataProvider";
+import { useAdminPageData } from "@/app/admin/AdminPageDataProvider";
 import React, { HTMLAttributes } from "react";
 import MemoizedAdminRowListItem from "./AdminRowListItem";
 

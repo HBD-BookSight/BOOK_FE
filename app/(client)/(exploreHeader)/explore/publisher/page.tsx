@@ -1,5 +1,5 @@
 import PublisherFilterController from "@/components/publisherFilterController/PublisherFilterController";
-import PublisherPageDataProvider from "@/context/PublisherPageDataProvider";
+import PublisherPageDataProvider from "@/app/(client)/(exploreHeader)/explore/publisher/PublisherPageDataProvider";
 import React from "react";
 
 const PublisherPage = () => {

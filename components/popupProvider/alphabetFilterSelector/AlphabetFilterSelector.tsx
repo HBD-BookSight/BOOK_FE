@@ -1,3 +1,4 @@
+"use client";
 import CommonPillButton from "@/components/common/CommonPillButton";
 import { usePopupState } from "@/context/popupStore";
 import React, { HTMLAttributes, useEffect, useRef, useState } from "react";
@@ -31,7 +32,7 @@ const AlphabetFilterSelector = ({ className, ...props }: Readonly<Props>) => {
       },
       {
         root: containerRef.current,
-        rootMargin: "-45% 0px -45% 0px",
+        rootMargin: "-40% 0px -40% 0px",
       }
     );
     ref.current.forEach((element) => {

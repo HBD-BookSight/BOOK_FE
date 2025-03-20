@@ -1,7 +1,7 @@
 "use client";
 
 import AdminRowController from "@/components/adminRowController/AdminRowController";
-import { useAdminPageData } from "@/context/AdminPageDataProvider";
+import { useAdminPageData } from "@/app/admin/AdminPageDataProvider";
 
 /**
  * 페이지 상태정보를 페이지에서 분리하고 필요한 정보를 AdminRowController에 전달하는 컨테이너
