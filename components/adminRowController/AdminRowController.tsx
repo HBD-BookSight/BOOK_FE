@@ -2,7 +2,7 @@
 
 import { HTMLAttributes, useRef } from "react";
 import CommonPillButton from "../common/CommonPillButton";
-import { usePopupActon } from "@/context/popupStore";
+import { usePopupAction } from "@/context/popupStore";
 import AdminDeleteForm, { AdminDeleteFormRef } from "../popupProvider/adminForm/AdminDeleteForm";
 import AlertPopupModal from "../popupProvider/AlertPopupModal";
 import AdminPopupModal from "../popupProvider/AdminPopupModal";
@@ -22,7 +22,7 @@ type Props = {
 } & HTMLAttributes<HTMLDivElement>;
 
 const AdminRowController = ({ className, resultLength, selectRow, defaultValues, ...props }: Readonly<Props>) => {
-  const { openPopup, closePopup } = usePopupActon();
+  const { openPopup, closePopup } = usePopupAction();
   const adminDeleteFormRef = useRef<AdminDeleteFormRef>(null);
   const AltFormComponentRef = useRef<AdminContentFormRef | AdminEventFormRef | AdminPublisherFormRef>(null);
   const pathName = usePathname();

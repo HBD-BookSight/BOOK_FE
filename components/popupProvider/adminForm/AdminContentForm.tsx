@@ -1,7 +1,7 @@
 "use client";
 import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
-import { usePopupActon } from "@/context/popupStore";
+import { usePopupAction } from "@/context/popupStore";
 import { forwardRef, HTMLAttributes, useImperativeHandle } from "react";
 import { Controller, FieldValues, useFieldArray, useForm } from "react-hook-form";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
@@ -29,7 +29,7 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(({ className, de
       isbns: [{ value: undefined }],
     },
   });
-  const { closePopup } = usePopupActon();
+  const { closePopup } = usePopupAction();
   const {
     fields: urlFields,
     append: appendUrl,

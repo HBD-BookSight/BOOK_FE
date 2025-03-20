@@ -1,7 +1,7 @@
 "use client";
 import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
-import { usePopupActon } from "@/context/popupStore";
+import { usePopupAction } from "@/context/popupStore";
 import { forwardRef, HTMLAttributes, useImperativeHandle } from "react";
 import { Controller, FieldValues, useFieldArray, useForm } from "react-hook-form";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
@@ -25,7 +25,7 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(({ className
       urls: [{ value: "", type: "Link" }],
     },
   });
-  const { closePopup } = usePopupActon();
+  const { closePopup } = usePopupAction();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "urls",
