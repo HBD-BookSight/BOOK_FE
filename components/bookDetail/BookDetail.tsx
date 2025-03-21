@@ -28,12 +28,14 @@ const BookDetail = <T extends CsvSuspenseResource | KakaoSuspenseResource>({
       }
     : result.documents[0];
 
+  const kstBirthDay = new Date(new Date(bookData?.datetime).getTime() + 9 * 60 * 60 * 1000);
+
   return (
     <div className={`relative flex size-full flex-col px-[var(--client-layout-margin)] ${className || ""}`} {...props}>
-      <BookDetailImageSection imageUrl={bookData?.thumbnail} birthDay={new Date(bookData?.datetime)} className="my-6" />
+      <BookDetailImageSection imageUrl={bookData?.thumbnail} birthDay={kstBirthDay} className="my-6" />
       <BookTitleSection
         bookName={bookData?.title || "책 이름(정보 미제공)"}
-        birthDayDate={new Date(bookData?.datetime)}
+        birthDayDate={kstBirthDay}
         url={bookData?.url}
         className="mb-10"
       />
