@@ -12,7 +12,13 @@ const PageTransitonTemplate = ({
   };
   return (
     <AnimatePresence mode="wait">
-      <motion.div initial="initial" animate="animate" exit="exit" variants={layoutVariants}>
+      <motion.div
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={layoutVariants}
+        className="flex flex-1 flex-col overflow-hidden"
+      >
         {children}
       </motion.div>
     </AnimatePresence>

@@ -4,7 +4,7 @@ const backButtonHeaderlayout = ({ children }: Readonly<{ children: React.ReactNo
   return (
     <>
       <BackbuttonHeader />
-      <div className="overflow-hidden">{children}</div>
+      {children}
     </>
   );
 };
