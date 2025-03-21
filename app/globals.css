@@ -25,9 +25,6 @@
     }
     scrollbar-width: none;
   }
-}
-
-@layer utilities {
   .scrollbar-custom {
     overflow: hidden;
   }
@@ -44,5 +41,17 @@
   }
   .scrollbar-custom::-webkit-scrollbar-track {
     background-opacity: 0;
+  }
+
+  .section-title {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 26px;
+  }
+  .section-sub-title {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--sub-color);
   }
 }
