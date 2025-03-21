@@ -27,7 +27,7 @@ const PublisherFilterController = () => {
   };
 
   return (
-    <header className="sticky top-0 flex w-full">
+    <div className="sticky top-0 flex w-full">
       <div className="scrollbar-hide flex flex-row items-center justify-start gap-2 overflow-x-auto pl-5 text-xl">
         <CommonPillButton
           className={`!size-fit shrink-0 px-4 transition-colors ${
@@ -38,7 +38,9 @@ const PublisherFilterController = () => {
           onClick={() =>
             setContentsFilter((prev) =>
               prev?.includes(ContentsFilterType.NEWS_LETTER)
-                ? prev?.filter((item) => item !== ContentsFilterType.NEWS_LETTER)
+                ? prev.length < 0
+                  ? prev?.filter((item) => item !== ContentsFilterType.NEWS_LETTER)
+                  : [ContentsFilterType.PLAY_LIST]
                 : [...prev, ContentsFilterType.NEWS_LETTER]
             )
           }
@@ -54,7 +56,9 @@ const PublisherFilterController = () => {
           onClick={() =>
             setContentsFilter((prev) =>
               prev?.includes(ContentsFilterType.PLAY_LIST)
-                ? prev?.filter((item) => item !== ContentsFilterType.PLAY_LIST)
+                ? prev.length < 0
+                  ? prev?.filter((item) => item !== ContentsFilterType.PLAY_LIST)
+                  : [ContentsFilterType.NEWS_LETTER]
                 : [...prev, ContentsFilterType.PLAY_LIST]
             )
           }
@@ -70,7 +74,7 @@ const PublisherFilterController = () => {
           <TriangleArrow className={`flex size-4 rotate-180 items-center justify-center transition duration-300`} />
         </CommonPillButton>
       </div>
-    </header>
+    </div>
   );
 };
 
