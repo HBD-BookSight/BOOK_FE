@@ -5,6 +5,7 @@ import PromotionContract from "@/components/promotionContract/PromotionContract"
 import getBirthdayBook from "@/function/server/getBirtdayBook";
 import { Suspense } from "react";
 import BirthDayBookSaveHelper from "./BirthDayBookSaveHelper";
+import TodayLibrary from "@/components/todayLibrary/TodayLibrary";
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <Suspense fallback={<LoadingSpinner className="h-[30vw] w-full" />}>
         <MainBookSlideContainer />
       </Suspense>
+      <TodayLibrary className="mb-5" />
       <MainScheduleSlide className="mb-5" />
       <PromotionContract />
     </main>
