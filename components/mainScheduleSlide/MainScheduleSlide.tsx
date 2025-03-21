@@ -18,7 +18,6 @@ const MainScheduleSlide = ({ className, ...props }: Readonly<Props>) => {
         <Link
           className="flex size-fit items-center justify-center border-none bg-white px-4 text-[var(--sub-color)]"
           href="/schedule"
-          scroll={false}
         >
           <p>view all</p> <BackArrowIcon className="size-5 rotate-180" />
         </Link>
