@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import CommonPillButton from "../common/CommonPillButton";
 import TriangleArrow from "@/public/icons/triangleArrowIcon.svg";
 import { ModalType, usePopupAction } from "@/context/popupStore";
@@ -14,6 +14,13 @@ const ScheduleFilterController = () => {
   const { contentsfilter, setContentsFilter, alphabetFilter, setAlphabetFilter } =
     useSchedulePageFilterControllerData();
   const { openPopup, closePopup } = usePopupAction();
+  const ref = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    const bodyElement = document.body.getBoundingClientRect();
+    if (ref.current) {
+      ref.current.style.width = bodyElement.width + "px";
+    }
+  }, []);
 
   const bottomSheetOpenHander = () => {
     openPopup<string>(
@@ -27,7 +34,10 @@ const ScheduleFilterController = () => {
   };
 
   return (
-    <div className="fixed z-30 flex w-full bg-[#FFFFFFD9] pl-[var(--client-layout-margin)] backdrop-blur-[5px]">
+    <div
+      className="fixed z-30 flex w-full bg-[#FFFFFFD9] pl-[var(--client-layout-margin)] backdrop-blur-[5px]"
+      ref={ref}
+    >
       <div className="scrollbar-hide flex flex-row items-center justify-start gap-2 overflow-x-auto text-xl">
         <CommonPillButton
           className={`!size-fit shrink-0 px-4 transition-colors ${
