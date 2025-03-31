@@ -7,7 +7,7 @@ type Props = {
   contentType: string;
   title: string;
 };
-const DiscoveryList = ({ className, imageUrl, contentType, title, ...props }: Readonly<Props>) => {
+const DiscoveryItem = ({ className, imageUrl, contentType, title, ...props }: Readonly<Props>) => {
   return (
     <li className={`relative flex w-full flex-row justify-between py-6 ${className || ""}`} {...props}>
       <div className="relative flex flex-1 flex-col items-start justify-center gap-2 pr-3">
@@ -23,4 +23,4 @@ const DiscoveryList = ({ className, imageUrl, contentType, title, ...props }: Re
   );
 };
 
-export default DiscoveryList;
+export default DiscoveryItem;
