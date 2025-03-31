@@ -13,7 +13,7 @@ const ClientLayout = ({
       className={`relative mx-auto flex h-full min-h-screen w-screen flex-col bg-white antialiased sm:max-w-[640px]`}
     >
       <ReactQueryDevtools initialIsOpen={false} />
-      <div className="relative mx-auto flex size-full flex-1 flex-col">{children}</div>
+      <div className="relative mx-auto flex size-full flex-1 flex-col overflow-x-hidden">{children}</div>
       <BottomNavLayout />
       <PopupProvider />
     </body>
