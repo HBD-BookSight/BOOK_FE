@@ -1,4 +1,6 @@
 import { HTMLAttributes } from "react";
+import Logo from "@/components/logo/Logo";
+import Link from "next/link";
 
 type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
 const HomeHeader = ({ className, ...etc }: Readonly<Props>) => {
@@ -9,7 +11,9 @@ const HomeHeader = ({ className, ...etc }: Readonly<Props>) => {
       }`}
       {...etc}
     >
-      HBD
+      <Link href={"/"}>
+        <Logo />
+      </Link>
     </header>
   );
 };
