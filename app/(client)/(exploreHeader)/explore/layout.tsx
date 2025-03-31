@@ -5,7 +5,7 @@ const layout = ({ children }: Readonly<{ children: ReactNode }>) => {
   return (
     <>
       <ExploreHeader />
-      {children}
+      <div className="overflow-hidden">{children}</div>
     </>
   );
 };
