@@ -8,9 +8,9 @@ const SchedulePage = () => {
   return (
     <main className="relative flex flex-1 flex-col overflow-hidden">
       <SchedulePageDataProvider initialData={{}}>
-        <ScheduleFilterController />
         <ScheduleHeaderHelper />
-        <div className="mt-8 flex flex-col gap-3 p-[--client-layout-margin]">
+        <ScheduleFilterController />
+        <div className="mt-14 flex flex-col gap-3 p-[--client-layout-margin] pt-0">
           <ScheduleDataContainer />
         </div>
       </SchedulePageDataProvider>

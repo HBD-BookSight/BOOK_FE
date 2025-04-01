@@ -35,7 +35,7 @@ const ScheduleFilterController = () => {
 
   return (
     <div
-      className="fixed z-30 flex w-full bg-[#FFFFFFD9] pl-[var(--client-layout-margin)] backdrop-blur-[5px]"
+      className="fixed z-30 flex w-full bg-[#FFFFFFD9] pb-3 pl-[var(--client-layout-margin)] backdrop-blur-[5px]"
       ref={ref}
     >
       <div className="scrollbar-hide flex flex-row items-center justify-start gap-2 overflow-x-auto text-xl">
