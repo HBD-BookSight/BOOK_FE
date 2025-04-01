@@ -21,5 +21,7 @@ const discoveryPage = () => {
 export default discoveryPage;
 
 const DiscoveryDataContainer = () => {
-  return [...new Array(12)].map((_item, index) => <DiscoveryItem key={index} className="h-fit w-full"></DiscoveryItem>);
+  return [...new Array(12)].map((_item, index) => (
+    <DiscoveryItem key={index} className="h-fit w-full" contentType="타입" title="제목" imageUrl=""></DiscoveryItem>
+  ));
 };
