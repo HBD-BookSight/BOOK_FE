@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import DiscoveryHeaderHelper from "./DiscoveryHeaderHelper";
 import DiscoveryPageDataProvider from "./DiscoveryPageDataProvider";
 import DiscoveryFilterController from "@/components/discoveryFilterController/DiscoveryFilterController";
@@ -10,7 +10,7 @@ const discoveryPage = () => {
       <DiscoveryHeaderHelper />
       <DiscoveryPageDataProvider initialData={{}}>
         <DiscoveryFilterController />
-        <ul className="w-full px-[var(--client-layout-margin)]">
+        <ul className="mt-14 w-full px-[var(--client-layout-margin)]">
           <DiscoveryDataContainer />
         </ul>
       </DiscoveryPageDataProvider>
@@ -22,6 +22,9 @@ export default discoveryPage;
 
 const DiscoveryDataContainer = () => {
   return [...new Array(12)].map((_item, index) => (
-    <DiscoveryItem key={index} className="h-fit w-full" contentType="타입" title="제목" imageUrl=""></DiscoveryItem>
+    <Fragment key={index}>
+      <DiscoveryItem key={index} className="h-fit w-full" contentType="타입" title="제목" imageUrl="" />
+      {index < [...new Array(12)].length - 1 && <div className="border-b" />}
+    </Fragment>
   ));
 };
