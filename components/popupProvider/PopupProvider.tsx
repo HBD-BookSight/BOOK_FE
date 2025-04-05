@@ -1,9 +1,16 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
-import { ModalType, usePopupState } from "../../context/popupStore";
+import { ModalType, usePopupAction, usePopupState } from "../../context/popupStore";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 const PopupProvider = () => {
   const { type, content, isOpen } = usePopupState();
+  const { closePopup } = usePopupAction();
+  const pathName = usePathname();
+  useEffect(() => {
+    closePopup();
+  }, [closePopup, pathName]);
   return (
     <AnimatePresence>
       {isOpen && type === ModalType.POPUP && (
