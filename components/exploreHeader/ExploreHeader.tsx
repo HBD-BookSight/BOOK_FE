@@ -10,7 +10,7 @@ const READER = /\/reader$/;
 const ExploreHeader = () => {
   const pathname = usePathname();
   return (
-    <header className="sticky top-0 flex w-full flex-col">
+    <header className="sticky top-0 z-30 flex w-full flex-col bg-[#FFFFFFD9] backdrop-blur-[5px]">
       <div className="scrollbar-hide flex flex-row items-center justify-start gap-4 overflow-x-auto py-6 pl-5 text-xl font-bold">
         <Link href={"./publisher"} className="shrink-0">
           <p className={`p-2 ${!PUBLISHER.test(pathname) && "text-[var(--sub-color)]"}`}>출판사</p>
