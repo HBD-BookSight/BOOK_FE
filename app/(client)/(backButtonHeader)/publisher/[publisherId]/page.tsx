@@ -30,7 +30,7 @@ const PublisherPage = async ({ params }: { params: Promise<{ publisherId: string
         ))}
       </section>
       <Link
-        href={""}
+        href={"/search?query=" + encodeURIComponent(publisherId)}
         className="fixed bottom-[13vh] flex h-fit items-center rounded-full bg-[#FFFFFFD9] px-6 py-2 text-sm text-[var(--sub-color)] shadow-[0_0_var(--client-layout-margin)_rgba(0,0,0,0.12)] backdrop-blur-[5px]"
       >
         의 책 더보기
