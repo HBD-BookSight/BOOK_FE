@@ -7,7 +7,12 @@ import Link from "next/link";
 type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
 const Discovery = ({ className, ...props }: Readonly<Props>) => {
   return (
-    <section className={`relative h-fit w-full p-[var(--client-layout-margin)] ${className || ""}`} {...props}>
+    <section
+      className={`relative h-fit w-full px-[var(--client-layout-margin)] py-[var(--content-section-margin)] ${
+        className || ""
+      }`}
+      {...props}
+    >
       <div className="relative flex size-full flex-col items-center justify-between">
         <div className="relative flex size-full flex-col items-start justify-center">
           <h2 className="section-title mb-1">디스커버리</h2>
