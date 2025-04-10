@@ -20,7 +20,7 @@ const AdminPopupModal = ({ className, children, ...props }: Readonly<Props>) => 
       <div className="flex size-full flex-row justify-center gap-2">
         <CommonPillButton
           onClick={confirmCallback}
-          className="h-10 w-20 bg-[var(--highlight-color)] font-bold text-white"
+          className="h-10 w-20 !bg-[var(--highlight-color)] font-bold text-white"
         >
           Ok
         </CommonPillButton>

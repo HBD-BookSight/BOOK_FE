@@ -64,7 +64,7 @@ const AdminRowController = ({ className, resultLength, selectRow, defaultValues,
     >
       <span className="flex flex-row items-center justify-center gap-7">
         <p className="text-sm font-semibold text-[var(--highlight-color)]">All {resultLength || "0"}</p>
-        <CommonPillButton onClick={() => setRow(pathName)} className="h-8 w-20 bg-[var(--highlight-color)] text-white">
+        <CommonPillButton onClick={() => setRow(pathName)} className="h-8 w-20 !bg-[var(--highlight-color)] text-white">
           Add row
         </CommonPillButton>
       </span>
