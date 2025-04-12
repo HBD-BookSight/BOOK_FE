@@ -1,11 +1,11 @@
 import LoadingSpinner from "@/components/common/LoadingSpinner";
-import MainBookSlide from "@/components/mainBookSlide/MainBookSlide";
-import MainScheduleSlide from "@/components/mainScheduleSlide/MainScheduleSlide";
 import getBirthdayBook from "@/function/server/getBirtdayBook";
 import { Suspense } from "react";
-import BirthDayBookSaveHelper from "./BirthDayBookSaveHelper";
-import TodayLibrary from "@/components/todayLibrary/TodayLibrary";
+import BirthDayBookSaveHelper from "./components/BirthDayBookSaveHelper";
 import Discovery from "@/components/discovery/Discovery";
+import TodayLibrary from "./components/todayLibrary/TodayLibrary";
+import MainScheduleSlide from "./components/mainScheduleSlide/MainScheduleSlide";
+import MainBookSlide from "./components/mainBookSlide/MainBookSlide";
 
 const Home = () => {
   return (

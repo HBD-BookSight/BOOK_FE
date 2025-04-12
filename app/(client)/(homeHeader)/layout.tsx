@@ -1,4 +1,4 @@
-import HomeHeader from "@/components/homeHeader/HomeHeader";
+import HomeHeader from "./components/homeHeader/HomeHeader";
 
 const homeHeaderlayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (

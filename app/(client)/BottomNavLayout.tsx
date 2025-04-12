@@ -1,8 +1,8 @@
 "use client";
-import BottomNav from "@/components/bottomNav/BottomNav";
-import SearchBottomPanel from "@/components/searchBottomPanel/SearchBottomPanel";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import BottomNav from "./components/bottomNav/BottomNav";
+import SearchBottomPanel from "./components/searchBottomPanel/SearchBottomPanel";
 
 const BottomNavLayout = () => {
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);

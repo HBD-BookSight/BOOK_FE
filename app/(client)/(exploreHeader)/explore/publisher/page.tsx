@@ -1,7 +1,7 @@
-import PublisherFilterController from "@/components/publisherFilterController/PublisherFilterController";
-import PublisherPageDataProvider from "@/app/(client)/(exploreHeader)/explore/publisher/PublisherPageDataProvider";
-import PublisherGridItem from "./PublisherGridItem";
+import PublisherGridItem from "./components/PublisherGridItem";
 import Link from "next/link";
+import PublisherPageDataProvider from "./components/PublisherPageDataProvider";
+import PublisherFilterController from "./components/publisherFilterController/PublisherFilterController";
 
 const PublisherPage = () => {
   return (

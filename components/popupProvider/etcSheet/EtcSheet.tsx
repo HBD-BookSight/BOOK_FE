@@ -34,7 +34,6 @@ const EtcSheet = ({ className, children, ...props }: Readonly<Props>) => {
           e.preventDefault();
           ref.current.style.height =
             Math.min(initialHeight, window.innerHeight - (e.touches[0].clientY - 24 || 0)) + "px"; // 24는 시트헤더 위치임
-          console.log(ref.current.style.height, window.innerHeight - (e.touches[0].clientY || 0));
         }
         if (isGrab && ref.current && ref.current.offsetHeight <= 60) {
           closePopup();

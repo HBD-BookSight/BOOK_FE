@@ -1,4 +1,4 @@
-import ExploreHeader from "@/components/exploreHeader/ExploreHeader";
+import ExploreHeader from "@/app/(client)/(exploreHeader)/explore/components/exploreHeader/ExploreHeader";
 import React, { ReactNode } from "react";
 
 const layout = ({ children }: Readonly<{ children: ReactNode }>) => {

@@ -1,6 +1,6 @@
-import AdminHeader from "@/components/adminHeader/AdminHeader";
-import AdminSideNav from "@/components/adminSideNav/AdminSideNav";
 import { ReactNode } from "react";
+import AdminHeader from "./components/adminHeader/AdminHeader";
+import AdminSideNav from "./components/adminSideNav/AdminSideNav";
 
 const AdminHomeLayout = ({
   children,

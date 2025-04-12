@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
-import AdminPageDataProvider from "@/app/admin/AdminPageDataProvider";
-import AdminRowControllerContainer from "@/components/adminRowController/AdminRowControllerContainer";
-import AdminRowList from "@/components/adminRowList/AdminRowList";
-import AdminPaginationController from "@/components/adminPaginationController/AdminPaginationController";
+import AdminPageDataProvider from "@/app/admin/(home)/components/AdminPageDataProvider";
+import AdminRowList from "@/app/admin/(home)/components/adminRowList/AdminRowList";
+import AdminPaginationController from "@/app/admin/(home)/components/adminPaginationController/AdminPaginationController";
 import { AdminPublisherInputs } from "@/components/popupProvider/adminForm/AdminPublisherForm";
+import AdminRowControllerContainer from "../components/adminRowControllerContainer/AdminRowControllerContainer";
 
 const Publisher = async ({ searchParams }: { searchParams: Promise<{ keyword?: string }> }) => {
   if (false) {

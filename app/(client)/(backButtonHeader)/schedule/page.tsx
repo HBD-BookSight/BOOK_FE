@@ -1,8 +1,8 @@
 import React from "react";
-import ScheduleHeaderHelper from "./ScheduleHeaderHelper";
-import SchedulePageDataProvider from "./SchedulePageDataProvider";
-import ScheduleItem from "@/components/mainScheduleSlide/ScheduleItem";
-import ScheduleFilterController from "@/components/scheduleFilterController/ScheduleFilterController";
+import ScheduleHeaderHelper from "./components/ScheduleHeaderHelper";
+import SchedulePageDataProvider from "./components/SchedulePageDataProvider";
+import ScheduleItem from "@/components/scheduleItem/ScheduleItem";
+import ScheduleFilterController from "./components/scheduleFilterController/ScheduleFilterController";
 
 const SchedulePage = () => {
   return (

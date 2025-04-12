@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import BirthDayHeaderHelper from "./BirthDayHeaderHelper";
-import BirthDayBookGridContainer from "./BirthDayBookGridContainer";
+import BirthDayHeaderHelper from "./components/BirthDayHeaderHelper";
+import BirthDayBookGridContainer from "./components/BirthDayBookGridContainer";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
 const BirthDayDetail = () => {
   return (

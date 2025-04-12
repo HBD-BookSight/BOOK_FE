@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
-import DiscoveryHeaderHelper from "./DiscoveryHeaderHelper";
-import DiscoveryPageDataProvider from "./DiscoveryPageDataProvider";
-import DiscoveryFilterController from "@/components/discoveryFilterController/DiscoveryFilterController";
+import DiscoveryHeaderHelper from "./components/DiscoveryHeaderHelper";
+import DiscoveryPageDataProvider from "./components/DiscoveryPageDataProvider";
+import DiscoveryFilterController from "./components/discoveryFilterController/DiscoveryFilterController";
 import DiscoveryItem from "@/components/discovery/DiscoveryItem";
 
 const discoveryPage = () => {

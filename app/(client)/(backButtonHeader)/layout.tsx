@@ -1,4 +1,4 @@
-import BackbuttonHeader from "@/components/backButtonHeader/BackbuttonHeader";
+import BackbuttonHeader from "./components/backButtonHeader/BackbuttonHeader";
 
 const backButtonHeaderlayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (

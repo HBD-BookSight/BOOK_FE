@@ -1,7 +1,7 @@
 import { Suspense } from "react";
-import SearchBookGridContainer from "./SearchBookGridContainer";
+import SearchBookGridContainer from "./components/SearchBookGridContainer";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
-import SearchHeaderHelper from "./SearchHeaderHelper";
+import SearchHeaderHelper from "./components/SearchHeaderHelper";
 
 const SearchPage = async ({ searchParams }: { searchParams: Promise<{ query?: string }> }) => {
   const { query } = await searchParams;
