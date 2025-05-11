@@ -10,6 +10,7 @@ const useGetBirthDayBooks = () => {
     getNextPageParam: (lastPage) =>
       lastPage.hasNext ? lastPage.totalPages + 1 : undefined,
   });
+
   return { data, fetchNextPage, hasNextPage, status };
 };
 
