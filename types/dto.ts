@@ -304,3 +304,11 @@ export interface PageResponseAuthorDto {
   hasNext: boolean;
   hasPrevious: boolean;
 }
+
+export interface SearchBookeventDto {
+  keyword?: string | null;
+  page?: number;
+  limit?: number;
+  orderBy?: string;
+  direction?: "asc" | "desc";
+}
