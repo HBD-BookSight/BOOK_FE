@@ -1,22 +1,35 @@
 "use client";
-import React, { Dispatch, HTMLAttributes, SetStateAction, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
-import ArrowHeadIcon from "@/public/icons/arrowHeadIcon.svg";
-import BookItem from "./BookItem";
 import { isMobile } from "@/function/common";
-import { CSVBook } from "@/types/api";
+import ArrowHeadIcon from "@/public/icons/arrowHeadIcon.svg";
+import { BookDto } from "@/types/dto";
+import { motion } from "framer-motion";
+import {
+  Dispatch,
+  HTMLAttributes,
+  SetStateAction,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import BookItem from "./BookItem";
 
 type Props = {
   className?: string;
-  books: CSVBook[];
+  books?: BookDto[];
   setConfettiWind: Dispatch<SetStateAction<number>>;
 } & HTMLAttributes<HTMLDivElement>;
 
-const MainBookSlideContainer = ({ className, books, setConfettiWind, ...props }: Readonly<Props>) => {
+const MainBookSlideContainer = ({
+  className,
+  books,
+  setConfettiWind,
+  ...props
+}: Readonly<Props>) => {
   const [slideViewSize, setSlideViewSize] = useState<number>();
   const [prevScrollIndex, setPrevScrollIndex] = useState<number>(0);
   const slideContainerRef = useRef<HTMLDivElement>(null);
-  const [booksData, setBooksData] = useState<Array<CSVBook> | undefined>(books);
+  const [booksData, setBooksData] = useState<Array<BookDto> | undefined>(books);
   const [isMobileState, setIsMobileState] = useState(false);
 
   //슬라이드 뷰 크기 조정용
@@ -48,7 +61,8 @@ const MainBookSlideContainer = ({ className, books, setConfettiWind, ...props }:
 
   const handleScroll = () => {
     if (slideContainerRef.current && booksData) {
-      const { scrollLeft, scrollWidth, clientWidth } = slideContainerRef.current;
+      const { scrollLeft, scrollWidth, clientWidth } =
+        slideContainerRef.current;
       const scrollRatio = scrollLeft / (scrollWidth - clientWidth); // 현재 스크롤 비율
       const totalSteps = booksData.length; // 배열의 길이 (6개)
       const stepSize = 1 / totalSteps; // 한 단계의 비율 (예: 0.16)
@@ -81,9 +95,9 @@ const MainBookSlideContainer = ({ className, books, setConfettiWind, ...props }:
 
   return (
     <div
-      className={`${isMobileState ? "" : "scrollbar-custom"} group relative size-full max-w-full overflow-auto ${
-        className || ""
-      }`}
+      className={`${
+        isMobileState ? "" : "scrollbar-custom"
+      } group relative size-full max-w-full overflow-auto ${className || ""}`}
       {...props}
       ref={slideContainerRef}
       onScroll={handleScroll}
@@ -112,13 +126,13 @@ const MainBookSlideContainer = ({ className, books, setConfettiWind, ...props }:
                 transition={{
                   layout: { duration: 0.15, ease: "easeInOut" },
                 }}
-                key={book.ISBN_THIRTEEN_NO}
+                key={book.isbn}
                 className="relative flex size-full items-end justify-center"
               >
                 <BookItem
                   ind={index}
-                  isbn={book.ISBN_THIRTEEN_NO}
-                  imageUrl={book.IMAGE_URL}
+                  isbn={book.isbn}
+                  imageUrl={book.titleImage}
                   bookLength={booksData.length}
                 />
               </motion.div>

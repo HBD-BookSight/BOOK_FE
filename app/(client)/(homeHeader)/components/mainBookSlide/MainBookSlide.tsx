@@ -1,12 +1,21 @@
 "use client";
-import React, { HTMLAttributes, useEffect, useLayoutEffect, useRef, useState } from "react";
-import BookDescription from "./BookDescription";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
+import useGetBirthDayBooks from "@/components/hooks/useGetBirthDayBooks";
+import {
+  HTMLAttributes,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import ReactConfetti from "react-confetti";
+import BookDescription from "./BookDescription";
 import MainBookSlideContainer from "./MainBookSlideContainer";
-import { CSVBook } from "@/types/api";
 
-type Props = { className?: string; books: CSVBook[] } & HTMLAttributes<HTMLDivElement>;
-const MainBookSlide = ({ className, books, ...props }: Readonly<Props>) => {
+type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
+
+const MainBookSlide = ({ className, ...props }: Readonly<Props>) => {
+  const { data, status } = useGetBirthDayBooks();
   const sectionRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [confettiWind, setConfettiWind] = useState<number>(0);
@@ -35,7 +44,11 @@ const MainBookSlide = ({ className, books, ...props }: Readonly<Props>) => {
   }, [confettiWind]);
 
   return (
-    <section className={`flex size-full flex-col ${className || ""}`} {...props} ref={sectionRef}>
+    <section
+      className={`flex size-full flex-col ${className || ""}`}
+      {...props}
+      ref={sectionRef}
+    >
       <ReactConfetti
         width={size.width}
         height={size.height}
@@ -47,8 +60,20 @@ const MainBookSlide = ({ className, books, ...props }: Readonly<Props>) => {
         frameRate={60}
         style={{ zIndex: 0, display: "absolute" }}
       />
-      <BookDescription createdAt={new Date()} className="z-10 px-[var(--client-layout-margin)]" />
-      <MainBookSlideContainer books={books.slice(0, 6)} setConfettiWind={setConfettiWind} />
+      <BookDescription
+        createdAt={new Date()}
+        className="z-10 px-[var(--client-layout-margin)]"
+      />
+      {status === "success" ? (
+        <MainBookSlideContainer
+          books={
+            data ? data.pages.flatMap((page) => page.items).slice(0, 6) : []
+          }
+          setConfettiWind={setConfettiWind}
+        />
+      ) : (
+        <LoadingSpinner className="h-[30vw] w-full" />
+      )}
     </section>
   );
 };
