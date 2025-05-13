@@ -312,3 +312,13 @@ export interface SearchBookeventDto {
   orderBy?: string;
   direction?: "asc" | "desc";
 }
+
+export interface EventRequestDto {
+  page: number;
+  limit: number;
+  eventFlag: "SOLO" | "GROUP" | "ETC";
+  eventType?: string;
+  location?: "ONLINE" | "OFFLINE";
+  startDate?: string;
+  endDate?: string;
+}
