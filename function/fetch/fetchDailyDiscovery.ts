@@ -10,8 +10,6 @@ const fetchDailyDiscovery = async (): Promise<ContentsDto[] | undefined> => {
     );
     if (response.ok) {
       const result: ListResponseContentsDto = await response.json();
-      console.log(result);
-
       return result.items;
     } else {
       throw new Error(response.statusText);
