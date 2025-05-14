@@ -2,10 +2,10 @@
 import CommonDropDown from "@/components/common/CommonDropDown";
 import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
-import CommonSelectBox from "@/components/common/CommonSelectBox";
-import CommonToggleSwitch from "@/components/common/CommonToggleSwitch";
-import { usePopupAction } from "@/context/popupStore";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
+
+import CommonSubmitButton from "@/components/common/CommonSubmitButton";
+import { usePopupAction } from "@/context/popupStore";
 import {
   forwardRef,
   HTMLAttributes,
@@ -21,19 +21,17 @@ import {
 
 type Props = {
   className?: string;
-  defaultValues?: AdminEventInputs;
+  defaultValues?: EventPromotionFormTypes;
 } & HTMLAttributes<HTMLDivElement>;
-export type AdminEventInputs = {
-  urls: { value: string; type: "Video" | "Article" | "Podcast" | "Link" }[];
+
+export type EventPromotionFormTypes = {
+  urls: { value: string; type: "링크" | "구글폼" }[];
   eventTitle: string;
-  eventHost: string;
+  eventHost?: string;
   startDate: Date | string;
   endDate: Date | string;
-  location: "Online" | "Offline" | "Online/Offline";
-  eventType: string;
-  eventFlag: "Solo" | "Group" | "etc";
-  isPosting: boolean;
-  isbn?: number;
+  location?: "Online" | "Offline" | "Online/Offline";
+  eventType?: string;
   bookName?: string;
   senderName?: string;
   senderEmail?: string;
@@ -48,7 +46,7 @@ const EventPromotionForm = forwardRef<AdminEventFormRef, Props>(
   ({ className, defaultValues, ...props }, ref) => {
     console.log(defaultValues?.startDate);
     const { register, handleSubmit, control, setValue, watch } =
-      useForm<AdminEventInputs>({
+      useForm<EventPromotionFormTypes>({
         mode: "onSubmit",
         defaultValues: defaultValues
           ? {
@@ -61,14 +59,19 @@ const EventPromotionForm = forwardRef<AdminEventFormRef, Props>(
                 .split("T")[0],
             }
           : {
-              urls: [{ value: "", type: "Video" }],
+              urls: [{ value: "", type: "링크" }],
             },
       });
-    const { closePopup } = usePopupAction();
-    const { fields, append, remove } = useFieldArray({
+    const {
+      fields: urlFields,
+      append: appendUrl,
+      remove: removeUrl,
+    } = useFieldArray({
       control,
       name: "urls",
     });
+    const { closePopup } = usePopupAction();
+
     const onSubmitHandler = (data: FieldValues) => {
       console.log(data);
       closePopup();
@@ -99,12 +102,30 @@ const EventPromotionForm = forwardRef<AdminEventFormRef, Props>(
         {...props}
       >
         <form
-          className="relative flex size-full max-h-[80vh] flex-col gap-6 overflow-auto px-[var(--client-layout-margin)] py-6"
+          className="relative flex size-full max-h-[80vh] flex-col gap-9 overflow-auto px-[var(--client-layout-margin)] py-6"
           onSubmit={handleSubmit(onSubmitHandler, onErrorHandler)}
         >
           <div className="relative flex size-full flex-col gap-3">
-            <CommonLabel>URL*</CommonLabel>
-            {fields.map((_field, index) => (
+            <CommonLabel htmlFor="eventTitle">
+              <div className="flex gap-0.5 font-bold">
+                이벤트 명 <div className="text-[#FF2C6CFF]">*</div>{" "}
+              </div>
+            </CommonLabel>
+            <CommonInputField
+              placeholder="ex) 아름드리 서평단 모집"
+              type="url"
+              className="flex-[2] py-3"
+              id="eventTitle"
+              {...register("eventTitle", { required: "입력이 필요합니다" })}
+            />
+          </div>
+          <div className="relative flex size-full flex-col gap-3">
+            <CommonLabel htmlFor="eventLink">
+              <div className="flex gap-0.5 font-bold">
+                링크 첨부 <div className="text-[#FF2C6CFF]">*</div>{" "}
+              </div>
+            </CommonLabel>
+            {urlFields.map((_field, index) => (
               <div
                 className="relative flex h-fit w-full flex-row gap-1"
                 key={index}
@@ -112,7 +133,7 @@ const EventPromotionForm = forwardRef<AdminEventFormRef, Props>(
                 <CommonInputField
                   placeholder="https://example.com"
                   type="url"
-                  className="flex-[2]"
+                  className="flex-[2] py-3"
                   id={`url${index}`}
                   {...register(`urls.${index}.value`, {
                     required: "입력이 필요합니다",
@@ -125,67 +146,80 @@ const EventPromotionForm = forwardRef<AdminEventFormRef, Props>(
                   render={({ field }) => (
                     <CommonDropDown
                       {...field}
-                      className="flex-1"
-                      optionItems={["Video", "Article", "Podcast", "Link"]}
+                      className="flex-1 py-0.5"
+                      optionItems={["링크", "구글폼"]}
                     />
                   )}
                 />
-                <button
-                  type="button"
-                  onClick={() => remove(index)}
-                  className="p-1 text-sm font-semibold text-[var(--highlight-color)]"
+                <div
+                  onClick={() => removeUrl(index)}
+                  className="p-1 font-semibold text-[var(--highlight-color)]"
                 >
                   <CancleIcon className="size-5" />
-                </button>
+                </div>
               </div>
             ))}
-            <div className="relative flex size-full flex-row justify-end gap-2">
+            <div className="relative flex size-full flex-row gap-2">
               <button
-                onClick={() => append({ value: "", type: "Video" })}
-                className="text-sm font-semibold text-[var(--sub-color)]"
+                onClick={() => appendUrl({ value: "", type: "링크" })}
+                className="text-[13px] font-bold text-[var(--highlight-color)]"
               >
-                + Add
+                + 링크 추가
               </button>
             </div>
           </div>
-          <div>
-            <CommonLabel htmlFor="eventTitle">Event Title</CommonLabel>
-            <CommonInputField
-              id="eventTitle"
-              {...register("eventTitle", { required: "입력이 필요합니다" })}
-            />
-          </div>
-          <div>
-            <CommonLabel htmlFor="eventHost">Event Host</CommonLabel>
+          <div className="flex flex-col gap-3">
+            <CommonLabel
+              htmlFor="eventHost"
+              className="text-[var(--sub-color)]"
+            >
+              이벤트 주최 측
+            </CommonLabel>
             <CommonInputField
               id="eventHost"
+              className="py-3"
               {...register("eventHost", { required: "입력이 필요합니다" })}
             />
           </div>
-          <div className="relative flex size-full flex-col">
-            <CommonLabel htmlFor="startDate">Date/Duration</CommonLabel>
+          <div className="relative flex size-full flex-col gap-3">
+            <CommonLabel
+              htmlFor="startDate"
+              className="text-[var(--sub-color)]"
+            >
+              참여자 모집 기간
+            </CommonLabel>
             <div className="relative flex w-full flex-row items-center justify-center">
               <CommonInputField
                 id="startDate"
                 type="date"
-                className="!px-1"
+                className="px-4"
                 {...register("startDate", { required: "입력이 필요합니다" })}
               />
               ~
               <CommonInputField
                 id="endDate"
                 type="date"
-                className="!px-1"
+                className="px-4"
                 {...register("endDate", { required: "입력이 필요합니다" })}
               />
             </div>
           </div>
-          <div>
+          <div className="flex flex-col gap-3">
             <CommonLabel
-              htmlFor="location"
-              className="text-[var(--highlight-color)]"
+              htmlFor="eventType"
+              className="text-[var(--sub-color)]"
             >
-              Location*
+              이벤트 타입
+            </CommonLabel>
+            <CommonInputField
+              id="eventType"
+              className="py-3"
+              {...register("eventType", { required: "입력이 필요합니다" })}
+            />
+          </div>
+          <div className="flex flex-col gap-3">
+            <CommonLabel htmlFor="location" className="text-[var(--sub-color)]">
+              온라인/오프라인
             </CommonLabel>
             <Controller
               name={`location`}
@@ -194,101 +228,62 @@ const EventPromotionForm = forwardRef<AdminEventFormRef, Props>(
               render={({ field }) => (
                 <CommonDropDown
                   {...field}
-                  className="flex-1"
-                  optionItems={["Online", "Offline", "Online/Offline"]}
+                  className="flex-1 py-1"
+                  optionItems={["온라인", "오프라인", "온라인/오프라인"]}
                 />
               )}
             />
           </div>
-          <div>
-            <CommonLabel
-              htmlFor="eventType"
-              className="text-[var(--highlight-color)]"
-            >
-              Event Type*
-            </CommonLabel>
-            <CommonInputField id="eventType" {...register("eventType")} />
-          </div>
-          <div>
-            <CommonLabel
-              htmlFor="eventFlag"
-              className="text-[var(--highlight-color)]"
-            >
-              Event Flag*
-            </CommonLabel>
-            <CommonSelectBox
-              optionItems={["Solo", "Group", "etc"]}
-              className="flex-1"
-              {...register(`eventFlag`, { required: "입력이 필요합니다" })}
-            />
-          </div>
-          <div className="relative flex size-full flex-row">
-            <CommonLabel
-              htmlFor="isPosting"
-              className="text-[var(--highlight-color)]"
-            >
-              Posting on/off*
-            </CommonLabel>
-            <CommonToggleSwitch
-              className="h-5 w-10"
-              {...register(`isPosting`, { required: "입력이 필요합니다" })}
-            />
-          </div>
-          <div className="relative flex size-full flex-row border-b-[1px]"></div>
-          <div>
-            <CommonLabel htmlFor="isbn" className="text-[var(--sub-color)]">
-              Book ISBN Number
-            </CommonLabel>
-            <CommonInputField id="isbn" {...register("isbn")} />
-          </div>
-          <div>
+          <div className="flex flex-col gap-3">
             <CommonLabel htmlFor="bookName" className="text-[var(--sub-color)]">
-              Book Name
+              이벤트 도서명
             </CommonLabel>
-            <CommonInputField id="bookName" {...register("bookName")} />
+            <CommonInputField
+              id="bookName"
+              {...register("bookName")}
+              className="py-3"
+            />
           </div>
-          <div>
+          <div className="flex flex-col gap-3">
             <CommonLabel
               htmlFor="senderName"
               className="text-[var(--sub-color)]"
             >
-              Sender Name
+              문의자 성함
             </CommonLabel>
-            <CommonInputField id="senderName" {...register("senderName")} />
+            <CommonInputField
+              id="senderName"
+              className="py-3"
+              {...register("senderName")}
+            />
           </div>
-          <div>
+          <div className="flex flex-col gap-3">
             <CommonLabel
               htmlFor="senderEmail"
               className="text-[var(--sub-color)]"
             >
-              Sender Email
+              문의자 이메일
             </CommonLabel>
-            <CommonInputField id="senderEmail" {...register("senderEmail")} />
+            <CommonInputField
+              id="senderEmail"
+              className="py-3"
+              {...register("senderEmail")}
+            />
           </div>
-          <div>
+          <div className="flex flex-col gap-3">
             <CommonLabel
               htmlFor="senderMessage"
               className="text-[var(--sub-color)]"
             >
-              Sender Message
+              전하고 싶은 말
             </CommonLabel>
             <CommonInputField
+              className="py-3"
               id="senderMessage"
               {...register("senderMessage")}
             />
           </div>
-          <div>
-            <CommonLabel htmlFor="memo" className="text-[var(--sub-color)]">
-              Memo
-            </CommonLabel>
-            <CommonInputField id="memo" {...register("memo")} />
-          </div>
-          <div>
-            <CommonLabel htmlFor="tag" className="text-[var(--sub-color)]">
-              Tag
-            </CommonLabel>
-            <CommonInputField id="tag" {...register("tag")} />
-          </div>
+          <CommonSubmitButton>제출하기</CommonSubmitButton>
         </form>
       </div>
     );

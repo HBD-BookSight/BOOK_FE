@@ -3,14 +3,14 @@ type Props = {
   children?: ReactNode;
   className?: string;
 } & HTMLAttributes<HTMLButtonElement>;
-const CommonPillButton = ({
+const CommonSubmitButton = ({
   children,
   className,
   ...props
 }: Readonly<Props>) => {
   return (
     <button
-      className={`relative flex size-full items-center justify-center rounded-full bg-[#F8F8FE] py-7 text-lg text-[var(--highlight-color)] ${
+      className={`relative flex size-full items-center justify-center rounded-full bg-[#F8F8FE] py-7 text-lg font-bold text-[var(--highlight-color)] ${
         className || ""
       }`}
       {...props}
@@ -20,4 +20,4 @@ const CommonPillButton = ({
   );
 };
 
-export default CommonPillButton;
+export default CommonSubmitButton;
