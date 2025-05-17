@@ -1,10 +1,11 @@
-import React, { HTMLAttributes } from "react";
-import BookDetailImageSection from "./BookDetailImageSection";
-import BookTitleSection from "./BookTitleSection";
-import BookDetailSection from "./BookDetailSection";
-import RecommandedItem from "./RecommandedItem";
 import { CsvSuspenseResource } from "@/app/(client)/(backButtonHeader)/birth-day/[isbn]/page";
 import { KakaoSuspenseResource } from "@/app/(client)/(backButtonHeader)/book/[isbn]/page";
+import { HTMLAttributes } from "react";
+import BookDetailImageSection from "./BookDetailImageSection";
+import BookDetailSection from "./BookDetailSection";
+import BookTitleSection from "./BookTitleSection";
+import ReadersReview from "./ReadersReview";
+import RecommandedItem from "./RecommandedItem";
 
 type Props<T extends CsvSuspenseResource | KakaoSuspenseResource> = {
   className?: string;
@@ -28,16 +29,27 @@ const BookDetail = <T extends CsvSuspenseResource | KakaoSuspenseResource>({
       }
     : result.documents[0];
 
-  const kstBirthDay = new Date(new Date(bookData?.datetime).getTime() + 9 * 60 * 60 * 1000);
+  const kstBirthDay = new Date(
+    new Date(bookData?.datetime).getTime() + 9 * 60 * 60 * 1000
+  );
 
   return (
-    <div className={`relative flex size-full flex-col px-[var(--client-layout-margin)] ${className || ""}`} {...props}>
-      <BookDetailImageSection imageUrl={bookData?.thumbnail} birthDay={kstBirthDay} className="my-6" />
+    <div
+      className={`relative flex size-full flex-col gap-7 px-[var(--client-layout-margin)] ${
+        className || ""
+      }`}
+      {...props}
+    >
+      <BookDetailImageSection
+        imageUrl={bookData?.thumbnail}
+        birthDay={kstBirthDay}
+        className="mt-6"
+      />
       <BookTitleSection
         bookName={bookData?.title || "책 이름(정보 미제공)"}
         birthDayDate={kstBirthDay}
         url={bookData?.url}
-        className="mb-10"
+        author={bookData?.authors.join(", ") || "저자 이름(정보 미제공)"}
       />
       <BookDetailSection
         author={bookData?.authors.join(", ") || "저자 이름(정보 미제공)"}
@@ -55,6 +67,7 @@ const BookDetail = <T extends CsvSuspenseResource | KakaoSuspenseResource>({
           title="fasdfasdfasdfasdsdfasdfasdfasdfasdfasdfasdfaasdsdfasdfasdfasdfasdfasdfasdfassdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfafasd"
         />
       </section>
+      <ReadersReview />
     </div>
   );
 };

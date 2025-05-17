@@ -1,10 +1,10 @@
-import { HTMLAttributes, Suspense } from "react";
-import MainScheduleSlideContainer from "./MainScheduleSlideContainer";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
+import fetchDailySchedule from "@/function/fetch/fetchDailySchedule";
 import BackArrowIcon from "@/public/icons/backArrowIcon.svg";
 import Link from "next/link";
+import { HTMLAttributes, Suspense } from "react";
 import PromotionContract from "../promotionContract/PromotionContract";
-import fetchDailySchedule from "@/function/fetch/fetchDailySchedule";
-import LoadingSpinner from "@/components/common/LoadingSpinner";
+import MainScheduleSlideContainer from "./MainScheduleSlideContainer";
 
 type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
 const MainScheduleSlide = async ({ className, ...props }: Readonly<Props>) => {
@@ -19,7 +19,9 @@ const MainScheduleSlide = async ({ className, ...props }: Readonly<Props>) => {
       <div className="relative flex size-full flex-row items-center justify-between pr-[var(--client-layout-margin)]">
         <div>
           <h2 className="section-title mb-1">다가오는 일정</h2>
-          <p className="section-sub-title mb-4">책을 좋아하는 당신을 위한 이벤트</p>
+          <p className="section-sub-title mb-4">
+            책을 좋아하는 당신을 위한 이벤트
+          </p>
         </div>
         <Link
           className="flex size-fit items-center justify-center border-none bg-white px-4 text-sm text-[var(--sub-color)]"
@@ -29,9 +31,11 @@ const MainScheduleSlide = async ({ className, ...props }: Readonly<Props>) => {
         </Link>
       </div>
       <Suspense fallback={<LoadingSpinner className="w-full" />}>
-        {dailySchedule && <MainScheduleSlideContainer scheduleItems={dailySchedule} />}
+        {dailySchedule && (
+          <MainScheduleSlideContainer scheduleItems={dailySchedule} />
+        )}
       </Suspense>
-      <Link href="/schedule/contactUs/eventPromotion" className="contents">
+      <Link href="/schedule/contactUs" className="contents">
         <PromotionContract className="pr-[var(--client-layout-margin)]" />
       </Link>
     </section>

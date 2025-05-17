@@ -1,8 +1,8 @@
 "use client";
 
+import TriangleArrow from "@/public/icons/triangleArrowIcon.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChangeEvent, forwardRef, HTMLAttributes, useState } from "react";
-import TriangleArrow from "@/public/icons/triangleArrowIcon.svg";
 
 type Props = {
   className?: string;
@@ -12,7 +12,17 @@ type Props = {
   height?: number;
 } & HTMLAttributes<HTMLUListElement>;
 const CommonDropDown = forwardRef<HTMLInputElement, Readonly<Props>>(
-  ({ className, name, optionItems, defaultValue = optionItems[0], height = 40, ...props }, ref) => {
+  (
+    {
+      className,
+      name,
+      optionItems,
+      defaultValue = optionItems[0],
+      height = 40,
+      ...props
+    },
+    ref
+  ) => {
     const [selectedValue, setSelectedValue] = useState(defaultValue);
     const [isOpen, setIsOpen] = useState(false);
 
@@ -34,7 +44,9 @@ const CommonDropDown = forwardRef<HTMLInputElement, Readonly<Props>>(
         >
           {selectedValue}
           <TriangleArrow
-            className={`flex size-4 items-center justify-center transition duration-300 ${!isOpen ? "rotate-180" : ""}`}
+            className={`flex size-4 items-center justify-center transition duration-300 ${
+              !isOpen ? "rotate-180" : ""
+            }`}
           />
         </li>
         <AnimatePresence>
@@ -57,7 +69,7 @@ const CommonDropDown = forwardRef<HTMLInputElement, Readonly<Props>>(
                     ref={ref}
                   />
                   <li
-                    className={`relative flex w-full cursor-pointer flex-row items-center justify-between p-2 peer-checked:bg-[var(--sub-highlight-color)]`}
+                    className={`relative flex w-full cursor-pointer flex-row items-center justify-between px-4 py-2 peer-checked:bg-[var(--sub-highlight-color)]`}
                     style={{ height: height + "px" }}
                   >
                     {option}
