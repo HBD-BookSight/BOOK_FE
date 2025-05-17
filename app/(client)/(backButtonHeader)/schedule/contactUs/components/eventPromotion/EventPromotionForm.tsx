@@ -36,8 +36,6 @@ export type EventPromotionFormTypes = {
   senderName?: string;
   senderEmail?: string;
   senderMessage?: string;
-  memo?: string;
-  tag?: string;
 };
 export type AdminEventFormRef = {
   handleSubmit: () => void;

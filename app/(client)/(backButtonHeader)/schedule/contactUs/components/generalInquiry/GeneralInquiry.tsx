@@ -9,21 +9,21 @@ import { FieldValues, useForm } from "react-hook-form";
 
 type Props = {
   className?: string;
-  defaultValues?: EventPromotionFormTypes;
+  defaultValues?: GeneralInquiry;
 } & HTMLAttributes<HTMLDivElement>;
 
-export type EventPromotionFormTypes = {
+export type GeneralInquiry = {
   senderName?: string;
   senderEmail: string;
   senderMessage: string;
 };
-export type AdminEventFormRef = {
+export type GeneralInquiryRef = {
   handleSubmit: () => void;
 };
-const EventPromotionForm = forwardRef<AdminEventFormRef, Props>(
+const GeneralInquiry = forwardRef<GeneralInquiryRef, Props>(
   ({ className, defaultValues, ...props }, ref) => {
     console.log(defaultValues);
-    const { register, handleSubmit } = useForm<EventPromotionFormTypes>({
+    const { register, handleSubmit } = useForm<GeneralInquiry>({
       mode: "onSubmit",
       defaultValues: defaultValues,
     });
@@ -106,5 +106,5 @@ const EventPromotionForm = forwardRef<AdminEventFormRef, Props>(
   }
 );
 
-EventPromotionForm.displayName = "EventPromotionForm";
-export default EventPromotionForm;
+GeneralInquiry.displayName = "GeneralInquiry";
+export default GeneralInquiry;
