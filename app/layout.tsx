@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import "./globals.css";
-import { ReactNode } from "react";
 import Head from "next/head";
+import { ReactNode } from "react";
+import "./globals.css";
 import Providers from "./Providers";
 
 export const metadata: Metadata = {
@@ -18,10 +18,15 @@ export default function RootLayout({
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
       </Head>
       <html lang="ko" className="bg-slate-100">
-        <Providers>{children}</Providers>
+        <Providers>
+          <body>{children}</body>
+        </Providers>
       </html>
     </>
   );
