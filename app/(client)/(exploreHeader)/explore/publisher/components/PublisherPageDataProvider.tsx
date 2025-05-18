@@ -4,6 +4,7 @@ import React, { createContext, Dispatch, ReactNode, SetStateAction, useContext, 
 export enum ContentsFilterType {
   PLAY_LIST = "play-list",
   NEWS_LETTER = "news-letter",
+  ALL= "all",
 }
 type PageContextProps<T> = {
   data: T;
