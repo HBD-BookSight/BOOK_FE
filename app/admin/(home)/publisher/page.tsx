@@ -1,11 +1,15 @@
-import { redirect } from "next/navigation";
 import AdminPageDataProvider from "@/app/admin/(home)/components/AdminPageDataProvider";
-import AdminRowList from "@/app/admin/(home)/components/adminRowList/AdminRowList";
 import AdminPaginationController from "@/app/admin/(home)/components/adminPaginationController/AdminPaginationController";
+import AdminRowList from "@/app/admin/(home)/components/adminRowList/AdminRowList";
 import { AdminPublisherInputs } from "@/components/popupProvider/adminForm/AdminPublisherForm";
+import { redirect } from "next/navigation";
 import AdminRowControllerContainer from "../components/adminRowControllerContainer/AdminRowControllerContainer";
 
-const Publisher = async ({ searchParams }: { searchParams: Promise<{ keyword?: string }> }) => {
+const Publisher = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ keyword?: string }>;
+}) => {
   if (false) {
     //서버에서 권한 인증 통신에 성공하지 못한경우 리다이렉트
     redirect("/admin/login");
@@ -20,6 +24,7 @@ const Publisher = async ({ searchParams }: { searchParams: Promise<{ keyword?: s
           publisherName: "test",
           instagramId: "test",
           urls: [{ value: "test", type: "Link" }],
+          isbns: [{ value: 0 }],
           memo: "test",
           tag: "test",
         },
