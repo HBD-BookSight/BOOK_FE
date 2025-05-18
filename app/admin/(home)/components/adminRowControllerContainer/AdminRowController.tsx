@@ -19,6 +19,7 @@ import AdminDeleteForm, { AdminDeleteFormRef } from "@/components/popupProvider/
 import AdminPopupModal from "@/components/popupProvider/AdminPopupModal";
 import AlertPopupModal from "@/components/popupProvider/AlertPopupModal";
 import CommonPillButton from "@/components/common/CommonPillButton";
+import AdminInquiryForm, { AdminInquiryInputs } from "@/components/popupProvider/adminForm/AdminInquiryForm";
 
 type Props = {
   className?: string;
@@ -40,9 +41,13 @@ const AdminRowController = ({ className, resultLength, selectRow, defaultValues,
           <AdminContentForm ref={AltFormComponentRef} defaultValues={defaultValues as AdminContentInputs} />
         ) : pathName === "/admin/event" ? (
           <AdminEventForm ref={AltFormComponentRef} defaultValues={defaultValues as AdminEventInputs} />
+        ) : pathName === "/admin/inquiry" ? (
+          <AdminInquiryForm ref={AltFormComponentRef} defaultValues={defaultValues as AdminInquiryInputs} />
         ) : (
           <AdminPublisherForm ref={AltFormComponentRef} defaultValues={defaultValues as AdminPublisherInputs} />
         )}
+
+
       </AdminPopupModal>,
       closePopup,
       () => {
