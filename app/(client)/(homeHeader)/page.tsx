@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import MainBookSlide from "./components/mainBookSlide/MainBookSlide";
 import MainScheduleSlide from "./components/mainScheduleSlide/MainScheduleSlide";
 import TodayLibrary from "./components/todayLibrary/TodayLibrary";
+export const dynamic = "force-dynamic";
 
 const Home = () => {
   return (
