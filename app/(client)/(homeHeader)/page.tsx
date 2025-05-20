@@ -21,3 +21,8 @@ const Home = () => {
 };
 
 export default Home;
+
+// const MainBookSlideContainer = async () => {
+//   const data = await getBirtdayBook();
+//   return <MainBookSlide className="mb-12" books={data} />;
+// };

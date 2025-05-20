@@ -16,10 +16,12 @@ const useGetBirthDayBooks = () => {
 
 export default useGetBirthDayBooks;
 
-const fetchBirthDayBooks = async ({ pageParam = 1 }) => {
+const fetchBirthDayBooks = async ({ pageParam = 0 }) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/books?page=${pageParam}`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/books?keyword=string&page=${pageParam}&limit=10&orderBy=publishedDate&direction=desc`
   );
+  console.log(response, "response");
+
   if (!response.ok) {
     throw new Error("Failed to fetch books");
   }
