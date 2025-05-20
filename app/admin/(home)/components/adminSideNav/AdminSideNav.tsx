@@ -24,6 +24,12 @@ const AdminSideNav = ({ className, ...props }: Readonly<Props>) => {
         <Link href="/admin/publisher" className={`${pathname === "/admin/publisher" ? "" : "text-[var(--sub-color)]"}`}>
           Publisher
         </Link>
+        <Link href="/admin/inquiry" className={`${pathname === "/admin/inquiry" ? "" : "text-[var(--sub-color)]"}`}>
+          기타 문의
+        </Link>
+        <Link href="/admin/kakaoInquiry" className={`${pathname === "/admin/publikakaoInquirysher" ? "" : "text-[var(--sub-color)]"}`}>
+          카카오 요청
+        </Link>
         <CommonPillButton className="mt-auto h-8 w-20 border-gray-200 text-[var(--sub-color)]">Logout</CommonPillButton>
       </div>
     </nav>

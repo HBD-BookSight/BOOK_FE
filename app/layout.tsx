@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Head from "next/head";
 import { ReactNode } from "react";
 import "./globals.css";
 import Providers from "./Providers";
@@ -23,16 +22,8 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <>
-      <Head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
-      </Head>
-      <html lang="ko" className="bg-slate-100">
-        <Providers>{children}</Providers>
-      </html>
-    </>
+    <html lang="ko" className="bg-slate-100">
+      <Providers>{children}</Providers>
+    </html>
   );
 }
