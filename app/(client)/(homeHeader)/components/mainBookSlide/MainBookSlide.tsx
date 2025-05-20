@@ -1,6 +1,5 @@
 "use client";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
-import useGetBirthDayBooks from "@/components/hooks/useGetBirthDayBooks";
 import {
   HTMLAttributes,
   useEffect,
@@ -10,12 +9,11 @@ import {
 } from "react";
 import ReactConfetti from "react-confetti";
 import BookDescription from "./BookDescription";
-import MainBookSlideContainer from "./MainBookSlideContainer";
 
 type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
 
 const MainBookSlide = ({ className, ...props }: Readonly<Props>) => {
-  const { data, status } = useGetBirthDayBooks();
+  // const { data, status } = useGetBirthDayBooks();
   const sectionRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [confettiWind, setConfettiWind] = useState<number>(0);
@@ -64,16 +62,16 @@ const MainBookSlide = ({ className, ...props }: Readonly<Props>) => {
         createdAt={new Date()}
         className="z-10 px-[var(--client-layout-margin)]"
       />
-      {status === "success" ? (
+      {/* {status === "success" ? (
         <MainBookSlideContainer
           books={
             data ? data.pages.flatMap((page) => page.items).slice(0, 6) : []
           }
           setConfettiWind={setConfettiWind}
         />
-      ) : (
-        <LoadingSpinner className="h-[30vw] w-full" />
-      )}
+      ) : ( */}
+      <LoadingSpinner className="h-[30vw] w-full" />
+      {/* )} */}
     </section>
   );
 };

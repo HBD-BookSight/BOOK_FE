@@ -1,7 +1,7 @@
-import { Suspense } from "react";
-import BirthDayHeaderHelper from "./components/BirthDayHeaderHelper";
-import BirthDayBookGridContainer from "./components/BirthDayBookGridContainer";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
+import { Suspense } from "react";
+import BirthDayBookGridContainer from "./components/BirthDayBookGridContainer";
+import BirthDayHeaderHelper from "./components/BirthDayHeaderHelper";
 const BirthDayDetail = () => {
   return (
     <main className="relative flex size-full flex-col items-center">

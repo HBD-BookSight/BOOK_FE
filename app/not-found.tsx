@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="relative flex h-screen flex-col items-center justify-center gap-10 bg-[#ffffff]">
+    <body className="relative flex h-screen flex-col items-center justify-center gap-10 bg-[#ffffff]">
       <div className="flex flex-col items-center sm:flex-row sm:items-end">
         <Image
           src={"/images/BOOKY_404.png"}
@@ -28,6 +28,6 @@ export default function NotFound() {
       >
         홈 화면으로
       </Link>
-    </div>
+    </body>
   );
 }
