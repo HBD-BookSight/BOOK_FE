@@ -9,7 +9,7 @@ const ClientLayout = ({
   children: ReactNode;
 }>) => {
   return (
-    <div
+    <body
       className={`relative mx-auto flex h-full min-h-screen w-screen flex-col bg-white antialiased sm:max-w-[640px]`}
     >
       <ReactQueryDevtools initialIsOpen={false} />
@@ -18,7 +18,7 @@ const ClientLayout = ({
       </div>
       <BottomNavLayout />
       <PopupProvider />
-    </div>
+    </body>
   );
 };
 
