@@ -1,10 +1,11 @@
 import { ListResponseRecommendedBookDto } from "@/types/dto";
+import fetchWithTimeout from "./fetchWithTimeout";
 
 const fetchTodayLibrary = async (): Promise<
   ListResponseRecommendedBookDto | undefined
 > => {
   try {
-    const response = await fetch(
+    const response = await fetchWithTimeout(
       process.env.NEXT_PUBLIC_BACKEND_URL + "/books/recommended",
       {
         next: { revalidate: 86400, tags: ["today-library"] },
@@ -18,6 +19,7 @@ const fetchTodayLibrary = async (): Promise<
     }
   } catch (error) {
     console.error("Error fetching data:", error);
+    return { items: [], length: 0 };
   }
 };
 

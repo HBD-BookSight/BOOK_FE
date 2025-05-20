@@ -1,8 +1,9 @@
 import { ContentsDto, ListResponseContentsDto } from "@/types/dto";
+import fetchWithTimeout from "./fetchWithTimeout";
 
-const fetchDailyDiscovery = async (): Promise<ContentsDto[] | undefined> => {
+const fetchDailyDiscovery = async (): Promise<ContentsDto[]> => {
   try {
-    const response = await fetch(
+    const response = await fetchWithTimeout(
       process.env.NEXT_PUBLIC_BACKEND_URL + "/contents/discovery",
       {
         next: { revalidate: 86400, tags: ["daily-discovery"] },
@@ -16,7 +17,7 @@ const fetchDailyDiscovery = async (): Promise<ContentsDto[] | undefined> => {
     }
   } catch (error) {
     console.error("Error fetching data:", error);
+    return [];
   }
 };
-
 export default fetchDailyDiscovery;
