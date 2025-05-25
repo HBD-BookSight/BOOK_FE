@@ -134,7 +134,6 @@ export interface UserDto {
 }
 
 export interface ContentsCreateRequest {
-  type: "VIDEO" | "ARTICLE" | "PODCAST" | "LINK" | "SNS";
   /** @format int64 */
   creatorId: number;
   title?: string;
@@ -146,7 +145,11 @@ export interface ContentsCreateRequest {
   /** @default [] */
   tagList?: string[];
   /** @default [] */
-  bookIsbnList?: string[];
+  bookIsbnList?: { value: number }[];
+}
+
+export interface ConentsPostRequest extends ContentsCreateRequest {
+  bookIsbnList?: number[];
 }
 
 export interface ContentsDto {

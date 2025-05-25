@@ -1,9 +1,9 @@
-import { EventPostRequest } from "@/types/dto";
+import { ConentsPostRequest } from "@/types/dto";
 
-export const postEvent = async (bodyData: EventPostRequest) => {
+export const postContents = async (bodyData: ConentsPostRequest) => {
   try {
     const response = await fetch(
-      process.env.NEXT_PUBLIC_BACKEND_URL + "/events",
+      process.env.NEXT_PUBLIC_BACKEND_URL + "/contents",
       {
         method: "POST",
         headers: {
@@ -13,11 +13,11 @@ export const postEvent = async (bodyData: EventPostRequest) => {
       }
     );
     if (!response.ok) {
-      throw new Error("Failed to create events");
+      throw new Error("Failed to create contents");
     }
     return await response.json();
   } catch (error) {
-    console.error("Error creating events:", error);
+    console.error("Error creating contents:", error);
     throw error;
   }
 };

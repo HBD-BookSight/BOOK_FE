@@ -3,7 +3,6 @@
 import CommonPillButton from "@/components/common/CommonPillButton";
 import AdminContentForm, {
   AdminContentFormRef,
-  AdminContentInputs,
 } from "@/components/popupProvider/adminForm/AdminContentForm";
 import AdminDeleteForm, {
   AdminDeleteFormRef,
@@ -20,7 +19,7 @@ import AdminPublisherForm, {
 import AdminPopupModal from "@/components/popupProvider/AdminPopupModal";
 import AlertPopupModal from "@/components/popupProvider/AlertPopupModal";
 import { usePopupAction } from "@/context/popupStore";
-import { EventCreateRequest, PublisherCreateRequest } from "@/types/dto";
+import { ContentsCreateRequest, EventCreateRequest, PublisherCreateRequest } from "@/types/dto";
 import { usePathname } from "next/navigation";
 import { HTMLAttributes, useRef } from "react";
 
@@ -28,7 +27,7 @@ type Props = {
   className?: string;
   resultLength?: string;
   selectRow: number | undefined;
-  defaultValues?: AdminContentInputs | EventCreateRequest;
+  defaultValues?: ContentsCreateRequest | EventCreateRequest;
 } & HTMLAttributes<HTMLDivElement>;
 
 const AdminRowController = ({
@@ -48,7 +47,7 @@ const AdminRowController = ({
   const setRow = (
     pathName: string,
     defaultValues?:
-      | AdminContentInputs
+      | ContentsCreateRequest
       | EventCreateRequest
       | PublisherCreateRequest
   ) => {
@@ -57,7 +56,7 @@ const AdminRowController = ({
         {pathName === "/admin/content" ? (
           <AdminContentForm
             ref={AltFormComponentRef}
-            defaultValues={defaultValues as AdminContentInputs}
+            defaultValues={defaultValues as ContentsCreateRequest}
           />
         ) : pathName === "/admin/event" ? (
           <AdminEventForm
