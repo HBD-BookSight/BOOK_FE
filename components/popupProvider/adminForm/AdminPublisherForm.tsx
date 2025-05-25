@@ -4,6 +4,7 @@ import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
 import { usePopupAction } from "@/context/popupStore";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
+import { PublisherCreateRequest } from "@/types/dto";
 import { forwardRef, HTMLAttributes, useImperativeHandle } from "react";
 import {
   Controller,
@@ -14,31 +15,23 @@ import {
 
 type Props = {
   className?: string;
-  defaultValues?: AdminPublisherInputs;
+  defaultValues?: PublisherCreateRequest;
 } & HTMLAttributes<HTMLDivElement>;
-export type AdminPublisherInputs = {
-  publisherName: string;
-  instagramId: string;
-  isbns: { value: number | undefined }[];
-  urls: {
-    value: string;
-    type: "Link" | "Youtube" | "Profile" | "Homepage" | "Blog";
-  }[];
-  memo?: string;
-  tag?: string;
-};
+
 export type AdminPublisherFormRef = {
   handleSubmit: () => void;
 };
 const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
   ({ className, defaultValues, ...props }, ref) => {
-    const { register, handleSubmit, control } = useForm<AdminPublisherInputs>({
-      mode: "onSubmit",
-      defaultValues: defaultValues || {
-        urls: [{ value: "", type: "Link" }],
-        isbns: [{ value: undefined }],
-      },
-    });
+    const { register, handleSubmit, control } = useForm<PublisherCreateRequest>(
+      {
+        mode: "onSubmit",
+        defaultValues: defaultValues || {
+          urls: [{ url: "", type: "Link" }],
+          bookIsbnList: [],
+        },
+      }
+    );
     const { closePopup } = usePopupAction();
     const { fields, append, remove } = useFieldArray({
       control,
@@ -50,7 +43,7 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
       remove: removeIsbn,
     } = useFieldArray({
       control,
-      name: "isbns",
+      name: "bookIsbnList",
     });
     const onSubmitHandler = (data: FieldValues) => {
       console.log(data);
@@ -82,26 +75,26 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
         >
           <div>
             <CommonLabel
-              htmlFor="publisherName"
+              htmlFor="name"
               className="text-[var(--highlight-color)]"
             >
               Publisher Name*
             </CommonLabel>
             <CommonInputField
-              id="publisherName"
-              {...register("publisherName", { required: "입력이 필요합니다" })}
+              id="name"
+              {...register("name", { required: "입력이 필요합니다" })}
             />
           </div>
           <div>
             <CommonLabel
-              htmlFor="instagramId"
+              htmlFor="engName"
               className="text-[var(--highlight-color)]"
             >
               Instagram Id*
             </CommonLabel>
             <CommonInputField
-              id="instagramId"
-              {...register("instagramId", { required: "입력이 필요합니다" })}
+              id="engName"
+              {...register("engName", { required: "입력이 필요합니다" })}
             />
           </div>
           <div className="relative flex size-full flex-col gap-3">
@@ -116,11 +109,10 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
                   type="url"
                   className="flex-[2]"
                   id={`url${index}`}
-                  {...register(`urls.${index}.value`, {
+                  {...register(`urls.${index}.url`, {
                     required: "입력이 필요합니다",
                   })}
                 />
-
                 <Controller
                   name={`urls.${index}.type`}
                   control={control}
@@ -150,7 +142,7 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
             ))}
             <div className="relative flex size-full flex-row justify-end gap-2">
               <button
-                onClick={() => append({ value: "", type: "Link" })}
+                onClick={() => append({ url: "", type: "Link" })}
                 className="text-sm font-semibold text-[var(--sub-color)]"
               >
                 + Add
@@ -172,7 +164,7 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
                 <CommonInputField
                   type="number"
                   id={`isbn${index}`}
-                  {...register(`isbns.${index}.value`, {
+                  {...register(`bookIsbnList.${index}.value`, {
                     required: "반드시 입력해야 합니다",
                     minLength: {
                       value: 10,
@@ -195,7 +187,7 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
             ))}
             <div className="relative flex size-full flex-row justify-end gap-2">
               <button
-                onClick={() => appendIsbn({ value: undefined })}
+                onClick={() => appendIsbn({ value: 0 })}
                 className="text-sm font-semibold text-[var(--sub-color)]"
               >
                 + Add
@@ -209,10 +201,10 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
             <CommonInputField id="memo" {...register("memo")} />
           </div>
           <div>
-            <CommonLabel htmlFor="tag" className="text-[var(--sub-color)]">
+            <CommonLabel htmlFor="tagList" className="text-[var(--sub-color)]">
               Tag
             </CommonLabel>
-            <CommonInputField id="tag" {...register("tag")} />
+            <CommonInputField id="tagList" {...register("tagList")} />
           </div>
         </form>
       </div>

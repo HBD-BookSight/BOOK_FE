@@ -21,7 +21,7 @@ export interface PublisherCreateRequest {
   /** @default [] */
   urls?: UrlInfo[];
   /** @default [] */
-  bookIsbnList?: string[];
+  bookIsbnList?: { value: number }[];
   /** @default [] */
   tagList?: string[];
 }
@@ -29,7 +29,7 @@ export interface PublisherCreateRequest {
 /** @default [] */
 export interface UrlInfo {
   url: string;
-  type: string;
+  type: "Link" | "Youtube" | "Profile" | "Homepage" | "Blog";
 }
 
 export interface BookDto {
