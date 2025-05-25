@@ -1,6 +1,6 @@
-import { PublisherCreateRequest } from "@/types/dto";
+import { PublisherPostRequest } from "@/types/dto";
 
-export const postPublisher = async (bodyData: PublisherCreateRequest) => {
+export const postPublisher = async (bodyData: PublisherPostRequest) => {
   try {
     const response = await fetch(
       process.env.NEXT_PUBLIC_BACKEND_URL + "/publishers",

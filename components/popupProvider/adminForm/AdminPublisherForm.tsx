@@ -3,15 +3,11 @@ import CommonDropDown from "@/components/common/CommonDropDown";
 import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
 import { usePopupAction } from "@/context/popupStore";
+import { postPublisher } from "@/function/post/postPublisher";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
-import { PublisherCreateRequest } from "@/types/dto";
+import { PublisherCreateRequest, PublisherPostRequest } from "@/types/dto";
 import { forwardRef, HTMLAttributes, useImperativeHandle } from "react";
-import {
-  Controller,
-  FieldValues,
-  useFieldArray,
-  useForm,
-} from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 
 type Props = {
   className?: string;
@@ -37,6 +33,7 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
       control,
       name: "urls",
     });
+
     const {
       fields: isbnFields,
       append: appendIsbn,
@@ -45,18 +42,21 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
       control,
       name: "bookIsbnList",
     });
-    const onSubmitHandler = (data: FieldValues) => {
-      console.log(data);
-      closePopup(); //성공시 모달 종료
-    };
-    const onErrorHandler = (data: FieldValues) => {
-      console.log(data);
+
+    const onSubmitHandler = async (data: PublisherCreateRequest) => {
+      const payload: PublisherPostRequest = {
+        ...data,
+        bookIsbnList: data.bookIsbnList?.map((b) => b.value),
+      };
+      const res = await postPublisher(payload);
+      console.log(res);
+      closePopup();
     };
 
     useImperativeHandle(
       ref,
       () => ({
-        handleSubmit: handleSubmit(onSubmitHandler, onErrorHandler),
+        handleSubmit: handleSubmit(onSubmitHandler),
       }),
       [handleSubmit] // eslint-disable-line
     );
@@ -71,7 +71,7 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
         </h2>
         <form
           className="relative flex size-full max-h-[80vh] flex-col gap-6 overflow-auto py-6"
-          onSubmit={handleSubmit(onSubmitHandler, onErrorHandler)}
+          onSubmit={handleSubmit(onSubmitHandler)}
         >
           <div>
             <CommonLabel
@@ -92,10 +92,7 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
             >
               Instagram Id*
             </CommonLabel>
-            <CommonInputField
-              id="engName"
-              {...register("engName", { required: "입력이 필요합니다" })}
-            />
+            <CommonInputField id="engName" {...register("engName")} />
           </div>
           <div className="relative flex size-full flex-col gap-3">
             <CommonLabel>URL*</CommonLabel>
@@ -109,14 +106,11 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
                   type="url"
                   className="flex-[2]"
                   id={`url${index}`}
-                  {...register(`urls.${index}.url`, {
-                    required: "입력이 필요합니다",
-                  })}
+                  {...register(`urls.${index}.url`)}
                 />
                 <Controller
                   name={`urls.${index}.type`}
                   control={control}
-                  rules={{ required: "입력이 필요합니다" }}
                   render={({ field }) => (
                     <CommonDropDown
                       {...field}
@@ -165,7 +159,6 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
                   type="number"
                   id={`isbn${index}`}
                   {...register(`bookIsbnList.${index}.value`, {
-                    required: "반드시 입력해야 합니다",
                     minLength: {
                       value: 10,
                       message: "10자리 이상 입력해야 합니다",

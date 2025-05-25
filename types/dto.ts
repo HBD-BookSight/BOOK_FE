@@ -26,6 +26,10 @@ export interface PublisherCreateRequest {
   tagList?: string[];
 }
 
+export interface PublisherPostRequest extends PublisherCreateRequest {
+  bookIsbnList?: number[];
+}
+
 /** @default [] */
 export interface UrlInfo {
   url: string;
