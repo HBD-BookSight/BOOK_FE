@@ -95,7 +95,11 @@ export interface EventCreateRequest {
   /** @default [] */
   tagList?: string[];
   /** @default [] */
-  bookIsbnList?: string[];
+  bookIsbnList?: { value: number }[];
+}
+
+export interface EventPostRequest extends EventCreateRequest {
+  bookIsbnList?: number[];
 }
 
 export interface EventDto {
@@ -114,6 +118,7 @@ export interface EventDto {
   startDate: string;
   /** @format date */
   endDate: string;
+  bookIsbnList?: { value: number }[];
   eventType: string;
   eventFlag: "SOLO" | "GROUP" | "ETC";
   memo?: string;
@@ -125,6 +130,7 @@ export interface UserDto {
   /** @format int64 */
   id: number;
   name: string;
+  bookIsbnList: number[];
 }
 
 export interface ContentsCreateRequest {
