@@ -3,7 +3,7 @@ import CommonDropDown from "@/components/common/CommonDropDown";
 import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
 import { usePopupAction } from "@/context/popupStore";
-import { postContents } from "@/function/post/postContents";
+import { postContents } from "@/function/post/admin";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
 import { ConentsPostRequest, ContentsCreateRequest } from "@/types/dto";
 import { useRouter } from "next/navigation";

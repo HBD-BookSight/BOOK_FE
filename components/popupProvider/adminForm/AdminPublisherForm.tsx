@@ -3,7 +3,7 @@ import CommonDropDown from "@/components/common/CommonDropDown";
 import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
 import { usePopupAction } from "@/context/popupStore";
-import { postPublisher } from "@/function/post/postPublisher";
+import { postPublisher } from "@/function/post/admin";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
 import { PublisherCreateRequest, PublisherPostRequest } from "@/types/dto";
 import { forwardRef, HTMLAttributes, useImperativeHandle } from "react";

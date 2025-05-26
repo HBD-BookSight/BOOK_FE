@@ -2,6 +2,7 @@
 import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
 import { usePopupAction } from "@/context/popupStore";
+import { postRequest } from "@/function/post/commonPost";
 import { useRouter } from "next/navigation";
 import { forwardRef, HTMLAttributes, useImperativeHandle } from "react";
 import { FieldValues, useForm } from "react-hook-form";
@@ -31,7 +32,7 @@ const AdminInquiryForm = forwardRef<AdminInquiryFormRef, Props>(
     const { closePopup } = usePopupAction();
 
     const onSubmitHandler = (data: FieldValues) => {
-      console.log(data);
+      postRequest("/contacts", data);
       closePopup(); //성공시 모달 종료
       router.refresh();
     };

@@ -5,7 +5,7 @@ import CommonLabel from "@/components/common/CommonLabel";
 import CommonSelectBox from "@/components/common/CommonSelectBox";
 import CommonToggleSwitch from "@/components/common/CommonToggleSwitch";
 import { usePopupAction } from "@/context/popupStore";
-import { postEvent } from "@/function/post/postEvent";
+import { postEvents } from "@/function/post/admin";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
 import { EventCreateRequest, EventPostRequest } from "@/types/dto";
 import {
@@ -66,8 +66,9 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
         bookIsbnList: data.bookIsbnList?.map((b) => b.value),
       };
       console.log(data);
-      const res = await postEvent(payload);
+      const res = await postEvents(payload);
       console.log(res);
+
       closePopup();
     };
 
