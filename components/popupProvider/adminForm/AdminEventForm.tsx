@@ -40,7 +40,7 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
                 .split("T")[0],
             }
           : {
-              bookIsbnList: [],
+              bookIsbnList: [{ value: 0 }],
               urls: [{ url: "", type: "Link" }],
             },
       });
@@ -136,8 +136,9 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
                 </button>
               </div>
             ))}
-            <div className="relative flex size-full flex-row justify-end gap-2">
+            <div className="relative flex size-full gap-2">
               <button
+                type="button"
                 onClick={() => append({ url: "", type: "Link" })}
                 className="text-sm font-semibold text-[var(--sub-color)]"
               >
@@ -146,21 +147,21 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
             </div>
           </div>
           <div>
-            <CommonLabel htmlFor="title">Event Title</CommonLabel>
+            <CommonLabel htmlFor="title">Event Title*</CommonLabel>
             <CommonInputField
               id="title"
               {...register("title", { required: "입력이 필요합니다" })}
             />
           </div>
           <div>
-            <CommonLabel htmlFor="host">Event Host</CommonLabel>
+            <CommonLabel htmlFor="host">Event Host*</CommonLabel>
             <CommonInputField
               id="host"
               {...register("host", { required: "입력이 필요합니다" })}
             />
           </div>
           <div className="relative flex size-full flex-col">
-            <CommonLabel htmlFor="startDate">Date/Duration</CommonLabel>
+            <CommonLabel htmlFor="startDate">Date/Duration*</CommonLabel>
             <div className="relative flex w-full flex-row items-center justify-center">
               <CommonInputField
                 id="startDate"
@@ -234,11 +235,8 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
           <div className="relative flex size-full flex-row border-b-[1px]"></div>
 
           <div className="relative flex size-full flex-col gap-3">
-            <CommonLabel
-              htmlFor="isbn"
-              className="text-[var(--highlight-color)]"
-            >
-              Book ISBN Number*
+            <CommonLabel htmlFor="isbn" className="text-[var(--sub-color)]">
+              Book ISBN Number
             </CommonLabel>
             {isbnFields.map((field, index) => (
               <div
@@ -268,8 +266,9 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
                 </button>
               </div>
             ))}
-            <div className="relative flex size-full flex-row justify-end gap-2">
+            <div className="relative flex size-full gap-2">
               <button
+                type="button"
                 onClick={() => appendIsbn({ value: 0 })}
                 className="text-sm font-semibold text-[var(--sub-color)]"
               >

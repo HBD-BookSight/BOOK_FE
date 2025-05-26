@@ -25,7 +25,7 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
       mode: "onSubmit",
       defaultValues: defaultValues || {
         urls: [{ url: "", type: "Link" }],
-        bookIsbnList: [],
+        bookIsbnList: [{ value: 0 }],
       },
     });
     const { closePopup } = usePopupAction();
@@ -116,8 +116,9 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
                 </button>
               </div>
             ))}
-            <div className="relative flex size-full flex-row justify-end gap-2">
+            <div className="relative flex size-full gap-2">
               <button
+                type="button"
                 onClick={() => appendUrl({ url: "", type: "Link" })}
                 className="text-sm font-semibold text-[var(--sub-color)]"
               >
@@ -161,7 +162,7 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
                 </button>
               </div>
             ))}
-            <div className="relative flex size-full flex-row justify-end gap-2">
+            <div className="relative flex size-full gap-2">
               <button
                 onClick={() => appendIsbn({ value: 0 })}
                 className="text-sm font-semibold text-[var(--sub-color)]"
