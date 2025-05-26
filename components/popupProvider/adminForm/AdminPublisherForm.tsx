@@ -24,7 +24,7 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
         mode: "onSubmit",
         defaultValues: defaultValues || {
           urls: [{ url: "", type: "Link" }],
-          bookIsbnList: [],
+          bookIsbnList: [{ value: 0 }],
         },
       }
     );
@@ -94,6 +94,18 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
             </CommonLabel>
             <CommonInputField id="engName" {...register("engName")} />
           </div>
+          <div>
+            <CommonLabel
+              htmlFor="logo"
+              className="text-[var(--highlight-color)]"
+            >
+              Logo link*
+            </CommonLabel>
+            <CommonInputField
+              id="logo"
+              {...register("logo", { required: "입력이 필요합니다" })}
+            />
+          </div>
           <div className="relative flex size-full flex-col gap-3">
             <CommonLabel>URL*</CommonLabel>
             {fields.map((_field, index) => (
@@ -134,8 +146,9 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
                 </button>
               </div>
             ))}
-            <div className="relative flex size-full flex-row justify-end gap-2">
+            <div className="relative flex size-full gap-2">
               <button
+                type="button"
                 onClick={() => append({ url: "", type: "Link" })}
                 className="text-sm font-semibold text-[var(--sub-color)]"
               >
@@ -178,8 +191,9 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
                 </button>
               </div>
             ))}
-            <div className="relative flex size-full flex-row justify-end gap-2">
+            <div className="relative flex size-full gap-2">
               <button
+                type="button"
                 onClick={() => appendIsbn({ value: 0 })}
                 className="text-sm font-semibold text-[var(--sub-color)]"
               >

@@ -14,14 +14,13 @@
 
 export interface PublisherCreateRequest {
   name: string;
-  engName?: string;
-  logo?: string;
+  engName: string;
+  logo: string;
+  urls: UrlInfo[];
+  bookIsbnList: { value: number }[];
+  /** @default [] */
   description?: string;
   memo?: string;
-  /** @default [] */
-  urls?: UrlInfo[];
-  /** @default [] */
-  bookIsbnList?: { value: number }[];
   /** @default [] */
   tagList?: string[];
 }
