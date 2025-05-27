@@ -2,9 +2,10 @@
 import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
 import { usePopupAction } from "@/context/popupStore";
+import { postContacts } from "@/function/post/admin";
 import { useRouter } from "next/navigation";
 import { forwardRef, HTMLAttributes, useImperativeHandle } from "react";
-import { FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 type Props = {
   className?: string;
@@ -30,19 +31,17 @@ const AdminInquiryForm = forwardRef<AdminInquiryFormRef, Props>(
     });
     const { closePopup } = usePopupAction();
 
-    const onSubmitHandler = (data: FieldValues) => {
-      console.log(data);
+    const onSubmitHandler = async (data: AdminInquiryInputs) => {
+      const res = await postContacts(data);
+      console.log(res, " 문의 등록 결과");
       closePopup(); //성공시 모달 종료
       router.refresh();
-    };
-    const onErrorHandler = (data: FieldValues) => {
-      console.log(data);
     };
 
     useImperativeHandle(
       ref,
       () => ({
-        handleSubmit: handleSubmit(onSubmitHandler, onErrorHandler),
+        handleSubmit: handleSubmit(onSubmitHandler),
       }),
       [handleSubmit] // eslint-disable-line
     );
@@ -57,28 +56,31 @@ const AdminInquiryForm = forwardRef<AdminInquiryFormRef, Props>(
         </h2>
         <form
           className="relative flex size-full max-h-[80vh] flex-col gap-6 overflow-auto py-6"
-          onSubmit={handleSubmit(onSubmitHandler, onErrorHandler)}
+          onSubmit={handleSubmit(onSubmitHandler)}
         >
-          <div>
+          <div className="flex flex-col gap-3">
             <CommonLabel
               htmlFor="senderName"
-              className="text-[var(--sub-color)]"
+              className="text-[var(--highlight-color)]"
             >
               문의자 성함
             </CommonLabel>
             <CommonInputField id="senderName" {...register("senderName")} />
           </div>
-          <div>
+          <div className="flex flex-col gap-3">
             <CommonLabel
               htmlFor="senderEmail"
-              className="text-[var(--sub-color)]"
+              className="text-[var(--highlight-color)]"
             >
               문의자 이메일
             </CommonLabel>
             <CommonInputField id="senderEmail" {...register("senderEmail")} />
           </div>
-          <div>
-            <CommonLabel htmlFor="memo" className="text-[var(--sub-color)]">
+          <div className="flex flex-col gap-3">
+            <CommonLabel
+              htmlFor="memo"
+              className="text-[var(--highlight-color)]"
+            >
               전하고 싶은 말
             </CommonLabel>
             <CommonInputField id="memo" {...register("memo")} />

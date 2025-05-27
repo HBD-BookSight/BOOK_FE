@@ -1,11 +1,15 @@
-import { AdminEventInputs } from "@/components/popupProvider/adminForm/AdminEventForm";
+import { EventDto } from "@/types/dto";
 import { redirect } from "next/navigation";
-import AdminRowControllerContainer from "../components/adminRowControllerContainer/AdminRowControllerContainer";
 import AdminPageDataProvider from "../components/AdminPageDataProvider";
-import AdminRowList from "../components/adminRowList/AdminRowList";
 import AdminPaginationController from "../components/adminPaginationController/AdminPaginationController";
+import AdminRowControllerContainer from "../components/adminRowControllerContainer/AdminRowControllerContainer";
+import AdminRowList from "../components/adminRowList/AdminRowList";
 
-const Event = async ({ searchParams }: { searchParams: Promise<{ keyword?: string }> }) => {
+const Event = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ keyword?: string }>;
+}) => {
   if (false) {
     //서버에서 권한 인증 통신에 성공하지 못한경우 리다이렉트
     redirect("/admin/login");
@@ -14,35 +18,39 @@ const Event = async ({ searchParams }: { searchParams: Promise<{ keyword?: strin
   console.log("searchParams 테스트", keyword);
 
   return (
-    <AdminPageDataProvider<AdminEventInputs[]>
+    <AdminPageDataProvider<EventDto[]>
       initialData={[
         {
-          urls: [{ value: "asdassdfasdf", type: "Video" }],
-          eventTitle: "test",
-          eventHost: "test",
-          startDate: new Date(),
-          endDate: new Date(),
-          location: "Offline",
+          urls: [{ url: "asdassdfasdf", type: "Link" }],
+          title: "test",
+          host: "test",
           eventType: "test",
-          eventFlag: "Group",
-          isPosting: true,
+          id: 0,
+          creator: {
+            id: 1,
+            name: "관리자",
+            bookIsbnList: [0, 1],
+          },
+          location: "ONLINE",
+          startDate: "",
+          endDate: "",
+          eventFlag: "SOLO",
+          books: [],
+          tags: [],
         },
       ]}
     >
       <AdminRowControllerContainer />
-      <AdminRowList<AdminEventInputs[]>
+      <AdminRowList<EventDto[]>
         keys={[
           "isbn",
-          "urls",
-          "urlsasdfasdfafsasdfasfd",
-          "312342344",
-          "312342564",
-          "312342344",
-          "312342564",
-          "31264663264",
-          "31264663264",
-          "31434636",
-          "311234",
+          "title",
+          "publishedDate",
+          "detailUrl",
+          "translator",
+          "price",
+          "authorNameList",
+          "publisherId",
         ]}
       ></AdminRowList>
       <AdminPaginationController />

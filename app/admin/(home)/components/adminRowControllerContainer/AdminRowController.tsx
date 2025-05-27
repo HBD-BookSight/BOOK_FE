@@ -1,53 +1,79 @@
 "use client";
 
-import { HTMLAttributes, useRef } from "react";
-import { usePathname } from "next/navigation";
+import CommonPillButton from "@/components/common/CommonPillButton";
 import AdminContentForm, {
   AdminContentFormRef,
-  AdminContentInputs,
 } from "@/components/popupProvider/adminForm/AdminContentForm";
+import AdminDeleteForm, {
+  AdminDeleteFormRef,
+} from "@/components/popupProvider/adminForm/AdminDeleteForm";
 import AdminEventForm, {
   AdminEventFormRef,
-  AdminEventInputs,
 } from "@/components/popupProvider/adminForm/AdminEventForm";
+import AdminInquiryForm, {
+  AdminInquiryInputs,
+} from "@/components/popupProvider/adminForm/AdminInquiryForm";
 import AdminPublisherForm, {
   AdminPublisherFormRef,
-  AdminPublisherInputs,
 } from "@/components/popupProvider/adminForm/AdminPublisherForm";
-import { usePopupAction } from "@/context/popupStore";
-import AdminDeleteForm, { AdminDeleteFormRef } from "@/components/popupProvider/adminForm/AdminDeleteForm";
 import AdminPopupModal from "@/components/popupProvider/AdminPopupModal";
 import AlertPopupModal from "@/components/popupProvider/AlertPopupModal";
-import CommonPillButton from "@/components/common/CommonPillButton";
-import AdminInquiryForm, { AdminInquiryInputs } from "@/components/popupProvider/adminForm/AdminInquiryForm";
+import { usePopupAction } from "@/context/popupStore";
+import { ContentsCreateRequest, EventCreateRequest, PublisherCreateRequest } from "@/types/dto";
+import { usePathname } from "next/navigation";
+import { HTMLAttributes, useRef } from "react";
 
 type Props = {
   className?: string;
   resultLength?: string;
   selectRow: number | undefined;
-  defaultValues?: AdminContentInputs | AdminEventInputs | AdminPublisherInputs;
+  defaultValues?: ContentsCreateRequest | EventCreateRequest;
 } & HTMLAttributes<HTMLDivElement>;
 
-const AdminRowController = ({ className, resultLength, selectRow, defaultValues, ...props }: Readonly<Props>) => {
+const AdminRowController = ({
+  className,
+  resultLength,
+  selectRow,
+  defaultValues,
+  ...props
+}: Readonly<Props>) => {
   const { openPopup, closePopup } = usePopupAction();
   const adminDeleteFormRef = useRef<AdminDeleteFormRef>(null);
-  const AltFormComponentRef = useRef<AdminContentFormRef | AdminEventFormRef | AdminPublisherFormRef>(null);
+  const AltFormComponentRef = useRef<
+    AdminContentFormRef | AdminEventFormRef | AdminPublisherFormRef
+  >(null);
   const pathName = usePathname();
 
-  const setRow = (pathName: string, defaultValues?: AdminContentInputs | AdminEventInputs | AdminPublisherInputs) => {
+  const setRow = (
+    pathName: string,
+    defaultValues?:
+      | ContentsCreateRequest
+      | EventCreateRequest
+      | PublisherCreateRequest
+  ) => {
     openPopup(
       <AdminPopupModal>
         {pathName === "/admin/content" ? (
-          <AdminContentForm ref={AltFormComponentRef} defaultValues={defaultValues as AdminContentInputs} />
+          <AdminContentForm
+            ref={AltFormComponentRef}
+            defaultValues={defaultValues as ContentsCreateRequest}
+          />
         ) : pathName === "/admin/event" ? (
-          <AdminEventForm ref={AltFormComponentRef} defaultValues={defaultValues as AdminEventInputs} />
+          <AdminEventForm
+            ref={AltFormComponentRef}
+            defaultValues={defaultValues as EventCreateRequest}
+          />
         ) : pathName === "/admin/inquiry" ? (
-          <AdminInquiryForm ref={AltFormComponentRef} defaultValues={defaultValues as AdminInquiryInputs} />
+          <AdminInquiryForm
+            ref={AltFormComponentRef}
+            defaultValues={defaultValues as AdminInquiryInputs}
+          />
         ) : (
-          <AdminPublisherForm ref={AltFormComponentRef} defaultValues={defaultValues as AdminPublisherInputs} />
+          <AdminPublisherForm
+            ref={AltFormComponentRef}
+            defaultValues={defaultValues as PublisherCreateRequest}
+          />
         )}
-
-
       </AdminPopupModal>,
       closePopup,
       () => {
@@ -74,8 +100,13 @@ const AdminRowController = ({ className, resultLength, selectRow, defaultValues,
       {...props}
     >
       <span className="flex flex-row items-center justify-center gap-7">
-        <p className="text-sm font-semibold text-[var(--highlight-color)]">All {resultLength || "0"}</p>
-        <CommonPillButton onClick={() => setRow(pathName)} className="h-8 w-20 !bg-[var(--highlight-color)] text-white">
+        <p className="text-sm font-semibold text-[var(--highlight-color)]">
+          All {resultLength || "0"}
+        </p>
+        <CommonPillButton
+          onClick={() => setRow(pathName)}
+          className="h-8 w-20 !bg-[var(--highlight-color)] text-white"
+        >
           Add row
         </CommonPillButton>
       </span>
@@ -87,7 +118,9 @@ const AdminRowController = ({ className, resultLength, selectRow, defaultValues,
           Delete
         </CommonPillButton>
         <CommonPillButton
-          onClick={() => selectRow !== undefined && setRow(pathName, defaultValues)}
+          onClick={() =>
+            selectRow !== undefined && setRow(pathName, defaultValues)
+          }
           className="h-8 w-20 border-gray-200 text-[var(--sub-color)]"
         >
           Edit
