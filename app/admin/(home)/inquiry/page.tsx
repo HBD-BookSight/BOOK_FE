@@ -22,17 +22,14 @@ const Inquiry = async ({
       <AdminRowControllerContainer />
       <AdminRowList<AdminInquiryInputs[]>
         keys={[
-          "isbns",
-          "urls",
-          "urlsasdfasdfafsasdfasfd",
-          "312342344",
-          "312342564",
-          "312342344",
-          "312342564",
-          "31264663264",
-          "31264663264",
-          "31434636",
-          "311234",
+          "isbn",
+          "title",
+          "publishedDate",
+          "detailUrl",
+          "translator",
+          "price",
+          "authorNameList",
+          "publisherId",
         ]}
       ></AdminRowList>
       <AdminPaginationController />

@@ -1,7 +1,7 @@
 import AdminPageDataProvider from "@/app/admin/(home)/components/AdminPageDataProvider";
 import AdminPaginationController from "@/app/admin/(home)/components/adminPaginationController/AdminPaginationController";
 import AdminRowList from "@/app/admin/(home)/components/adminRowList/AdminRowList";
-import { AdminPublisherInputs } from "@/components/popupProvider/adminForm/AdminPublisherForm";
+import { PublisherDto } from "@/types/dto";
 import { redirect } from "next/navigation";
 import AdminRowControllerContainer from "../components/adminRowControllerContainer/AdminRowControllerContainer";
 
@@ -18,32 +18,28 @@ const Publisher = async ({
   console.log("searchParams 테스트", keyword);
 
   return (
-    <AdminPageDataProvider<AdminPublisherInputs[]>
+    <AdminPageDataProvider<PublisherDto[]>
       initialData={[
         {
-          publisherName: "test",
-          instagramId: "test",
-          urls: [{ value: "test", type: "Link" }],
-          isbns: [{ value: 0 }],
-          memo: "test",
-          tag: "test",
+          name: "test",
+          engName: "test",
+          urls: [{ url: "test", type: "Link" }],
+          id: 0,
+          isOfficial: false,
         },
       ]}
     >
       <AdminRowControllerContainer />
-      <AdminRowList<AdminPublisherInputs[]>
+      <AdminRowList<PublisherDto[]>
         keys={[
           "isbn",
-          "urls",
-          "urlsasdfasdfafsasdfasfd",
-          "312342344",
-          "memo",
-          "publisherName",
-          "312342564",
-          "31264663264",
-          "31264663264",
-          "tag",
-          "311234",
+          "title",
+          "publishedDate",
+          "detailUrl",
+          "translator",
+          "price",
+          "authorNameList",
+          "publisherId",
         ]}
       ></AdminRowList>
       <AdminPaginationController />

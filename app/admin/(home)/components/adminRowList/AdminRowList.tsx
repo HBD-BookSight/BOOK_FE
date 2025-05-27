@@ -1,6 +1,6 @@
 "use client";
 import { useAdminPageData } from "@/app/admin/(home)/components/AdminPageDataProvider";
-import React, { HTMLAttributes } from "react";
+import { HTMLAttributes } from "react";
 import MemoizedAdminRowListItem from "./AdminRowListItem";
 
 type Props = {
@@ -11,13 +11,21 @@ const AdminRowList = <T,>({ className, keys, ...props }: Readonly<Props>) => {
   const { data, setSelectRow, selectRow } = useAdminPageData<T>();
 
   return (
-    <div className={`relative flex flex-1 flex-col overflow-auto ${className || ""}`} {...props}>
+    <div
+      className={`relative flex flex-1 flex-col overflow-auto ${
+        className || ""
+      }`}
+      {...props}
+    >
       <div className="absolute flex size-full flex-col gap-2">
         <div className="sticky top-0 flex w-fit flex-row gap-2 border-b-[1px] bg-white pl-8">
-          <p className="w-12 overflow-hidden text-ellipsis font-bold"></p>
+          <p className="w-10 overflow-hidden text-ellipsis font-bold"></p>
           {keys.map((key, index) => {
             return (
-              <p key={index} className="w-24 overflow-hidden text-ellipsis font-bold">
+              <p
+                key={index}
+                className="w-24 overflow-hidden text-ellipsis font-bold"
+              >
                 {key}
               </p>
             );

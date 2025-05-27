@@ -1,11 +1,15 @@
+import { BookCreateRequest, ContentsDto } from "@/types/dto";
 import { redirect } from "next/navigation";
-import { AdminContentInputs } from "@/components/popupProvider/adminForm/AdminContentForm";
 import AdminPageDataProvider from "../components/AdminPageDataProvider";
+import AdminPaginationController from "../components/adminPaginationController/AdminPaginationController";
 import AdminRowControllerContainer from "../components/adminRowControllerContainer/AdminRowControllerContainer";
 import AdminRowList from "../components/adminRowList/AdminRowList";
-import AdminPaginationController from "../components/adminPaginationController/AdminPaginationController";
 
-const Content = async ({ searchParams }: { searchParams: Promise<{ keyword?: string }> }) => {
+const Content = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ keyword?: string }>;
+}) => {
   if (false) {
     //서버에서 권한 인증 통신에 성공하지 못한경우 리다이렉트
     redirect("/admin/login");
@@ -14,26 +18,37 @@ const Content = async ({ searchParams }: { searchParams: Promise<{ keyword?: str
   console.log("searchParams 테스트", keyword);
 
   return (
-    <AdminPageDataProvider<AdminContentInputs[]>
+    <AdminPageDataProvider<ContentsDto[]>
       initialData={[
-        { isbns: [{ value: 123123123 }], urls: [{ value: "asdassdfasdf", type: "Video" }] },
-        { isbns: [{ value: 123 }, { value: 123 }], urls: [{ value: "123", type: "Video" }] },
+        {
+          id: 7281778282,
+          urls: [{ url: "www.mock.com", type: "Link" }],
+          type: "LINK",
+          creator: { id: 12, name: "마치", bookIsbnList: [124, 2892, 711] },
+        },
+        {
+          id: 7281778283,
+          urls: [{ url: "www.mock2.com", type: "Link" }],
+          type: "LINK",
+          creator: {
+            id: 12,
+            name: "윤마치",
+            bookIsbnList: [1124, 21892, 7111],
+          },
+        },
       ]}
     >
       <AdminRowControllerContainer />
-      <AdminRowList<AdminContentInputs[]>
+      <AdminRowList<BookCreateRequest[]>
         keys={[
-          "isbns",
-          "urls",
-          "urlsasdfasdfafsasdfasfd",
-          "312342344",
-          "312342564",
-          "312342344",
-          "312342564",
-          "31264663264",
-          "31264663264",
-          "31434636",
-          "311234",
+          "isbn",
+          "title",
+          "publishedDate",
+          "detailUrl",
+          "translator",
+          "price",
+          "authorNameList",
+          "publisherId",
         ]}
       ></AdminRowList>
       <AdminPaginationController />
