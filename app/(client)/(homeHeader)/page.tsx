@@ -1,5 +1,5 @@
 import LoadingSpinner from "@/components/common/LoadingSpinner";
-import Discovery from "@/components/discovery/Discovery";
+import DiscoveryDemo from "@/components/discovery/DiscoveryDemo";
 import getBirthdayBook from "@/function/server/getBirtdayBook";
 import { Suspense } from "react";
 import BirthDayBookSaveHelper from "./components/BirthDayBookSaveHelper";
@@ -14,7 +14,7 @@ const Home = () => {
       {/* <MainBookSlide /> */}
       <MainBookSlideContainer />
       <Suspense fallback={<LoadingSpinner className="w-full" />}>
-        <Discovery />
+        <DiscoveryDemo />
       </Suspense>
       <Suspense fallback={<LoadingSpinner className="w-full" />}>
         <TodayLibrary />

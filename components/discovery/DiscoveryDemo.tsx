@@ -1,9 +1,8 @@
-import fetchDailyDiscovery from "@/function/fetch/fetchDailyDiscovery";
+import { MOCK_CONTENTS } from "@/public/data/mock";
 import Image from "next/image";
 import Link from "next/link";
 import React, { HTMLAttributes } from "react";
 import CommonPillButton from "../common/CommonPillButton";
-import EmptyImage from "../common/EmptyImage";
 import DiscoveryItem from "./DiscoveryItem";
 
 enum ContentsType {
@@ -15,10 +14,7 @@ enum ContentsType {
 }
 
 type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
-const Discovery = async ({ className, ...props }: Readonly<Props>) => {
-  const dailyDiscoveryData = await fetchDailyDiscovery();
-  const hasDiscovery = dailyDiscoveryData && dailyDiscoveryData.length > 0;
-
+const DiscoveryDemo = async ({ className, ...props }: Readonly<Props>) => {
   return (
     <section
       className={`relative h-fit w-full px-[var(--client-layout-margin)] py-[var(--content-section-margin)] ${
@@ -34,31 +30,27 @@ const Discovery = async ({ className, ...props }: Readonly<Props>) => {
           </p>
         </div>
         <div className="relative aspect-video w-full overflow-hidden rounded-xl">
-          {hasDiscovery && dailyDiscoveryData[0].image ? (
-            <Image
-              alt="discovery"
-              src={dailyDiscoveryData[0].image}
-              fill
-              sizes="768px"
-            />
-          ) : (
-            <EmptyImage />
-          )}
+          <Image
+            alt="discovery"
+            src={MOCK_CONTENTS[0].image || "/default-image.jpg"}
+            fill
+            sizes="768px"
+          />
         </div>
       </div>
-      {hasDiscovery ? (
+      {MOCK_CONTENTS.length !== 0 ? (
         <ul>
-          {dailyDiscoveryData.map(
+          {MOCK_CONTENTS.map(
             (item, index) =>
               index > 0 &&
-              index < 3 && (
+              index < 4 && (
                 <React.Fragment key={item.id}>
                   <DiscoveryItem
-                    contentType={ContentsType[item.urls[0].type] || "기타"}
+                    contentType={ContentsType[item.urls[index]?.type] || "기타"}
                     title={item.title || ""}
                     imageUrl={item.image}
                   />
-                  {index < 3 - 1 && <div className="border-b" />}
+                  {index < 3  && <div className="border-b" />}
                 </React.Fragment>
               )
           )}
@@ -78,4 +70,4 @@ const Discovery = async ({ className, ...props }: Readonly<Props>) => {
     </section>
   );
 };
-export default Discovery;
+export default DiscoveryDemo;
