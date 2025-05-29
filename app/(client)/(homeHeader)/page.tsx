@@ -4,7 +4,7 @@ import getBirthdayBook from "@/function/server/getBirtdayBook";
 import { Suspense } from "react";
 import BirthDayBookSaveHelper from "./components/BirthDayBookSaveHelper";
 import MainBookSlideDemo from "./components/mainBookSlide/demo/MainBookSlideDemo";
-import MainScheduleSlide from "./components/mainScheduleSlide/MainScheduleSlide";
+import MainScheduleSlideDemo from "./components/mainScheduleSlide/MainScheduleSlideDemo";
 import TodayLibrary from "./components/todayLibrary/TodayLibrary";
 export const dynamic = "force-dynamic";
 
@@ -19,7 +19,7 @@ const Home = () => {
       <Suspense fallback={<LoadingSpinner className="w-full" />}>
         <TodayLibrary />
       </Suspense>
-      <MainScheduleSlide />
+      <MainScheduleSlideDemo />
     </main>
   );
 };

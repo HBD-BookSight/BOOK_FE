@@ -39,14 +39,14 @@ export interface BookDto {
   isbn: string;
   title: string;
   summary: string;
+  publisher: Simple;
   /** @format date-time */
   publishedDate: string;
-  titleImage?: string;
   authorList: Simple[];
+  titleImage?: string;
   translator?: string;
   /** @format int32 */
   price?: number;
-  publisher: Simple;
 }
 
 export interface Detail {

@@ -1,9 +1,9 @@
-import { MOCK_CONTENTS } from "@/public/data/mock";
 import Image from "next/image";
 import Link from "next/link";
 import React, { HTMLAttributes } from "react";
 import CommonPillButton from "../common/CommonPillButton";
 import DiscoveryItem from "./DiscoveryItem";
+import { MOCK_CONTENTS } from "@/public/data/mock_content";
 
 enum ContentsType {
   "Youtube" = "유튜브",

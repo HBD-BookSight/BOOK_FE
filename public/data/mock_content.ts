@@ -68,3 +68,4 @@ export const MOCK_CONTENTS: ContentsDto[] = [
     creator: { name: "조선비즈", id: 7 },
   },
 ];
+
