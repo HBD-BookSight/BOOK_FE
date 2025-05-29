@@ -1,5 +1,5 @@
-import type { NextConfig } from "next";
 import withSerwistInit from "@serwist/next";
+import type { NextConfig } from "next";
 
 const withSerwist = withSerwistInit({
   swSrc: "sw.ts",
@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
       : "http://localhost:3000",
   },
   images: {
+    
     remotePatterns: [
       {
         protocol: "https",
@@ -35,6 +36,12 @@ const nextConfig: NextConfig = {
         pathname: "/thumb/**",
       },
     ], // 책사진 도메인 허용
+    domains: [
+      "i.ytimg.com",
+      "i0.wp.com",
+      "image.yes24.com",
+      "minumsa.minumsa.com"
+    ],
   },
   webpack: (config) => {
     // SVG 파일에 대한 규칙 추가

@@ -1,10 +1,10 @@
 import LoadingSpinner from "@/components/common/LoadingSpinner";
-import Discovery from "@/components/discovery/Discovery";
+import DiscoveryDemo from "@/components/discovery/DiscoveryDemo";
 import getBirthdayBook from "@/function/server/getBirtdayBook";
 import { Suspense } from "react";
 import BirthDayBookSaveHelper from "./components/BirthDayBookSaveHelper";
 import MainBookSlideDemo from "./components/mainBookSlide/demo/MainBookSlideDemo";
-import MainScheduleSlide from "./components/mainScheduleSlide/MainScheduleSlide";
+import MainScheduleSlideDemo from "./components/mainScheduleSlide/MainScheduleSlideDemo";
 import TodayLibrary from "./components/todayLibrary/TodayLibrary";
 export const dynamic = "force-dynamic";
 
@@ -14,12 +14,12 @@ const Home = () => {
       {/* <MainBookSlide /> */}
       <MainBookSlideContainer />
       <Suspense fallback={<LoadingSpinner className="w-full" />}>
-        <Discovery />
+        <DiscoveryDemo />
       </Suspense>
       <Suspense fallback={<LoadingSpinner className="w-full" />}>
         <TodayLibrary />
       </Suspense>
-      <MainScheduleSlide />
+      <MainScheduleSlideDemo />
     </main>
   );
 };
