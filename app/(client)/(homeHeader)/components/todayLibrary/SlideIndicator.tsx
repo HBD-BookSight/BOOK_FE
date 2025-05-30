@@ -1,16 +1,29 @@
 "use client";
-import React, { Dispatch, SetStateAction } from "react";
 import { motion } from "framer-motion";
+import { Dispatch, SetStateAction } from "react";
 type Props = {
   className?: string;
   pageCount: number;
   currentPage: number;
   setCurrentPage: Dispatch<SetStateAction<number>>;
 };
-const SlideIndicator = ({ className, pageCount, currentPage, setCurrentPage, ...props }: Readonly<Props>) => {
+const SlideIndicator = ({
+  className,
+  pageCount,
+  currentPage,
+  setCurrentPage,
+  ...props
+}: Readonly<Props>) => {
+  console.log(pageCount, currentPage);
+
   return (
-    <div className={`relative flex w-full flex-row items-center justify-center gap-1 ${className || ""}`} {...props}>
-      {[...Array(pageCount)].map((_, index) => (
+    <div
+      className={`relative flex w-full flex-row items-center justify-center gap-1 ${
+        className || ""
+      }`}
+      {...props}
+    >
+      {[...Array(Math.ceil(pageCount))].map((_, index) => (
         <motion.button
           key={index}
           layoutId="slide-indicator"

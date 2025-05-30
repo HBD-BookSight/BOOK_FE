@@ -21,13 +21,15 @@ const SlideContainer = ({
     >
       <div className="grid grid-cols-3 gap-1">
         {todayLibrary &&
-          todayLibrary?.items.map((item, index) => (
-            <TodayLibraryItem
-              key={index}
-              publisher={item.publisher.name}
-              imageUrl={item.titleImage}
-            />
-          ))}
+          todayLibrary.items
+            .slice(currentPage * 3, currentPage * 3 + 3)
+            .map((item, index) => (
+              <TodayLibraryItem
+                key={index}
+                publisher={item.publisher.name}
+                imageUrl={item.titleImage}
+              />
+            ))}
       </div>
       <SlideIndicator
         pageCount={todayLibrary.items.length / 3}

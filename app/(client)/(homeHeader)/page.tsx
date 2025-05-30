@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import BirthDayBookSaveHelper from "./components/BirthDayBookSaveHelper";
 import MainBookSlideDemo from "./components/mainBookSlide/demo/MainBookSlideDemo";
 import MainScheduleSlideDemo from "./components/mainScheduleSlide/MainScheduleSlideDemo";
-import TodayLibrary from "./components/todayLibrary/TodayLibrary";
+import TodayLibraryDemo from "./components/todayLibrary/TodayLibraryDemo";
 export const dynamic = "force-dynamic";
 
 const Home = () => {
@@ -17,7 +17,7 @@ const Home = () => {
         <DiscoveryDemo />
       </Suspense>
       <Suspense fallback={<LoadingSpinner className="w-full" />}>
-        <TodayLibrary />
+        <TodayLibraryDemo />
       </Suspense>
       <MainScheduleSlideDemo />
     </main>
