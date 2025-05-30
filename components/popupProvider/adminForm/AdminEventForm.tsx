@@ -1,4 +1,5 @@
 "use client";
+import CommonCalendar from "@/components/common/CommonCalendar";
 import CommonDropDown from "@/components/common/CommonDropDown";
 import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
@@ -147,6 +148,7 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
               </button>
             </div>
           </div>
+          <CommonCalendar />
           <div>
             <CommonLabel htmlFor="title">Event Title*</CommonLabel>
             <CommonInputField

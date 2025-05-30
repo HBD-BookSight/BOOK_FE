@@ -15,6 +15,7 @@
     "@tanstack/react-query": "^5.67.3",
     "@tanstack/react-query-devtools": "^5.67.3",
     "csv-parser": "^3.2.0",
+    "date-fns": "^4.1.0",
     "framer-motion": "^12.4.3",
     "next": "^15.2.1",
     "react": "^19.0.0",
