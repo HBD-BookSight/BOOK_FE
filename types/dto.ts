@@ -90,6 +90,10 @@ export interface EventCreateRequest {
   senderName?: string;
   senderEmail?: string;
   senderMessage?: string;
+  dateRange?: {
+    startDate: string;
+    endDate: string;
+  };
   memo?: string;
   /** @default [] */
   tagList?: string[];

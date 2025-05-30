@@ -1,8 +1,11 @@
 import DropdownArrow from "@/public/icons/dropdownArrow.svg";
 import { format } from "date-fns";
 import { useState } from "react";
+interface CommonCalendarProps {
+  onDateChange?: (range: { start: Date; end: Date }) => void;
+}
 
-const CommonCalendar = () => {
+const CommonCalendar = ({ onDateChange }: CommonCalendarProps) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [viewYear, setViewYear] = useState<number>(2025);
@@ -18,7 +21,11 @@ const CommonCalendar = () => {
   };
 
   const sameDay = (a: Date | null, b: Date | null) =>
-    a && b && a.getTime() === b.getTime();
+    !!a &&
+    !!b &&
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate();
 
   const handleDateClick = (date: Date | null) => {
     if (!date) return;
@@ -38,18 +45,18 @@ const CommonCalendar = () => {
         setEndDate(date);
       }
     }
+    // After updating state, call onDateChange if both startDate and endDate are set
+    setTimeout(() => {
+      if (startDate && endDate && onDateChange) {
+        onDateChange({ start: startDate, end: endDate });
+      }
+    }, 0);
   };
 
   function isSelected(date: Date | null) {
-    if (!date) return false;
-    if (!startDate) return false;
-    if (startDate && !endDate) return date.getTime() === startDate.getTime();
-    return (
-      startDate &&
-      endDate &&
-      date.getTime() >= startDate.getTime() &&
-      date.getTime() <= endDate.getTime()
-    );
+    if (!date || !startDate) return false;
+    if (!endDate) return sameDay(date, startDate);
+    return date >= startDate && date <= endDate;
   }
 
   return (
