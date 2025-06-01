@@ -1,18 +1,22 @@
 "use client";
-import React, { useLayoutEffect, useRef } from "react";
-import TriangleArrow from "@/public/icons/triangleArrowIcon.svg";
-import { ModalType, usePopupAction } from "@/context/popupStore";
 import {
   ContentsFilterType,
   useSchedulePageFilterControllerData,
 } from "@/app/(client)/(backButtonHeader)/schedule/components/SchedulePageDataProvider";
-import BottomSheetModal from "@/components/popupProvider/BottomSheetModal";
-import AlphabetFilterSelector from "@/components/popupProvider/alphabetFilterSelector/AlphabetFilterSelector";
 import CommonPillButton from "@/components/common/CommonPillButton";
+import BottomSheetModal from "@/components/popupProvider/BottomSheetModal";
+import YearMonthFilterSelector from "@/components/popupProvider/alphabetFilterSelector/YearMonthFilterSelector";
+import { ModalType, usePopupAction } from "@/context/popupStore";
+import TriangleArrow from "@/public/icons/triangleArrowIcon.svg";
+import { useLayoutEffect, useRef } from "react";
 
 const ScheduleFilterController = () => {
-  const { contentsfilter, setContentsFilter, alphabetFilter, setAlphabetFilter } =
-    useSchedulePageFilterControllerData();
+  const {
+    contentsfilter,
+    setContentsFilter,
+    alphabetFilter,
+    setAlphabetFilter,
+  } = useSchedulePageFilterControllerData();
   const { openPopup, closePopup } = usePopupAction();
   const ref = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
@@ -25,7 +29,7 @@ const ScheduleFilterController = () => {
   const bottomSheetOpenHander = () => {
     openPopup<string>(
       <BottomSheetModal>
-        <AlphabetFilterSelector />
+        <YearMonthFilterSelector />
       </BottomSheetModal>,
       closePopup,
       setAlphabetFilter,
@@ -80,7 +84,9 @@ const ScheduleFilterController = () => {
           onClick={bottomSheetOpenHander}
         >
           모집시기 {alphabetFilter}
-          <TriangleArrow className={`flex size-4 rotate-180 items-center justify-center transition duration-300`} />
+          <TriangleArrow
+            className={`flex size-4 rotate-180 items-center justify-center transition duration-300`}
+          />
         </CommonPillButton>
       </div>
     </div>
