@@ -4,6 +4,7 @@ import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
 
+import CommonCalendar from "@/components/common/CommonCalendar";
 import CommonSubmitButton from "@/components/common/CommonSubmitButton";
 import { usePopupAction } from "@/context/popupStore";
 import {
@@ -36,6 +37,7 @@ export type EventPromotionFormTypes = {
   senderName?: string;
   senderEmail?: string;
   senderMessage?: string;
+  dateRange?: { start: string; end: string };
 };
 export type AdminEventFormRef = {
   handleSubmit: () => void;
@@ -186,21 +188,22 @@ const EventPromotionForm = forwardRef<AdminEventFormRef, Props>(
             >
               참여자 모집 기간
             </CommonLabel>
-            <div className="relative flex w-full flex-row items-center justify-center">
-              <CommonInputField
-                id="startDate"
-                type="date"
-                className="px-4"
-                {...register("startDate", { required: "입력이 필요합니다" })}
-              />
-              ~
-              <CommonInputField
-                id="endDate"
-                type="date"
-                className="px-4"
-                {...register("endDate", { required: "입력이 필요합니다" })}
-              />
-            </div>
+            <Controller
+              name="dateRange"
+              control={control}
+              rules={{ required: "날짜를 선택하세요" }}
+              render={({ field: { onChange } }) => (
+                <CommonCalendar
+                  onDateChange={({ start, end }) => {
+                    const startStr = start.toISOString().split("T")[0];
+                    const endStr = end.toISOString().split("T")[0];
+                    onChange({ start: startStr, end: endStr });
+                    setValue("startDate", startStr);
+                    setValue("endDate", endStr);
+                  }}
+                />
+              )}
+            />
           </div>
           <div className="flex flex-col gap-3">
             <CommonLabel
