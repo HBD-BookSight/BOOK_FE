@@ -162,22 +162,25 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
               {...register("host", { required: "입력이 필요합니다" })}
             />
           </div>
-          <Controller
-            name="dateRange"
-            control={control}
-            rules={{ required: "날짜를 선택하세요" }}
-            render={({ field: { onChange } }) => (
-              <CommonCalendar
-                onDateChange={({ start, end }) => {
-                  const startStr = start.toISOString().split("T")[0];
-                  const endStr = end.toISOString().split("T")[0];
-                  onChange({ start: startStr, end: endStr });
-                  setValue("startDate", startStr);
-                  setValue("endDate", endStr);
-                }}
-              />
-            )}
-          />
+          <div>
+            <CommonLabel className="font-semibold">Date/Duration*</CommonLabel>
+            <Controller
+              name="dateRange"
+              control={control}
+              rules={{ required: "날짜를 선택하세요" }}
+              render={({ field: { onChange } }) => (
+                <CommonCalendar
+                  onDateChange={({ start, end }) => {
+                    const startStr = start.toISOString().split("T")[0];
+                    const endStr = end.toISOString().split("T")[0];
+                    onChange({ start: startStr, end: endStr });
+                    setValue("startDate", startStr);
+                    setValue("endDate", endStr);
+                  }}
+                />
+              )}
+            />
+          </div>
           <div>
             <CommonLabel
               htmlFor="location"

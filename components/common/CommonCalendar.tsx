@@ -61,7 +61,6 @@ const CommonCalendar = ({ onDateChange }: CommonCalendarProps) => {
 
   return (
     <div className="flex size-full flex-col gap-2.5 text-sm text-zinc-500">
-      <label className="font-semibold">Date/Duration*</label>
       <div className="flex items-center gap-2">
         <input
           className="h-[52px] w-full rounded-[10px] border px-4 py-[5px] text-base focus:border-[#5F69BE] focus:outline-none"
