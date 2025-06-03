@@ -38,13 +38,21 @@ const YearMonthFilterSelector = ({ className, ...props }: Readonly<Props>) => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("!text-[var(--highlight-color)]");
+            entry.target.classList.add(
+              "!text-[var(--highlight-color)]",
+              "border-y-[0.4px]",
+              "border-[var(--sub-color)]"
+            );
             if (entry.target.textContent) {
               const num = parseInt(entry.target.textContent);
               if (!isNaN(num)) setSelectedYear(num);
             }
           } else {
-            entry.target.classList.remove("!text-[var(--highlight-color)]");
+            entry.target.classList.remove(
+              "!text-[var(--highlight-color)]",
+              "border-y-[0.4px]",
+              "border-[var(--sub-color)]"
+            );
           }
         });
       },
@@ -66,13 +74,21 @@ const YearMonthFilterSelector = ({ className, ...props }: Readonly<Props>) => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("!text-[var(--highlight-color)]");
+            entry.target.classList.add(
+              "!text-[var(--highlight-color)]",
+              "border-y-[0.4px]",
+              "border-[var(--sub-color)]"
+            );
             if (entry.target.textContent) {
               const num = parseInt(entry.target.textContent);
               if (!isNaN(num)) setSelectedMonth(num);
             }
           } else {
-            entry.target.classList.remove("!text-[var(--highlight-color)]");
+            entry.target.classList.remove(
+              "!text-[var(--highlight-color)]",
+              "border-y-[0.4px]",
+              "border-[var(--sub-color)]"
+            );
           }
         });
       },
@@ -91,14 +107,14 @@ const YearMonthFilterSelector = ({ className, ...props }: Readonly<Props>) => {
 
   return (
     <div
-      className={`scrollbar-hide flex size-fit w-full flex-col items-center rounded-t-[40px] bg-white p-6 shadow-[0_0_20px_0_rgba(0,0,0,0.12)] ${
+      className={`flex size-fit w-full flex-col items-center rounded-t-[40px] bg-white p-6 shadow-[0_0_20px_0_rgba(0,0,0,0.12)] ${
         className || ""
       }`}
       {...props}
     >
       <div className="flex gap-5 font-semibold">
         <ul
-          className="flex max-h-[30vh] snap-y snap-mandatory flex-col gap-[5vh] overflow-y-scroll py-[10vh]"
+          className="flex max-h-[30vh] snap-y snap-mandatory flex-col gap-[1vh] overflow-y-scroll py-[10vh] scrollbar-hide"
           ref={yearContainerRef}
         >
           {years.map((year, index) => (
@@ -107,14 +123,14 @@ const YearMonthFilterSelector = ({ className, ...props }: Readonly<Props>) => {
                 if (el) yearRefs.current[index] = el;
               }}
               key={index}
-              className="flex snap-center items-center justify-center text-2xl text-[#DBE1F1]"
+              className="flex snap-center items-center justify-center py-5 text-2xl text-[#DBE1F1]"
             >
               <p>{year}년</p>
             </div>
           ))}
         </ul>
         <ul
-          className="flex max-h-[30vh] snap-y snap-mandatory flex-col gap-[5vh] overflow-y-scroll py-[10vh]"
+          className="flex max-h-[30vh] snap-y snap-mandatory flex-col gap-[1vh] overflow-y-scroll py-[10vh] scrollbar-hide"
           ref={monthContainerRef}
         >
           {months.map((month, index) => (
@@ -123,7 +139,7 @@ const YearMonthFilterSelector = ({ className, ...props }: Readonly<Props>) => {
                 if (el) monthRefs.current[index] = el;
               }}
               key={index}
-              className="flex snap-center items-center justify-center text-2xl text-[#DBE1F1]"
+              className="flex snap-center items-center justify-center py-5 text-2xl text-[#DBE1F1]"
             >
               <p>{month}월</p>
             </div>
