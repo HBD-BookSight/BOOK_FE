@@ -39,14 +39,14 @@ export interface BookDto {
   isbn: string;
   title: string;
   summary: string;
+  publisher: Simple;
   /** @format date-time */
   publishedDate: string;
-  titleImage?: string;
   authorList: Simple[];
+  titleImage?: string;
   translator?: string;
   /** @format int32 */
   price?: number;
-  publisher: Simple;
 }
 
 export interface Detail {
@@ -90,6 +90,10 @@ export interface EventCreateRequest {
   senderName?: string;
   senderEmail?: string;
   senderMessage?: string;
+  dateRange?: {
+    startDate: string;
+    endDate: string;
+  };
   memo?: string;
   /** @default [] */
   tagList?: string[];
@@ -129,7 +133,7 @@ export interface UserDto {
   /** @format int64 */
   id: number;
   name: string;
-  bookIsbnList: number[];
+  bookIsbnList?: number[];
 }
 
 export interface ContentsCreateRequest {
@@ -154,9 +158,8 @@ export interface ConentsPostRequest extends ContentsCreateRequest {
 export interface ContentsDto {
   /** @format int64 */
   id: number;
-  title?: string;
-  type: "VIDEO" | "ARTICLE" | "PODCAST" | "LINK" | "SNS";
   urls: UrlInfo[];
+  title?: string;
   image?: string;
   creator: UserDto;
 }

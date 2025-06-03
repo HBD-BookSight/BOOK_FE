@@ -1,13 +1,13 @@
 "use client";
+import CommonCalendar from "@/components/common/CommonCalendar";
 import CommonDropDown from "@/components/common/CommonDropDown";
 import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
 import CommonSelectBox from "@/components/common/CommonSelectBox";
 import CommonToggleSwitch from "@/components/common/CommonToggleSwitch";
 import { usePopupAction } from "@/context/popupStore";
-import { postEvents } from "@/function/post/admin";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
-import { EventCreateRequest, EventPostRequest } from "@/types/dto";
+import { EventCreateRequest } from "@/types/dto";
 import {
   forwardRef,
   HTMLAttributes,
@@ -32,15 +32,13 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
         defaultValues: defaultValues
           ? {
               ...defaultValues,
-              startDate: new Date(defaultValues.startDate)
-                .toISOString()
-                .split("T")[0],
-              endDate: new Date(defaultValues.endDate)
-                .toISOString()
-                .split("T")[0],
             }
           : {
               bookIsbnList: [{ value: 0 }],
+              isPosting: false,
+              startDate: new Date().toISOString().split("T")[0],
+              endDate: new Date().toISOString().split("T")[0],
+              location: "ONLINE",
               urls: [{ url: "", type: "Link" }],
             },
       });
@@ -61,18 +59,18 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
     });
 
     const onSubmitHandler = async (data: EventCreateRequest) => {
-      const payload: EventPostRequest = {
-        ...data,
-        bookIsbnList: data.bookIsbnList?.map((b) => b.value),
-      };
       console.log(data);
-      const res = await postEvents(payload);
-      console.log(res);
+      // const payload: EventPostRequest = {
+      //   ...data,
+      //   bookIsbnList: data.bookIsbnList?.map((b) => b.value),
+      // };
+      // console.log(data);
+      // const res = await postEvents(payload);
+      // console.log(res);
 
       closePopup();
     };
 
-    //시작일 설정시 자동으로 종료일이 설정되도록
     const startDate = watch("startDate");
     useEffect(() => {
       if (startDate) {
@@ -83,7 +81,10 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
     useImperativeHandle(
       ref,
       () => ({
-        handleSubmit: handleSubmit(onSubmitHandler),
+        handleSubmit: () =>
+          handleSubmit(onSubmitHandler, (errors) => {
+            console.warn("❌ 유효성 검사 실패", errors);
+          })(),
       }),
       [handleSubmit] // eslint-disable-line
     );
@@ -161,23 +162,24 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
               {...register("host", { required: "입력이 필요합니다" })}
             />
           </div>
-          <div className="relative flex size-full flex-col">
-            <CommonLabel htmlFor="startDate">Date/Duration*</CommonLabel>
-            <div className="relative flex w-full flex-row items-center justify-center">
-              <CommonInputField
-                id="startDate"
-                type="date"
-                className="!px-1"
-                {...register("startDate", { required: "입력이 필요합니다" })}
-              />
-              ~
-              <CommonInputField
-                id="endDate"
-                type="date"
-                className="!px-1"
-                {...register("endDate", { required: "입력이 필요합니다" })}
-              />
-            </div>
+          <div>
+            <CommonLabel className="font-semibold">Date/Duration*</CommonLabel>
+            <Controller
+              name="dateRange"
+              control={control}
+              rules={{ required: "날짜를 선택하세요" }}
+              render={({ field: { onChange } }) => (
+                <CommonCalendar
+                  onDateChange={({ start, end }) => {
+                    const startStr = start.toISOString().split("T")[0];
+                    const endStr = end.toISOString().split("T")[0];
+                    onChange({ start: startStr, end: endStr });
+                    setValue("startDate", startStr);
+                    setValue("endDate", endStr);
+                  }}
+                />
+              )}
+            />
           </div>
           <div>
             <CommonLabel
@@ -228,9 +230,17 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
             >
               Posting on/off*
             </CommonLabel>
-            <CommonToggleSwitch
-              className="h-5 w-10"
-              {...register(`isPosting`, { required: "입력이 필요합니다" })}
+            <Controller
+              name="isPosting"
+              control={control}
+              rules={{ required: "입력이 필요합니다" }}
+              render={({ field: { value, onChange } }) => (
+                <CommonToggleSwitch
+                  className="h-5 w-10"
+                  checked={value}
+                  onChange={onChange}
+                />
+              )}
             />
           </div>
           <div className="relative flex size-full flex-row border-b-[1px]"></div>

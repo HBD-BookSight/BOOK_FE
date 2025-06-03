@@ -23,13 +23,11 @@ const Content = async ({
         {
           id: 7281778282,
           urls: [{ url: "www.mock.com", type: "Link" }],
-          type: "LINK",
           creator: { id: 12, name: "마치", bookIsbnList: [124, 2892, 711] },
         },
         {
           id: 7281778283,
           urls: [{ url: "www.mock2.com", type: "Link" }],
-          type: "LINK",
           creator: {
             id: 12,
             name: "윤마치",
