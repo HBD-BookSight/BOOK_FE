@@ -22,11 +22,12 @@ export interface PublisherCreateRequest {
   description?: string;
   memo?: string;
   /** @default [] */
-  tagList?: string[];
+  tagList?: string;
 }
 
 export interface PublisherPostRequest extends PublisherCreateRequest {
   bookIsbnList?: number[];
+  tagList?: string[];
 }
 
 /** @default [] */

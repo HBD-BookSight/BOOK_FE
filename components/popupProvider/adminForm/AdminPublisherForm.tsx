@@ -47,9 +47,11 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
       const payload: PublisherPostRequest = {
         ...data,
         bookIsbnList: data.bookIsbnList?.map((b) => b.value),
+        tagList: data.tagList
+          ? data.tagList.split(",").map((tag) => tag.trim())
+          : [],
       };
-      const res = await postPublisher(payload);
-      console.log(res);
+      await postPublisher(payload);
       closePopup();
     };
 
@@ -219,5 +221,5 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
   }
 );
 
-AdminPublisherForm.displayName = "AdminContentForm";
+AdminPublisherForm.displayName = "AdminPublisherForm";
 export default AdminPublisherForm;
