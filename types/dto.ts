@@ -17,6 +17,7 @@ export interface PublisherCreateRequest {
   engName: string;
   logo: string;
   urls: UrlInfo[];
+  userId: number;
   bookIsbnList: { value: number }[];
   /** @default [] */
   description?: string;
@@ -80,9 +81,7 @@ export interface EventCreateRequest {
   /** @format int64 */
   userId: number;
   location: "ONLINE" | "OFFLINE";
-  /** @format date */
   startDate: string;
-  /** @format date */
   endDate: string;
   eventType: string;
   eventFlag: "SOLO" | "GROUP" | "ETC";
@@ -92,18 +91,19 @@ export interface EventCreateRequest {
   senderEmail?: string;
   senderMessage?: string;
   dateRange?: {
-    startDate: string;
-    endDate: string;
+    start: string;
+    end: string;
   };
   memo?: string;
   /** @default [] */
-  tagList?: string[];
+  tagList?: string;
   /** @default [] */
   bookIsbnList?: { value: number }[];
 }
 
 export interface EventPostRequest extends EventCreateRequest {
   bookIsbnList?: number[];
+  tagList?: string[];
 }
 
 export interface EventDto {
