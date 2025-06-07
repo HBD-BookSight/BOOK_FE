@@ -166,16 +166,10 @@ export interface ContentsDto {
   creator: UserDto;
 }
 
-export interface ContactCreateRequest {
-  name?: string;
-  email: string;
-  message: string;
-}
-
 export interface ContactDto {
-  name?: string;
   email: string;
   message: string;
+  name?: string;
 }
 
 export interface BookCreateRequest {
