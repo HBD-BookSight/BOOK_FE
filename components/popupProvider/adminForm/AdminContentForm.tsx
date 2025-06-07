@@ -47,15 +47,16 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
     });
 
     const onSubmitHandler = async (data: ContentsCreateRequest) => {
-      console.log(data);
       const payload: ConentsPostRequest = {
         ...data,
         creatorId: 1, // 임시로 1로 설정, 실제 사용자 ID로 변경 필요
         bookIsbnList: data.bookIsbnList?.map((b) => b.value),
+        tagList: data.tagList
+          ? data.tagList.split(",").map((tag) => tag.trim())
+          : [],
       };
-      const res = await postContents(payload);
-      console.log(res);
-      closePopup(); //성공시 모달 종료
+      await postContents(payload);
+      closePopup();
       router.refresh();
     };
 

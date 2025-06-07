@@ -17,16 +17,18 @@ export interface PublisherCreateRequest {
   engName: string;
   logo: string;
   urls: UrlInfo[];
+  userId: number;
   bookIsbnList: { value: number }[];
   /** @default [] */
   description?: string;
   memo?: string;
   /** @default [] */
-  tagList?: string[];
+  tagList?: string;
 }
 
 export interface PublisherPostRequest extends PublisherCreateRequest {
   bookIsbnList?: number[];
+  tagList?: string[];
 }
 
 /** @default [] */
@@ -79,9 +81,7 @@ export interface EventCreateRequest {
   /** @format int64 */
   userId: number;
   location: "ONLINE" | "OFFLINE";
-  /** @format date */
   startDate: string;
-  /** @format date */
   endDate: string;
   eventType: string;
   eventFlag: "SOLO" | "GROUP" | "ETC";
@@ -91,18 +91,19 @@ export interface EventCreateRequest {
   senderEmail?: string;
   senderMessage?: string;
   dateRange?: {
-    startDate: string;
-    endDate: string;
+    start: string;
+    end: string;
   };
   memo?: string;
   /** @default [] */
-  tagList?: string[];
+  tagList?: string;
   /** @default [] */
   bookIsbnList?: { value: number }[];
 }
 
 export interface EventPostRequest extends EventCreateRequest {
   bookIsbnList?: number[];
+  tagList?: string[];
 }
 
 export interface EventDto {
@@ -146,13 +147,14 @@ export interface ContentsCreateRequest {
   /** @default [] */
   urls?: UrlInfo[];
   /** @default [] */
-  tagList?: string[];
+  tagList?: string;
   /** @default [] */
   bookIsbnList?: { value: number }[];
 }
 
 export interface ConentsPostRequest extends ContentsCreateRequest {
   bookIsbnList?: number[];
+  tagList?: string[];
 }
 
 export interface ContentsDto {
@@ -164,16 +166,10 @@ export interface ContentsDto {
   creator: UserDto;
 }
 
-export interface ContactCreateRequest {
-  name?: string;
-  email: string;
-  message: string;
-}
-
 export interface ContactDto {
-  name?: string;
   email: string;
   message: string;
+  name?: string;
 }
 
 export interface BookCreateRequest {

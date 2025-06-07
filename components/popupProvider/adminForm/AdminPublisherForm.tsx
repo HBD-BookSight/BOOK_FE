@@ -6,6 +6,7 @@ import { usePopupAction } from "@/context/popupStore";
 import { postPublisher } from "@/function/post/admin";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
 import { PublisherCreateRequest, PublisherPostRequest } from "@/types/dto";
+import { useRouter } from "next/navigation";
 import { forwardRef, HTMLAttributes, useImperativeHandle } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 
@@ -19,6 +20,7 @@ export type AdminPublisherFormRef = {
 };
 const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
   ({ className, defaultValues, ...props }, ref) => {
+    const router = useRouter();
     const { register, handleSubmit, control } = useForm<PublisherCreateRequest>(
       {
         mode: "onSubmit",
@@ -47,9 +49,12 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
       const payload: PublisherPostRequest = {
         ...data,
         bookIsbnList: data.bookIsbnList?.map((b) => b.value),
+        tagList: data.tagList
+          ? data.tagList.split(",").map((tag) => tag.trim())
+          : [],
       };
-      const res = await postPublisher(payload);
-      console.log(res);
+      await postPublisher(payload);
+      router.refresh();
       closePopup();
     };
 
@@ -219,5 +224,5 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
   }
 );
 
-AdminPublisherForm.displayName = "AdminContentForm";
+AdminPublisherForm.displayName = "AdminPublisherForm";
 export default AdminPublisherForm;

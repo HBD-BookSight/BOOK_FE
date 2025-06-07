@@ -1,13 +1,13 @@
-import { AdminInquiryInputs } from "@/components/popupProvider/adminForm/AdminInquiryForm";
 import {
   ConentsPostRequest,
+  ContactDto,
   EventPostRequest,
   PublisherPostRequest,
 } from "@/types/dto";
 import { postRequest } from "./commonPost";
 
-export const postContacts = (body: AdminInquiryInputs) =>
-  postRequest<AdminInquiryInputs>("/contacts", body);
+export const postContacts = (body: ContactDto) =>
+  postRequest<ContactDto>("/contacts", body);
 
 export const postContents = (body: ConentsPostRequest) =>
   postRequest<ConentsPostRequest>("/contents", body);

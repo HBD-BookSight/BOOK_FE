@@ -3,20 +3,15 @@ import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
 import { usePopupAction } from "@/context/popupStore";
 import { postContacts } from "@/function/post/admin";
+import { ContactDto } from "@/types/dto";
 import { useRouter } from "next/navigation";
 import { forwardRef, HTMLAttributes, useImperativeHandle } from "react";
 import { useForm } from "react-hook-form";
 
 type Props = {
   className?: string;
-  defaultValues?: AdminInquiryInputs;
+  defaultValues?: ContactDto;
 } & HTMLAttributes<HTMLDivElement>;
-
-export type AdminInquiryInputs = {
-  senderName: string;
-  senderEmail: string;
-  memo: string;
-};
 
 export type AdminInquiryFormRef = {
   handleSubmit: () => void;
@@ -25,16 +20,15 @@ export type AdminInquiryFormRef = {
 const AdminInquiryForm = forwardRef<AdminInquiryFormRef, Props>(
   ({ className, defaultValues, ...props }, ref) => {
     const router = useRouter();
-    const { register, handleSubmit } = useForm<AdminInquiryInputs>({
+    const { register, handleSubmit } = useForm<ContactDto>({
       mode: "onSubmit",
       defaultValues: defaultValues,
     });
     const { closePopup } = usePopupAction();
 
-    const onSubmitHandler = async (data: AdminInquiryInputs) => {
-      const res = await postContacts(data);
-      console.log(res, " 문의 등록 결과");
-      closePopup(); //성공시 모달 종료
+    const onSubmitHandler = async (data: ContactDto) => {
+      await postContacts(data);
+      closePopup();
       router.refresh();
     };
 
@@ -60,30 +54,30 @@ const AdminInquiryForm = forwardRef<AdminInquiryFormRef, Props>(
         >
           <div className="flex flex-col gap-3">
             <CommonLabel
-              htmlFor="senderName"
+              htmlFor="name"
               className="text-[var(--highlight-color)]"
             >
               문의자 성함
             </CommonLabel>
-            <CommonInputField id="senderName" {...register("senderName")} />
+            <CommonInputField id="name" {...register("name")} />
           </div>
           <div className="flex flex-col gap-3">
             <CommonLabel
-              htmlFor="senderEmail"
+              htmlFor="email"
               className="text-[var(--highlight-color)]"
             >
               문의자 이메일
             </CommonLabel>
-            <CommonInputField id="senderEmail" {...register("senderEmail")} />
+            <CommonInputField id="email" {...register("email")} />
           </div>
           <div className="flex flex-col gap-3">
             <CommonLabel
-              htmlFor="memo"
+              htmlFor="message"
               className="text-[var(--highlight-color)]"
             >
               전하고 싶은 말
             </CommonLabel>
-            <CommonInputField id="memo" {...register("memo")} />
+            <CommonInputField id="message" {...register("message")} />
           </div>
         </form>
       </div>
