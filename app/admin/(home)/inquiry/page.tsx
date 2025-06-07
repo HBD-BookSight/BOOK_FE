@@ -1,9 +1,9 @@
-import { AdminInquiryInputs } from "@/components/popupProvider/adminForm/AdminInquiryForm";
 import { redirect } from "next/navigation";
 import AdminPageDataProvider from "../components/AdminPageDataProvider";
 import AdminPaginationController from "../components/adminPaginationController/AdminPaginationController";
 import AdminRowControllerContainer from "../components/adminRowControllerContainer/AdminRowControllerContainer";
 import AdminRowList from "../components/adminRowList/AdminRowList";
+import { ContactDto } from "@/types/dto";
 
 const Inquiry = async ({
   searchParams,
@@ -18,9 +18,9 @@ const Inquiry = async ({
   console.log("searchParams 테스트", keyword);
 
   return (
-    <AdminPageDataProvider<AdminInquiryInputs[]> initialData={[]}>
+    <AdminPageDataProvider<ContactDto[]> initialData={[]}>
       <AdminRowControllerContainer />
-      <AdminRowList<AdminInquiryInputs[]>
+      <AdminRowList<ContactDto[]>
         keys={[
           "isbn",
           "title",
