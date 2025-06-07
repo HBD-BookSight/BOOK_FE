@@ -10,16 +10,19 @@ import AdminDeleteForm, {
 import AdminEventForm, {
   AdminEventFormRef,
 } from "@/components/popupProvider/adminForm/AdminEventForm";
-import AdminInquiryForm, {
-  AdminInquiryInputs,
-} from "@/components/popupProvider/adminForm/AdminInquiryForm";
+import AdminInquiryForm from "@/components/popupProvider/adminForm/AdminInquiryForm";
 import AdminPublisherForm, {
   AdminPublisherFormRef,
 } from "@/components/popupProvider/adminForm/AdminPublisherForm";
 import AdminPopupModal from "@/components/popupProvider/AdminPopupModal";
 import AlertPopupModal from "@/components/popupProvider/AlertPopupModal";
 import { usePopupAction } from "@/context/popupStore";
-import { ContentsCreateRequest, EventCreateRequest, PublisherCreateRequest } from "@/types/dto";
+import {
+  ContactDto,
+  ContentsCreateRequest,
+  EventCreateRequest,
+  PublisherCreateRequest,
+} from "@/types/dto";
 import { usePathname } from "next/navigation";
 import { HTMLAttributes, useRef } from "react";
 
@@ -27,7 +30,11 @@ type Props = {
   className?: string;
   resultLength?: string;
   selectRow: number | undefined;
-  defaultValues?: ContentsCreateRequest | EventCreateRequest;
+  defaultValues?:
+    | ContentsCreateRequest
+    | EventCreateRequest
+    | ContactDto
+    | PublisherCreateRequest;
 } & HTMLAttributes<HTMLDivElement>;
 
 const AdminRowController = ({
@@ -50,6 +57,7 @@ const AdminRowController = ({
       | ContentsCreateRequest
       | EventCreateRequest
       | PublisherCreateRequest
+      | ContactDto
   ) => {
     openPopup(
       <AdminPopupModal>
@@ -66,7 +74,7 @@ const AdminRowController = ({
         ) : pathName === "/admin/inquiry" ? (
           <AdminInquiryForm
             ref={AltFormComponentRef}
-            defaultValues={defaultValues as AdminInquiryInputs}
+            defaultValues={defaultValues as ContactDto}
           />
         ) : (
           <AdminPublisherForm
