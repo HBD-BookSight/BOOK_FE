@@ -52,6 +52,9 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
         ...data,
         creatorId: 1, // 임시로 1로 설정, 실제 사용자 ID로 변경 필요
         bookIsbnList: data.bookIsbnList?.map((b) => b.value),
+        tagList: data.tagList
+          ? data.tagList.split(",").map((tag) => tag.trim())
+          : [],
       };
       const res = await postContents(payload);
       console.log(res);

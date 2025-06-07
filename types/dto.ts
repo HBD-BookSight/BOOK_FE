@@ -147,13 +147,14 @@ export interface ContentsCreateRequest {
   /** @default [] */
   urls?: UrlInfo[];
   /** @default [] */
-  tagList?: string[];
+  tagList?: string;
   /** @default [] */
   bookIsbnList?: { value: number }[];
 }
 
 export interface ConentsPostRequest extends ContentsCreateRequest {
   bookIsbnList?: number[];
+  tagList?: string[];
 }
 
 export interface ContentsDto {
