@@ -10,6 +10,7 @@ import { validateOptionalIsbnLength } from "@/function/common";
 import { postEvents } from "@/function/post/admin";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
 import { EventCreateRequest, EventPostRequest } from "@/types/dto";
+import { useRouter } from "next/navigation";
 import {
   forwardRef,
   HTMLAttributes,
@@ -28,6 +29,7 @@ export type AdminEventFormRef = {
 };
 const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
   ({ className, defaultValues, ...props }, ref) => {
+    const router = useRouter();
     const { register, handleSubmit, control, setValue, watch } =
       useForm<EventCreateRequest>({
         mode: "onSubmit",
@@ -59,7 +61,6 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
     });
 
     const onSubmitHandler = async (data: EventCreateRequest) => {
-      console.log(data.dateRange);
       const { dateRange, ...rest } = data;
       const payload: EventPostRequest = {
         ...rest,
@@ -70,9 +71,8 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
         startDate: dateRange?.start || "",
         endDate: dateRange?.end || "",
       };
-      console.log(payload);
-      const res = await postEvents(payload);
-      console.log(res);
+      await postEvents(payload);
+      router.refresh();
       closePopup();
     };
 

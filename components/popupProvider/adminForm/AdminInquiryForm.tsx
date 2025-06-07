@@ -27,8 +27,7 @@ const AdminInquiryForm = forwardRef<AdminInquiryFormRef, Props>(
     const { closePopup } = usePopupAction();
 
     const onSubmitHandler = async (data: ContactDto) => {
-      const res = await postContacts(data);
-      console.log(res, " 문의 등록 결과");
+      await postContacts(data);
       closePopup();
       router.refresh();
     };
