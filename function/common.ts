@@ -29,3 +29,12 @@ export const handleFetchKaKaoData = async (
   const data: KaKaoBookResponse = await response.json();
   return data;
 };
+
+
+export const validateOptionalIsbnLength = (value: string | number) => {
+  const stringValue = String(value).trim();
+  if (stringValue === "") return true;
+  if (stringValue.length < 10) return "10자리 이상 입력해야 합니다";
+  if (stringValue.length > 13) return "13자리 이하로 입력해야 합니다";
+  return true;
+};

@@ -6,8 +6,10 @@ import CommonLabel from "@/components/common/CommonLabel";
 import CommonSelectBox from "@/components/common/CommonSelectBox";
 import CommonToggleSwitch from "@/components/common/CommonToggleSwitch";
 import { usePopupAction } from "@/context/popupStore";
+import { validateOptionalIsbnLength } from "@/function/common";
+import { postEvents } from "@/function/post/admin";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
-import { EventCreateRequest } from "@/types/dto";
+import { EventCreateRequest, EventPostRequest } from "@/types/dto";
 import {
   forwardRef,
   HTMLAttributes,
@@ -34,11 +36,9 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
               ...defaultValues,
             }
           : {
-              bookIsbnList: [{ value: 0 }],
               isPosting: false,
-              startDate: new Date().toISOString().split("T")[0],
-              endDate: new Date().toISOString().split("T")[0],
               location: "ONLINE",
+              userId: 1,
               urls: [{ url: "", type: "Link" }],
             },
       });
@@ -59,15 +59,20 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
     });
 
     const onSubmitHandler = async (data: EventCreateRequest) => {
-      console.log(data);
-      // const payload: EventPostRequest = {
-      //   ...data,
-      //   bookIsbnList: data.bookIsbnList?.map((b) => b.value),
-      // };
-      // console.log(data);
-      // const res = await postEvents(payload);
-      // console.log(res);
-
+      console.log(data.dateRange);
+      const { dateRange, ...rest } = data;
+      const payload: EventPostRequest = {
+        ...rest,
+        bookIsbnList: data.bookIsbnList?.map((b) => b.value),
+        tagList: data.tagList
+          ? data.tagList.split(",").map((tag) => tag.trim())
+          : [],
+        startDate: dateRange?.start || "",
+        endDate: dateRange?.end || "",
+      };
+      console.log(payload);
+      const res = await postEvents(payload);
+      console.log(res);
       closePopup();
     };
 
@@ -125,7 +130,7 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
                     <CommonDropDown
                       {...field}
                       className="flex-1"
-                      optionItems={["Video", "Article", "Podcast", "Link"]}
+                      optionItems={["Link", "Video", "Article", "Podcast"]}
                     />
                   )}
                 />
@@ -196,7 +201,7 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
                 <CommonDropDown
                   {...field}
                   className="flex-1"
-                  optionItems={["Online", "Offline", "Online/Offline"]}
+                  optionItems={["ONLINE", "OFFLINE", "ONLINE/OFFLINE"]}
                 />
               )}
             />
@@ -218,7 +223,7 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
               Event Flag*
             </CommonLabel>
             <CommonSelectBox
-              optionItems={["Solo", "Group", "etc"]}
+              optionItems={["SOLO", "GROUP", "ETC"]}
               className="flex-1"
               {...register(`eventFlag`, { required: "입력이 필요합니다" })}
             />
@@ -258,14 +263,7 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
                   type="number"
                   id={`isbn${index}`}
                   {...register(`bookIsbnList.${index}.value`, {
-                    minLength: {
-                      value: 10,
-                      message: "10자리 이상 입력해야 합니다",
-                    },
-                    maxLength: {
-                      value: 13,
-                      message: "13자리 이하로 입력해야 합니다",
-                    },
+                    validate: validateOptionalIsbnLength,
                   })}
                 />
                 <button
