@@ -86,7 +86,7 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
             }
           }}
         >
-          <div>
+         <div className="relative flex size-full flex-col gap-3">
             <CommonLabel
               htmlFor="name"
               className="text-[var(--highlight-color)]"
@@ -98,7 +98,7 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
               {...register("name", { required: "입력이 필요합니다" })}
             />
           </div>
-          <div>
+          <div className="relative flex size-full flex-col gap-3">
             <CommonLabel
               htmlFor="engName"
               className="text-[var(--highlight-color)]"
@@ -107,7 +107,7 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
             </CommonLabel>
             <CommonInputField id="engName" {...register("engName")} />
           </div>
-          <div>
+          <div className="relative flex size-full flex-col gap-3">
             <CommonLabel
               htmlFor="logo"
               className="text-[var(--highlight-color)]"
@@ -129,7 +129,7 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
                 <CommonInputField
                   placeholder="https://example.com"
                   type="url"
-                  className="flex-[2]"
+                  className="flex-[3]"
                   id={`url${index}`}
                   {...register(`urls.${index}.url`)}
                 />
@@ -139,13 +139,12 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
                   render={({ field }) => (
                     <CommonDropDown
                       {...field}
-                      className="flex-1"
+                      className="flex-[2]"
                       optionItems={[
                         "Link",
-                        "Youtube",
-                        "Profile",
-                        "Homepage",
-                        "Blog",
+                        "YouTube",
+                        "Newsletter",
+                        "Playlist",
                       ]}
                     />
                   )}
@@ -214,13 +213,13 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
               </button>
             </div>
           </div>
-          <div>
+          <div className="relative flex size-full flex-col gap-3">
             <CommonLabel htmlFor="memo" className="text-[var(--sub-color)]">
               Memo
             </CommonLabel>
             <CommonInputField id="memo" {...register("memo")} />
           </div>
-          <div>
+          <div className="relative flex size-full flex-col gap-3">
             <CommonLabel htmlFor="tagList" className="text-[var(--sub-color)]">
               Tag
             </CommonLabel>
