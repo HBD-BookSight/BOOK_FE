@@ -1,9 +1,9 @@
 "use client";
-import { useForm } from "react-hook-form";
-import { HTMLAttributes } from "react";
-import { useRouter } from "next/navigation";
-import CommonLabel from "@/components/common/CommonLabel";
 import CommonInputField from "@/components/common/CommonInputField";
+import CommonLabel from "@/components/common/CommonLabel";
+import { useRouter } from "next/navigation";
+import { HTMLAttributes } from "react";
+import { useForm } from "react-hook-form";
 
 type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
 type Inputs = { email: string; password: string };
@@ -35,13 +35,17 @@ const LoginForm = ({ className, ...props }: Props) => {
         <h2 className="text-2xl font-bold">HBD</h2>
         <h3 className="text-sm font-bold text-[var(--sub-color)]">Admin</h3>
       </span>
-      <form className="relative flex size-full flex-col gap-6" onSubmit={handleSubmit(onSubmitHandler, onErrorHandler)}>
+      <form
+        className="relative flex size-full flex-col gap-6"
+        onSubmit={handleSubmit(onSubmitHandler, onErrorHandler)}
+      >
         <div className="relative flex size-full flex-col gap-3">
           <CommonLabel htmlFor="email">E-mail</CommonLabel>
           <CommonInputField
             placeholder="이메일을 입력하세요"
             type="email"
             id="email"
+            className="placeholder:text-[var(--sub-color)]"
             {...register("email", { required: "이메일을 입력해주세요" })}
           />
         </div>
@@ -51,6 +55,7 @@ const LoginForm = ({ className, ...props }: Props) => {
             placeholder="비밀번호를 입력하세요"
             type="password"
             id="password"
+            className="placeholder:text-[var(--sub-color)]"
             {...register("password", { required: "비밀번호를 입력해주세요" })}
           />
         </div>
