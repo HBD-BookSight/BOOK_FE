@@ -37,6 +37,11 @@ export interface UrlInfo {
   type: "Link" | "Youtube" | "Profile" | "Homepage" | "Blog";
 }
 
+export interface UrlInfoTypeString {
+  url: string;
+  type: string;
+}
+
 export interface BookDto {
   isbn: string;
   title: string;
@@ -145,7 +150,7 @@ export interface ContentsCreateRequest {
   description?: string;
   memo?: string;
   /** @default [] */
-  urls?: UrlInfo[];
+  urls?: UrlInfoTypeString[];
   /** @default [] */
   tagList?: string;
   /** @default [] */

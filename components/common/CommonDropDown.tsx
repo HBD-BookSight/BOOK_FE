@@ -38,7 +38,7 @@ const CommonDropDown = forwardRef<HTMLInputElement, Readonly<Props>>(
         {...props}
       >
         <li
-          className={`relative flex w-full cursor-pointer flex-row items-center justify-between px-4 py-2 peer-checked:bg-[var(--sub-highlight-color)]`}
+          className={`relative flex w-full cursor-pointer flex-row items-center justify-between py-2 pl-4 pr-2 peer-checked:bg-[var(--sub-highlight-color)]`}
           style={{ height: height + "px" }}
           onClick={() => setIsOpen((prev) => !prev)}
         >

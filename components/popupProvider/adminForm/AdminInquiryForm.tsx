@@ -51,6 +51,14 @@ const AdminInquiryForm = forwardRef<AdminInquiryFormRef, Props>(
         <form
           className="relative flex size-full max-h-[80vh] flex-col gap-6 overflow-auto py-6"
           onSubmit={handleSubmit(onSubmitHandler)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              const tagName = (e.target as HTMLElement).tagName;
+              if (tagName === "INPUT" || tagName === "TEXTAREA") {
+                e.preventDefault();
+              }
+            }
+          }}
         >
           <div className="flex flex-col gap-3">
             <CommonLabel

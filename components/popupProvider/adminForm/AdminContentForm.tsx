@@ -24,7 +24,7 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
     const { register, handleSubmit, control } = useForm<ContentsCreateRequest>({
       mode: "onSubmit",
       defaultValues: defaultValues || {
-        urls: [{ url: "", type: "Link" }],
+        urls: [{ url: "", type: "Video" }],
         bookIsbnList: [{ value: 0 }],
       },
     });
@@ -79,6 +79,14 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
         <form
           className="relative flex size-full max-h-[80vh] flex-col gap-6 overflow-auto py-6"
           onSubmit={handleSubmit(onSubmitHandler)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              const tagName = (e.target as HTMLElement).tagName;
+              if (tagName === "INPUT" || tagName === "TEXTAREA") {
+                e.preventDefault();
+              }
+            }
+          }}
         >
           <div className="relative flex size-full flex-col gap-3">
             <CommonLabel>URL*</CommonLabel>
@@ -103,7 +111,7 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
                   render={({ field }) => (
                     <CommonDropDown
                       {...field}
-                      className="flex-1"
+                      className="flex-1 text-sm font-medium text-[#808080]"
                       optionItems={["Video", "Article", "Podcast", "Link"]}
                     />
                   )}
@@ -121,7 +129,7 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
               <button
                 type="button"
                 onClick={() => appendUrl({ url: "", type: "Link" })}
-                className="text-sm font-semibold text-[var(--sub-color)]"
+                className="text-xs font-semibold text-[var(--sub-color)]"
               >
                 + Add
               </button>
