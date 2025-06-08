@@ -42,6 +42,7 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
               location: "ONLINE",
               userId: 1,
               urls: [{ url: "", type: "Link" }],
+              bookIsbnList: [{ value: 0 }],
             },
       });
     const { closePopup } = usePopupAction();
@@ -138,7 +139,7 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
                     <CommonDropDown
                       {...field}
                       className="flex-1"
-                      optionItems={["Link", "Video", "Article", "Podcast"]}
+                      optionItems={["Link", "Form"]}
                     />
                   )}
                 />
@@ -161,21 +162,21 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
               </button>
             </div>
           </div>
-          <div>
+          <div className="relative flex size-full flex-col gap-2">
             <CommonLabel htmlFor="title">Event Title*</CommonLabel>
             <CommonInputField
               id="title"
               {...register("title", { required: "입력이 필요합니다" })}
             />
           </div>
-          <div>
+          <div className="relative flex size-full flex-col gap-3">
             <CommonLabel htmlFor="host">Event Host*</CommonLabel>
             <CommonInputField
               id="host"
               {...register("host", { required: "입력이 필요합니다" })}
             />
           </div>
-          <div>
+          <div className="relative flex size-full flex-col gap-3">
             <CommonLabel className="font-semibold">Date/Duration*</CommonLabel>
             <Controller
               name="dateRange"
@@ -194,7 +195,7 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
               )}
             />
           </div>
-          <div>
+          <div className="relative flex size-full flex-col gap-3">
             <CommonLabel
               htmlFor="location"
               className="text-[var(--highlight-color)]"
@@ -208,13 +209,13 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
               render={({ field }) => (
                 <CommonDropDown
                   {...field}
-                  className="flex-1"
+                  className="flex-1 text-sm font-medium"
                   optionItems={["ONLINE", "OFFLINE", "ONLINE/OFFLINE"]}
                 />
               )}
             />
           </div>
-          <div>
+          <div className="relative flex size-full flex-col gap-3">
             <CommonLabel
               htmlFor="eventType"
               className="text-[var(--highlight-color)]"
@@ -223,7 +224,7 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
             </CommonLabel>
             <CommonInputField id="eventType" {...register("eventType")} />
           </div>
-          <div>
+          <div className="relative flex size-full flex-col gap-3">
             <CommonLabel
               htmlFor="eventFlag"
               className="text-[var(--highlight-color)]"
@@ -293,7 +294,7 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
               </button>
             </div>
           </div>
-          <div>
+          <div className="relative flex size-full flex-col gap-3">
             <CommonLabel
               htmlFor="bookTitle"
               className="text-[var(--sub-color)]"
@@ -302,7 +303,7 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
             </CommonLabel>
             <CommonInputField id="bookTitle" {...register("bookTitle")} />
           </div>
-          <div>
+          <div className="relative flex size-full flex-col gap-3">
             <CommonLabel
               htmlFor="senderName"
               className="text-[var(--sub-color)]"
@@ -311,7 +312,7 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
             </CommonLabel>
             <CommonInputField id="senderName" {...register("senderName")} />
           </div>
-          <div>
+          <div className="relative flex size-full flex-col gap-3">
             <CommonLabel
               htmlFor="senderEmail"
               className="text-[var(--sub-color)]"
@@ -320,7 +321,7 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
             </CommonLabel>
             <CommonInputField id="senderEmail" {...register("senderEmail")} />
           </div>
-          <div>
+          <div className="relative flex size-full flex-col gap-3">
             <CommonLabel
               htmlFor="senderMessage"
               className="text-[var(--sub-color)]"
@@ -332,13 +333,13 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
               {...register("senderMessage")}
             />
           </div>
-          <div>
+          <div className="relative flex size-full flex-col gap-3">
             <CommonLabel htmlFor="memo" className="text-[var(--sub-color)]">
               Memo
             </CommonLabel>
             <CommonInputField id="memo" {...register("memo")} />
           </div>
-          <div>
+          <div className="relative flex size-full flex-col gap-3">
             <CommonLabel htmlFor="tagList" className="text-[var(--sub-color)]">
               Tag
             </CommonLabel>
