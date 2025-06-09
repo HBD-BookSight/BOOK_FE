@@ -80,7 +80,7 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               const tagName = (e.target as HTMLElement).tagName;
-              if (tagName === "INPUT" || tagName === "TEXTAREA") {
+              if (tagName === "INPUT") {
                 e.preventDefault();
               }
             }
