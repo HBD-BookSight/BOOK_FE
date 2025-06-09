@@ -23,7 +23,7 @@ const BookTitleSection = ({
     >
       <span className="flex items-center gap-2">
         <p className="text-lg font-semibold">{bookName}</p>
-        <p className="text-sm text-[#808080]">{author && author}</p>
+        <p className="text-sm text-[--sub-color]">{author && author}</p>
       </span>
       <p className="flex flex-row items-start gap-1 text-xs text-[var(--highlight-color)]">
         <BirthDayCakeIcon className="w-3" />

@@ -15,7 +15,7 @@ export default function NotFound() {
           <p className="font-['Inter'] text-6xl font-black text-[#5F69BE]">
             Oops!
           </p>
-          <span className="text-center text-sm font-medium leading-[22px] text-[#808080] sm:text-left">
+          <span className="text-center text-sm font-medium leading-[22px] text-[--sub-color] sm:text-left">
             페이지를 찾을 수 없습니다. <br />
             잘못된 경로이거나
             <br className=" sm:hidden" /> 페이지가 존재하지 않습니다.
@@ -23,7 +23,7 @@ export default function NotFound() {
         </div>
       </div>
       <Link
-        className="w-[328px] rounded-full bg-[#F8F8FE] py-6 text-center text-lg font-semibold text-[#5F69BE]"
+        className="w-[328px] rounded-full bg-[--sub-color] py-6 text-center text-lg font-semibold text-[#5F69BE]"
         href={"/"}
       >
         홈 화면으로

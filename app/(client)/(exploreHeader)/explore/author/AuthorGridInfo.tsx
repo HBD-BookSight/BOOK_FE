@@ -18,7 +18,7 @@ const AuthorGridDetail = ({ name, id, profile }: AuthorGridDetailProps) => {
         )}
         <p className="font-semibold">{name}</p>
         <Link
-          className="rounded-[50px] border border-[#EDEDED] px-3 py-2 text-[#808080]"
+          className="rounded-[50px] border border-[#EDEDED] px-3 py-2 text-[--sub-color]"
           href={`/author/${id}`}
         >
           프로필 보기
