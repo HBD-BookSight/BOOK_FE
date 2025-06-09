@@ -1,6 +1,7 @@
 "use client";
 import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
+import { usePreventEnterSubmit } from "@/components/hooks/usePreventEnterSubmit";
 import { usePopupAction } from "@/context/popupStore";
 import { postContacts } from "@/function/post/admin";
 import { ContactDto } from "@/types/dto";
@@ -31,6 +32,7 @@ const AdminInquiryForm = forwardRef<AdminInquiryFormRef, Props>(
       closePopup();
       router.refresh();
     };
+    const handlePreventEnterSubmit = usePreventEnterSubmit();
 
     useImperativeHandle(
       ref,
@@ -51,14 +53,7 @@ const AdminInquiryForm = forwardRef<AdminInquiryFormRef, Props>(
         <form
           className="relative flex size-full max-h-[80vh] flex-col gap-6 overflow-auto py-6"
           onSubmit={handleSubmit(onSubmitHandler)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              const tagName = (e.target as HTMLElement).tagName;
-              if (tagName === "INPUT" || tagName === "TEXTAREA") {
-                e.preventDefault();
-              }
-            }
-          }}
+          onKeyDown={handlePreventEnterSubmit}
         >
           <div className="flex flex-col gap-3">
             <CommonLabel

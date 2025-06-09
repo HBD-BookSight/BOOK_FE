@@ -5,6 +5,7 @@ import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
 import CommonSelectBox from "@/components/common/CommonSelectBox";
 import CommonToggleSwitch from "@/components/common/CommonToggleSwitch";
+import { usePreventEnterSubmit } from "@/components/hooks/usePreventEnterSubmit";
 import { usePopupAction } from "@/context/popupStore";
 import { validateOptionalIsbnLength } from "@/function/common";
 import { postEvents } from "@/function/post/admin";
@@ -78,6 +79,8 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
     };
 
     const startDate = watch("startDate");
+    const handlePreventEnterSubmit = usePreventEnterSubmit();
+
     useEffect(() => {
       if (startDate) {
         setValue("endDate", startDate);
@@ -106,14 +109,7 @@ const AdminEventForm = forwardRef<AdminEventFormRef, Props>(
         <form
           className="relative flex size-full max-h-[80vh] flex-col gap-6 overflow-auto py-6"
           onSubmit={handleSubmit(onSubmitHandler)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              const tagName = (e.target as HTMLElement).tagName;
-              if (tagName === "INPUT" || tagName === "TEXTAREA") {
-                e.preventDefault();
-              }
-            }
-          }}
+          onKeyDown={handlePreventEnterSubmit}
         >
           <div className="relative flex size-full flex-col gap-3">
             <CommonLabel>URL*</CommonLabel>

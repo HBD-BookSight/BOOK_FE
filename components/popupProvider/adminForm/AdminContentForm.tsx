@@ -2,6 +2,7 @@
 import CommonDropDown from "@/components/common/CommonDropDown";
 import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
+import { usePreventEnterSubmit } from "@/components/hooks/usePreventEnterSubmit";
 import { usePopupAction } from "@/context/popupStore";
 import { postContents } from "@/function/post/admin";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
@@ -60,6 +61,8 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
       router.refresh();
     };
 
+    const handlePreventEnterSubmit = usePreventEnterSubmit();
+
     useImperativeHandle(
       ref,
       () => ({
@@ -79,14 +82,7 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
         <form
           className="relative flex size-full max-h-[80vh] flex-col gap-6 overflow-auto py-6"
           onSubmit={handleSubmit(onSubmitHandler)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              const tagName = (e.target as HTMLElement).tagName;
-              if (tagName === "INPUT" || tagName === "TEXTAREA") {
-                e.preventDefault();
-              }
-            }
-          }}
+          onKeyDown={handlePreventEnterSubmit}
         >
           <div className="relative flex size-full flex-col gap-3">
             <CommonLabel>URL*</CommonLabel>
