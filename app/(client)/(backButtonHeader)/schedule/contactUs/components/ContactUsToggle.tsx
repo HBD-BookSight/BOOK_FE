@@ -12,7 +12,7 @@ const ContactUsToggle = ({ isEvent, setIsEvent }: ContactUsToggleProps) => {
         className={`flex w-[145px] cursor-pointer justify-center pb-3.5 transition-colors ${
           isEvent
             ? "border-b-2 border-[#5F69BE] font-bold text-[#5F69BE]"
-            : "text-[#808080]"
+            : "text-[--sub-color]"
         }`}
         onClick={() => setIsEvent(true)}
       >
@@ -21,7 +21,7 @@ const ContactUsToggle = ({ isEvent, setIsEvent }: ContactUsToggleProps) => {
       <div
         className={`flex w-[145px] cursor-pointer justify-center pb-3.5 transition-colors  ${
           isEvent
-            ? "text-[#808080]"
+            ? "text-[--sub-color]"
             : "border-b-2 border-[#5F69BE] font-bold text-[#5F69BE]"
         }`}
         onClick={() => setIsEvent(false)}

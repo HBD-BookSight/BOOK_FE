@@ -107,7 +107,7 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
                   render={({ field }) => (
                     <CommonDropDown
                       {...field}
-                      className="flex-1 text-sm font-medium text-[#808080]"
+                      className="flex-1 text-sm font-medium text-[--sub-color]"
                       optionItems={["Video", "Article", "Podcast", "Link"]}
                     />
                   )}
