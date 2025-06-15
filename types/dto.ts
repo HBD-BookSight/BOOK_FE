@@ -262,7 +262,7 @@ export interface PageResponseContentsDto {
 }
 
 export interface ListResponseContentsDto {
-  items: ContentsDto[];
+  items: DisoveryContentsDto[];
   /** @format int32 */
   length: number;
 }
@@ -337,4 +337,21 @@ export interface EventRequestDto {
   location?: "ONLINE" | "OFFLINE";
   startDate?: string;
   endDate?: string;
+}
+
+export interface DisoveryContentsDto {
+  /** @format int64 */
+  id: number;
+  urls: UrlInfoTypeString[];
+  image?: string;
+  creator: UserDto;
+  createdAt: string;
+}
+
+enum ContentsType {
+  "Youtube" = "유튜브",
+  "Homepage" = "홈페이지",
+  "Blog" = "블로그",
+  "Link" = "링크",
+  "Profile" = "프로필",
 }

@@ -1,7 +1,7 @@
-import { ContentsDto, ListResponseContentsDto } from "@/types/dto";
+import { DisoveryContentsDto, ListResponseContentsDto } from "@/types/dto";
 import fetchWithTimeout from "./fetchWithTimeout";
 
-const fetchDailyDiscovery = async (): Promise<ContentsDto[]> => {
+const fetchDailyDiscovery = async (): Promise<DisoveryContentsDto[]> => {
   try {
     const response = await fetchWithTimeout(
       process.env.NEXT_PUBLIC_BACKEND_URL + "/contents/discovery",
@@ -11,7 +11,7 @@ const fetchDailyDiscovery = async (): Promise<ContentsDto[]> => {
     );
     if (response.ok) {
       const result: ListResponseContentsDto = await response.json();
-      return result.items;
+      return result.items || [];
     } else {
       throw new Error(response.statusText);
     }
