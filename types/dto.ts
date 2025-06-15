@@ -262,7 +262,7 @@ export interface PageResponseContentsDto {
 }
 
 export interface ListResponseContentsDto {
-  items: DisoveryContentsDto[];
+  items: ContentsDto[];
   /** @format int32 */
   length: number;
 }
