@@ -31,7 +31,10 @@ const MainBookSlideContainer = ({
   const slideContainerRef = useRef<HTMLDivElement>(null);
   const [booksData, setBooksData] = useState<Array<BookDto> | undefined>(books);
   const [isMobileState, setIsMobileState] = useState(false);
-
+  
+  useEffect(() => {
+    setBooksData(books);
+  }, [books]);
   //슬라이드 뷰 크기 조정용
   useLayoutEffect(() => {
     const slideViewUpdateSize = () => {

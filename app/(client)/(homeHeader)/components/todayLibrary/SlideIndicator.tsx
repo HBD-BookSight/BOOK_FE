@@ -14,8 +14,6 @@ const SlideIndicator = ({
   setCurrentPage,
   ...props
 }: Readonly<Props>) => {
-  console.log(pageCount, currentPage);
-
   return (
     <div
       className={`relative flex w-full flex-row items-center justify-center gap-1 ${

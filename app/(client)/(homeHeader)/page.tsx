@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 const Home = () => {
   return (
     <main className="relative flex size-full flex-col items-center py-5">
-      <MainBookSlideContainer />
+      <MainBookSlide className="mb-12" />
       <Suspense fallback={<LoadingSpinner className="w-full" />}>
         <DiscoveryDemo />
       </Suspense>
@@ -22,17 +22,3 @@ const Home = () => {
 };
 
 export default Home;
-
-const MainBookSlideContainer = async () => {
-  return <MainBookSlide className="mb-12" />;
-};
-
-// const MainBookSlideContainer = async () => {
-//   const data = await getBirthdayBook();
-//   return (
-//     <>
-//       <BirthDayBookSaveHelper books={data} />
-//       <MainBookSlideDemo books={data.slice(0, 6)} />
-//     </>
-//   );
-// };
