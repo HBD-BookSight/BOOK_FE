@@ -1,4 +1,8 @@
-import { ListResponseContentsDto, PageResponsePublisherDto } from "@/types/dto";
+import {
+  ListResponseContentsDto,
+  PageResponseBookDto,
+  PageResponsePublisherDto,
+} from "@/types/dto";
 import { getRequest } from "./commonGet";
 
 export const getPublishers = () =>
@@ -8,4 +12,6 @@ export const getBookContents = (isbn: string) =>
   getRequest<ListResponseContentsDto>(`books/${isbn}/contents`);
 
 export const getBirthdayBooks = (date: string) =>
-  getRequest<ListResponseContentsDto>(`books?page=0&limit=10&publishedDate=${date}&orderBy=PublishedDate&direction=desc`);
+  getRequest<PageResponseBookDto>(
+    `/books?page=0&limit=10&publishedDate=2025-06-20&orderBy=PublishedDate&direction=desc`
+  );
