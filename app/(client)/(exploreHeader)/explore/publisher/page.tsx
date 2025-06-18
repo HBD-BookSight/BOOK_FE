@@ -6,6 +6,8 @@ import PublisherFilterController from "./components/publisherFilterController/Pu
 
 const PublisherPage = async () => {
   const initialData = await getPublishers();
+  console.log(initialData);
+  
   return (
     <main className="relative flex size-full flex-col items-center">
       <PublisherPageDataProvider initialData={{initialData}}>
@@ -15,7 +17,7 @@ const PublisherPage = async () => {
             <Link href={`/publisher/${item.id}`} key={item.id}>
               <PublisherGridItem
                 key={item.id}
-                imageUrl={item.logo || "/default-image.jpg"}
+                imageUrl={item.logo}
                 instagramId="@testasddfsdaf"
                 publisherName="asdfsdasfd"
               />

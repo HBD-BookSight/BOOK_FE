@@ -1,14 +1,49 @@
+'use client'
+
 import Image from "next/image";
+import { useState, useMemo } from "react";
 import EmptyImage from "../common/EmptyImage";
 
 type Props = {
   className?: string;
   imageUrl?: string;
 };
-const PublisherPortrait = ({ className, imageUrl, ...props }: Readonly<Props>) => {
+const PublisherPortrait = ({
+  className,
+  imageUrl,
+  ...props
+}: Readonly<Props>) => {
+  const [hasError, setHasError] = useState(false);
+
+  const isValidUrl = useMemo(() => {
+    if (!imageUrl) return false;
+    try {
+      new URL(imageUrl);
+      return true;
+    } catch {
+      return false;
+    }
+  }, [imageUrl]);
+
+  const shouldShowImage = isValidUrl && !hasError;
+
   return (
-    <div className={`relative aspect-square w-full overflow-hidden rounded-full ${className || ""}`} {...props}>
-      {imageUrl ? <Image alt="publisher" src={imageUrl} fill></Image> : <EmptyImage />}
+    <div
+      className={`relative aspect-square w-full overflow-hidden rounded-full ${
+        className || ""
+      }`}
+      {...props}
+    >
+      {shouldShowImage ? (
+        <Image
+          alt="publisher"
+          src={imageUrl!}
+          fill
+          onError={() => setHasError(true)}
+        />
+      ) : (
+        <EmptyImage />
+      )}
     </div>
   );
 };
