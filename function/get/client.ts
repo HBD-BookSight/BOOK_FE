@@ -13,5 +13,5 @@ export const getBookContents = (isbn: string) =>
 
 export const getBirthdayBooks = (date: string) =>
   getRequest<PageResponseBookDto>(
-    `/books?page=0&limit=10&publishedDate=${date}&orderBy=PublishedDate&direction=desc`
+    `/books?page=0&limit=10&publishedDate=${'2025-06-20'}&orderBy=PublishedDate&direction=desc`
   );
