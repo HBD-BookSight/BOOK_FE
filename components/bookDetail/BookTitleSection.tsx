@@ -16,6 +16,8 @@ const BookTitleSection = ({
   author,
   ...props
 }: Readonly<Props>) => {
+  const birthday = new Date(birthDayDate || "");
+  
   return (
     <section
       className={`relative flex size-full flex-col gap-1 ${className || ""}`}
@@ -27,8 +29,8 @@ const BookTitleSection = ({
       </span>
       <p className="flex flex-row items-start gap-1 text-xs text-[var(--highlight-color)]">
         <BirthDayCakeIcon className="w-3" />
-        {birthDayDate
-          ? formatDateToKorean(birthDayDate)
+        {birthday
+          ? formatDateToKorean(birthday)
           : "정보가 제공되지 않았습니다"}
       </p>
       {/* <div className="flex flex-row gap-2 text-sm text-[var(--sub-color)]">

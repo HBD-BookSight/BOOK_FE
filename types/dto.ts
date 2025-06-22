@@ -58,15 +58,22 @@ export interface BookDto {
 
 export interface Detail {
   /** @format int64 */
-  id: number;
-  name: string;
-  engName?: string;
-  logo?: string;
-  isOfficial: boolean;
-  description?: string;
-  urls: UrlInfo[];
-  books: BookDto[];
-  tags: TagDto[];
+  isbn: string;
+  title: string;
+  detailUrl: string;
+  summary: string;
+  publishedDate: Date;
+  titleImage: string;
+  authorList: [];
+  translator: [];
+  price: number;
+  status: string;
+  publisher: {
+    id: number;
+    name: string;
+  };
+  contentsDtoList: [];
+  eventDtoList: [];
 }
 
 export interface Simple {
