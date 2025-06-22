@@ -32,14 +32,14 @@ const Publisher = async ({
       <AdminRowControllerContainer />
       <AdminRowList<PublisherDto[]>
         keys={[
-          "isbn",
-          "title",
-          "publishedDate",
-          "detailUrl",
-          "translator",
-          "price",
-          "authorNameList",
-          "publisherId",
+          "PublisherName",
+          "InstagramID",
+          "LogoLink",
+          "URL",
+          "URLType",
+          "BookISBN",
+          "Memo",
+          "Tag",
         ]}
       ></AdminRowList>
       <AdminPaginationController />

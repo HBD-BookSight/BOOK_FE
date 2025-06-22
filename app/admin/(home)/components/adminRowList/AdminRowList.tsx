@@ -24,7 +24,7 @@ const AdminRowList = <T,>({ className, keys, ...props }: Readonly<Props>) => {
             return (
               <p
                 key={index}
-                className="w-24 overflow-hidden text-ellipsis font-bold"
+                className="w-[115px] overflow-hidden text-xs font-bold"
               >
                 {key}
               </p>

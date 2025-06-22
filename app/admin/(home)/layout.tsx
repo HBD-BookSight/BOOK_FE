@@ -12,7 +12,7 @@ const AdminHomeLayout = ({
       <AdminHeader />
       <div className="relative flex flex-1 flex-row overflow-hidden">
         <AdminSideNav />
-        <div className="relative mx-16 flex flex-1 flex-col overflow-hidden">{children}</div>
+        <div className="relative mr-5 flex flex-1 flex-col overflow-hidden">{children}</div>
       </div>
     </div>
   );
