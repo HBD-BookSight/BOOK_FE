@@ -1,4 +1,5 @@
 import fetchDailyDiscovery from "@/function/fetch/fetchDailyDiscovery";
+import { ContentsType } from "@/types/dto";
 import Image from "next/image";
 import Link from "next/link";
 import React, { HTMLAttributes } from "react";
@@ -8,13 +9,6 @@ import DiscoveryItem from "./DiscoveryItem";
 
 type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
 
-enum ContentsType {
-  "Youtube" = "유튜브",
-  "Homepage" = "홈페이지",
-  "Blog" = "블로그",
-  "Link" = "링크",
-  "Profile" = "프로필",
-}
 const Discovery = async ({ className, ...props }: Readonly<Props>) => {
   const dailyDiscoveryData = await fetchDailyDiscovery();
   const hasDiscovery = dailyDiscoveryData && dailyDiscoveryData.length > 0;
@@ -54,7 +48,11 @@ const Discovery = async ({ className, ...props }: Readonly<Props>) => {
               index < 4 && (
                 <React.Fragment key={item.id}>
                   <DiscoveryItem
-                    contentType={ContentsType[item.urls[index].type] || "기타"}
+                    contentType={
+                      item.urls && index < item.urls.length
+                        ? ContentsType[item.urls[index].type] || "기타"
+                        : "기타"
+                    }
                     title={item.title || ""}
                     imageUrl={item.image}
                   />

@@ -355,7 +355,7 @@ export interface DisoveryContentsDto {
   createdAt: string;
 }
 
-enum ContentsType {
+export enum ContentsType {
   "Youtube" = "유튜브",
   "Homepage" = "홈페이지",
   "Blog" = "블로그",

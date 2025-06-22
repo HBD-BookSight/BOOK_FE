@@ -1,17 +1,10 @@
+import { MOCK_CONTENTS } from "@/public/data/mock_content";
+import { ContentsType } from "@/types/dto";
 import Image from "next/image";
 import Link from "next/link";
 import React, { HTMLAttributes } from "react";
 import CommonPillButton from "../common/CommonPillButton";
 import DiscoveryItem from "./DiscoveryItem";
-import { MOCK_CONTENTS } from "@/public/data/mock_content";
-
-enum ContentsType {
-  "Youtube" = "유튜브",
-  "Homepage" = "홈페이지",
-  "Blog" = "블로그",
-  "Link" = "링크",
-  "Profile" = "프로필",
-}
 
 type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
 const DiscoveryDemo = async ({ className, ...props }: Readonly<Props>) => {
@@ -50,7 +43,7 @@ const DiscoveryDemo = async ({ className, ...props }: Readonly<Props>) => {
                     title={item.title || ""}
                     imageUrl={item.image}
                   />
-                  {index < 3  && <div className="border-b" />}
+                  {index < 3 && <div className="border-b" />}
                 </React.Fragment>
               )
           )}
