@@ -31,7 +31,7 @@ const MainBookSlideContainer = ({
   const slideContainerRef = useRef<HTMLDivElement>(null);
   const [booksData, setBooksData] = useState<Array<BookDto> | undefined>(books);
   const [isMobileState, setIsMobileState] = useState(false);
-  
+
   useEffect(() => {
     setBooksData(books);
   }, [books]);
@@ -49,14 +49,14 @@ const MainBookSlideContainer = ({
 
   const slideLeftHandler = () => {
     setBooksData((prev) => {
-      if (!prev) return prev;
+      if (!prev || prev.length === 0) return prev;
       return [...prev.slice(1), prev[0]];
     });
     setConfettiWind(-0.1);
   };
   const slideRightHandler = () => {
     setBooksData((prev) => {
-      if (!prev) return prev;
+      if (!prev || prev.length === 0) return prev;
       return [prev[prev.length - 1], ...prev.slice(0, prev.length - 1)];
     });
     setConfettiWind(0.1);
