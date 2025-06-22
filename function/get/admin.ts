@@ -1,7 +1,7 @@
-import { getRequest } from "./commonGet";
+import { getRequestForAdmin } from "./commonGet";
 
-export const getAdminKakaoBooks = () => getRequest("/kakao-books");
+export const getAdminKakaoBooks = () => getRequestForAdmin("/kakao-books");
 
-export const getAdminViewLogs = () => getRequest("/book-view-logs");
+export const getAdminViewLogs = () => getRequestForAdmin("/book-view-logs");
 
-export const getAdminSearchLogs = () => getRequest("/book-search-logs");
+export const getAdminSearchLogs = () => getRequestForAdmin("/book-search-logs");

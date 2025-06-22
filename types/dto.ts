@@ -58,15 +58,22 @@ export interface BookDto {
 
 export interface Detail {
   /** @format int64 */
-  id: number;
-  name: string;
-  engName?: string;
-  logo?: string;
-  isOfficial: boolean;
-  description?: string;
-  urls: UrlInfo[];
-  books: BookDto[];
-  tags: TagDto[];
+  isbn: string;
+  title: string;
+  detailUrl: string;
+  summary: string;
+  publishedDate: Date;
+  titleImage: string;
+  authorList: [];
+  translator: [];
+  price: number;
+  status: string;
+  publisher: {
+    id: number;
+    name: string;
+  };
+  contentsDtoList: [];
+  eventDtoList: [];
 }
 
 export interface Simple {
@@ -337,4 +344,21 @@ export interface EventRequestDto {
   location?: "ONLINE" | "OFFLINE";
   startDate?: string;
   endDate?: string;
+}
+
+export interface DisoveryContentsDto {
+  /** @format int64 */
+  id: number;
+  urls: UrlInfoTypeString[];
+  image?: string;
+  creator: UserDto;
+  createdAt: string;
+}
+
+export enum ContentsType {
+  "Youtube" = "유튜브",
+  "Homepage" = "홈페이지",
+  "Blog" = "블로그",
+  "Link" = "링크",
+  "Profile" = "프로필",
 }

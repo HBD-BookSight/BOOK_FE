@@ -5,7 +5,9 @@ import EmptyImage from "../common/EmptyImage";
 
 type Props = { className?: string; imageUrl?: string; birthDay?: Date } & HTMLAttributes<HTMLDivElement>;
 const BookDetailImageSection = ({ className, imageUrl, birthDay, ...props }: Readonly<Props>) => {
-  const isBirthday = birthDay?.getDate() === new Date().getDate() && birthDay.getMonth() === new Date().getMonth();
+  const birthdayDate = new Date(birthDay || "");
+
+  const isBirthday = birthdayDate?.getDate() === new Date().getDate() && birthdayDate.getMonth() === new Date().getMonth();
   return (
     <section
       className={`relative mx-auto flex aspect-[3/4] size-full max-w-[163px] items-center justify-center ${

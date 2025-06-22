@@ -14,7 +14,6 @@ const nextConfig: NextConfig = {
       : "http://localhost:3000",
   },
   images: {
-    
     remotePatterns: [
       {
         protocol: "https",
@@ -35,12 +34,16 @@ const nextConfig: NextConfig = {
         hostname: "search1.kakaocdn.net",
         pathname: "/thumb/**",
       },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+      },
     ], // 책사진 도메인 허용
     domains: [
       "i.ytimg.com",
       "i0.wp.com",
       "image.yes24.com",
-      "minumsa.minumsa.com"
+      "minumsa.minumsa.com",
     ],
   },
   webpack: (config) => {

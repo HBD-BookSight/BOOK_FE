@@ -1,42 +1,24 @@
 import LoadingSpinner from "@/components/common/LoadingSpinner";
-import DiscoveryDemo from "@/components/discovery/DiscoveryDemo";
-import getBirthdayBook from "@/function/server/getBirtdayBook";
+import Discovery from "@/components/discovery/Discovery";
 import { Suspense } from "react";
-import BirthDayBookSaveHelper from "./components/BirthDayBookSaveHelper";
-import MainBookSlideDemo from "./components/mainBookSlide/demo/MainBookSlideDemo";
-import MainScheduleSlideDemo from "./components/mainScheduleSlide/MainScheduleSlideDemo";
+import MainBookSlide from "./components/mainBookSlide/MainBookSlide";
+import MainScheduleSlide from "./components/mainScheduleSlide/MainScheduleSlide";
 import TodayLibraryDemo from "./components/todayLibrary/TodayLibraryDemo";
 export const dynamic = "force-dynamic";
 
 const Home = () => {
   return (
     <main className="relative flex size-full flex-col items-center py-5">
-      {/* <MainBookSlide /> */}
-      <MainBookSlideContainer />
+      <MainBookSlide className="mb-12" />
       <Suspense fallback={<LoadingSpinner className="w-full" />}>
-        <DiscoveryDemo />
+        <Discovery />
       </Suspense>
       <Suspense fallback={<LoadingSpinner className="w-full" />}>
         <TodayLibraryDemo />
       </Suspense>
-      <MainScheduleSlideDemo />
+      <MainScheduleSlide />
     </main>
   );
 };
 
 export default Home;
-
-// const MainBookSlideContainer = async () => {
-//   const data = await getBirtdayBook();
-//   return <MainBookSlide className="mb-12" books={data} />;
-// };
-
-const MainBookSlideContainer = async () => {
-  const data = await getBirthdayBook();
-  return (
-    <>
-      <BirthDayBookSaveHelper books={data} />
-      <MainBookSlideDemo books={data.slice(0, 6)} />
-    </>
-  );
-};

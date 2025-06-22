@@ -1,23 +1,32 @@
-import React, { Suspense } from "react";
-import BookHeaderHelper from "./BookHeaderHelper";
-import { KaKaoBookResponse } from "@/types/api";
-import { handleFetchKaKaoData } from "@/function/common";
-import BookDetail from "@/components/bookDetail/BookDetail";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
+import { handleFetchKaKaoData } from "@/function/common";
+import { KaKaoBookResponse } from "@/types/api";
+import { Suspense } from "react";
+import BookHeaderHelper from "./BookHeaderHelper";
+import BookDetailCsv from "@/components/bookDetail/BookDetailCsv";
 
 export const dynamic = "force-static";
 export const revalidate = 86400; // 24시간 동안 캐시 유지
 
-const BookDetailpage = async ({ params }: { params: Promise<{ isbn: number }> }) => {
+const BookDetailpage = async ({
+  params,
+}: {
+  params: Promise<{ isbn: number }>;
+}) => {
   const { isbn } = await params;
   const suspenseResource = fetchKaKaoBookSuspense(isbn);
 
   return (
     <>
-      <BookHeaderHelperContainer suspenseResource={suspenseResource} isbn={isbn} />
+      <BookHeaderHelperContainer
+        suspenseResource={suspenseResource}
+        isbn={isbn}
+      />
       <main className="flex size-full flex-1 items-center gap-8">
         <Suspense fallback={<LoadingSpinner className="h-[80vw] w-full" />}>
-          <BookDetail<KakaoSuspenseResource> suspenseResource={suspenseResource} />
+          <BookDetailCsv<KakaoSuspenseResource>
+            suspenseResource={suspenseResource}
+          />
         </Suspense>
       </main>
     </>
@@ -38,7 +47,10 @@ const fetchKaKaoBookSuspense = (isbn?: number): KakaoSuspenseResource => {
   return {
     read: () => {
       if (data) return data;
-      if (!promise) promise = handleFetchKaKaoData(isbn?.toString(), "isbn").then((result) => (data = result));
+      if (!promise)
+        promise = handleFetchKaKaoData(isbn?.toString(), "isbn").then(
+          (result) => (data = result)
+        );
       throw promise;
     },
   };
