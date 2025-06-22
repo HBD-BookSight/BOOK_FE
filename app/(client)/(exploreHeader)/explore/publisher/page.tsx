@@ -18,8 +18,8 @@ const PublisherPage = async () => {
               <PublisherGridItem
                 key={item.id}
                 imageUrl={item.logo}
-                instagramId="@testasddfsdaf"
-                publisherName="asdfsdasfd"
+                instagramId={item.urls[0]?.url || ""}
+                publisherName={item.name}
               />
             </Link>
           ))}
