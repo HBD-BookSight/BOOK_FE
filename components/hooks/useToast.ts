@@ -13,7 +13,7 @@ type ToastState = {
 
 export const useToast = create<ToastState>((set) => ({
   visible: false,
-  type: "success" || "error",
+  type: "success",
   message: "",
   showToast: (type, message) => {
     set({ visible: true, type, message });
