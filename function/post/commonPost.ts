@@ -15,7 +15,10 @@ export const postRequest = async <T>(
     );
 
     if (!response.ok) {
-      throw new Error(`Failed to POST to ${endpoint}`);
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(
+        errorData.message || `Request failed with status ${response.status}`
+      );
     }
 
     return await response.json();

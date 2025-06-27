@@ -10,7 +10,7 @@ export const postContacts = (body: ContactDto) =>
   postRequest<ContactDto>("/contacts", body);
 
 export const postContents = (body: ConentsPostRequest) =>
-  postRequest<ConentsPostRequest>("/contents", body);
+  postRequest<ConentsPostRequest>("/contednts", body);
 
 export const postEvents = (body: EventPostRequest) =>
   postRequest<EventPostRequest>("/events", body);
