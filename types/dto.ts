@@ -15,10 +15,10 @@
 export interface PublisherCreateRequest {
   name: string;
   engName: string;
-  logo: string;
-  urls: UrlInfo[];
-  userId: number;
-  bookIsbnList: { value: number }[];
+  logo?: string;
+  urls?: UrlInfo[];
+  userId?: number;
+  bookIsbnList?: { value: number }[];
   /** @default [] */
   description?: string;
   memo?: string;

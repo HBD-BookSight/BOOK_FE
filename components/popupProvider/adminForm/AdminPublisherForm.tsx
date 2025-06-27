@@ -109,22 +109,22 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
             >
               Instagram Id*
             </CommonLabel>
-            <CommonInputField id="engName" {...register("engName")} />
+            <CommonInputField
+              id="engName"
+              {...register("engName", { required: "입력이 필요합니다" })}
+            />
           </div>
           <div className="relative flex size-full flex-col gap-3">
             <CommonLabel
               htmlFor="logo"
-              className="text-[var(--highlight-color)]"
+              className="text-[var(--sub-color)]"
             >
-              Logo link*
+              Logo link
             </CommonLabel>
-            <CommonInputField
-              id="logo"
-              {...register("logo", { required: "입력이 필요합니다" })}
-            />
+            <CommonInputField id="logo" {...register("logo")} />
           </div>
           <div className="relative flex size-full flex-col gap-3">
-            <CommonLabel>URL*</CommonLabel>
+            <CommonLabel className="text-[var(--sub-color)]">URL</CommonLabel>
             {fields.map((_field, index) => (
               <div
                 className="relative flex h-fit w-full flex-row gap-1"
@@ -173,11 +173,8 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
             </div>
           </div>
           <div className="relative flex size-full flex-col gap-3">
-            <CommonLabel
-              htmlFor="isbn"
-              className="text-[var(--highlight-color)]"
-            >
-              Book ISBN Number*
+            <CommonLabel htmlFor="isbn" className="text-[var(--sub-color)]">
+              Book ISBN Number
             </CommonLabel>
             {isbnFields.map((field, index) => (
               <div
