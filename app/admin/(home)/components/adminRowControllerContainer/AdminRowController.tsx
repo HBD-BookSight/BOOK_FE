@@ -102,7 +102,7 @@ const AdminRowController = ({
   };
   return (
     <div
-      className={`relative flex h-16 w-full flex-row items-center justify-between !text-sm font-semibold ${
+      className={`relative flex h-16 w-full flex-row items-center justify-between pl-[60px] !text-sm font-semibold ${
         className || ""
       }`}
       {...props}

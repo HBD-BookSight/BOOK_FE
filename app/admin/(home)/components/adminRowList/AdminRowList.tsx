@@ -8,7 +8,14 @@ type Props = {
   className?: string;
 } & HTMLAttributes<HTMLDivElement>;
 const AdminRowList = <T,>({ className, keys, ...props }: Readonly<Props>) => {
-  const { data, setSelectRow, selectRow } = useAdminPageData<T>();
+  const { data, setSelectRow, selectRow, currentPage } = useAdminPageData<T>();
+  const PAGE_SIZE = 20;
+  const currentItems =
+    Array.isArray(data) &&
+    data.slice(
+      ((currentPage || 1) - 1) * PAGE_SIZE,
+      (currentPage || 1) * PAGE_SIZE
+    );
 
   return (
     <div
@@ -17,22 +24,19 @@ const AdminRowList = <T,>({ className, keys, ...props }: Readonly<Props>) => {
       }`}
       {...props}
     >
-      <div className="absolute flex size-full flex-col gap-2">
-        <div className="sticky top-0 flex w-fit flex-row gap-2 border-b-[1px] bg-white pl-8">
-          <p className="w-10 overflow-hidden text-ellipsis font-bold"></p>
-          {keys.map((key, index) => {
-            return (
-              <p
-                key={index}
-                className="w-24 overflow-hidden text-ellipsis font-bold"
-              >
-                {key}
-              </p>
-            );
-          })}
+      <div className="absolute flex size-full flex-col">
+        <div className="sticky top-0 z-10 flex flex-row border-b-[1px] bg-white pl-[88px]">
+          {keys.map((key, index) => (
+            <p
+              key={index}
+              className="flex-1 truncate px-2 py-1 text-xs font-bold"
+            >
+              {key}
+            </p>
+          ))}
         </div>
-        {data instanceof Array &&
-          data.map((item, rowIndex) => {
+        {currentItems instanceof Array &&
+          currentItems.map((item, rowIndex) => {
             if (typeof item === "object") {
               return (
                 <MemoizedAdminRowListItem<T>

@@ -1,4 +1,6 @@
-import { BookCreateRequest, ContentsDto } from "@/types/dto";
+import { getAdminContents } from "@/function/get/admin";
+import { formatContentsData } from "@/function/util/format";
+import { FormattedContents } from "@/types/format";
 import { redirect } from "next/navigation";
 import AdminPageDataProvider from "../components/AdminPageDataProvider";
 import AdminPaginationController from "../components/adminPaginationController/AdminPaginationController";
@@ -15,39 +17,15 @@ const Content = async ({
     redirect("/admin/login");
   }
   const { keyword } = await searchParams;
-  console.log("searchParams 테스트", keyword);
+  console.log(keyword, "searchParams 테스트");
 
+  const contentsData = await getAdminContents();
+  const formattedData = formatContentsData(contentsData.items);
   return (
-    <AdminPageDataProvider<ContentsDto[]>
-      initialData={[
-        {
-          id: 7281778282,
-          urls: [{ url: "www.mock.com", type: "Link" }],
-          creator: { id: 12, name: "마치", bookIsbnList: [124, 2892, 711] },
-        },
-        {
-          id: 7281778283,
-          urls: [{ url: "www.mock2.com", type: "Link" }],
-          creator: {
-            id: 12,
-            name: "윤마치",
-            bookIsbnList: [1124, 21892, 7111],
-          },
-        },
-      ]}
-    >
+    <AdminPageDataProvider<FormattedContents[]> initialData={formattedData}>
       <AdminRowControllerContainer />
-      <AdminRowList<BookCreateRequest[]>
-        keys={[
-          "isbn",
-          "title",
-          "publishedDate",
-          "detailUrl",
-          "translator",
-          "price",
-          "authorNameList",
-          "publisherId",
-        ]}
+      <AdminRowList<FormattedContents>
+        keys={["URL", "BookISBN", "contentTitle", "BookName", "Memo", "Tag"]}
       ></AdminRowList>
       <AdminPaginationController />
     </AdminPageDataProvider>

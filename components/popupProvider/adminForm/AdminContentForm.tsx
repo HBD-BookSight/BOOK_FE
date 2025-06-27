@@ -3,6 +3,7 @@ import CommonDropDown from "@/components/common/CommonDropDown";
 import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
 import { usePreventEnterSubmit } from "@/components/hooks/usePreventEnterSubmit";
+import { useToast } from "@/components/hooks/useToast";
 import { usePopupAction } from "@/context/popupStore";
 import { postContents } from "@/function/post/admin";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
@@ -22,6 +23,7 @@ export type AdminContentFormRef = {
 const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
   ({ className, defaultValues, ...props }, ref) => {
     const router = useRouter();
+    const { showToast } = useToast();
     const { register, handleSubmit, control } = useForm<ContentsCreateRequest>({
       mode: "onSubmit",
       defaultValues: defaultValues || {
@@ -46,7 +48,6 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
       control,
       name: "bookIsbnList",
     });
-
     const onSubmitHandler = async (data: ContentsCreateRequest) => {
       const payload: ConentsPostRequest = {
         ...data,
@@ -56,11 +57,16 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
           ? data.tagList.split(",").map((tag) => tag.trim())
           : [],
       };
-      await postContents(payload);
-      closePopup();
-      router.refresh();
+      try {
+        await postContents(payload);
+        closePopup();
+        showToast("success", "Successfully saved.");
+        router.refresh();
+      } catch (e) {
+        showToast("error", "Your request failed. Please try again");
+        console.log("Error submitting content:", e);
+      }
     };
-
     const handlePreventEnterSubmit = usePreventEnterSubmit();
 
     useImperativeHandle(
@@ -158,6 +164,7 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
                     },
                   })}
                 />
+
                 <button
                   type="button"
                   onClick={() => removeIsbn(index)}

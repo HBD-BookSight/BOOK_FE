@@ -3,6 +3,7 @@ import CommonDropDown from "@/components/common/CommonDropDown";
 import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
 import { usePreventEnterSubmit } from "@/components/hooks/usePreventEnterSubmit";
+import { useToast } from "@/components/hooks/useToast";
 import { usePopupAction } from "@/context/popupStore";
 import { postPublisher } from "@/function/post/admin";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
@@ -22,6 +23,7 @@ export type AdminPublisherFormRef = {
 const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
   ({ className, defaultValues, ...props }, ref) => {
     const router = useRouter();
+    const { showToast } = useToast();
     const { register, handleSubmit, control } = useForm<PublisherCreateRequest>(
       {
         mode: "onSubmit",
@@ -47,6 +49,7 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
     });
 
     const handlePreventEnterSubmit = usePreventEnterSubmit();
+
     const onSubmitHandler = async (data: PublisherCreateRequest) => {
       const payload: PublisherPostRequest = {
         ...data,
@@ -55,9 +58,15 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
           ? data.tagList.split(",").map((tag) => tag.trim())
           : [],
       };
-      await postPublisher(payload);
-      router.refresh();
-      closePopup();
+      try {
+        await postPublisher(payload);
+        showToast("success", "Successfully saved.");
+        router.refresh();
+        closePopup();
+      } catch (e) {
+        showToast("error", "Your request failed. Please try again");
+        console.log("Error submitting content:", e);
+      }
     };
 
     useImperativeHandle(
@@ -100,22 +109,22 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
             >
               Instagram Id*
             </CommonLabel>
-            <CommonInputField id="engName" {...register("engName")} />
+            <CommonInputField
+              id="engName"
+              {...register("engName", { required: "입력이 필요합니다" })}
+            />
           </div>
           <div className="relative flex size-full flex-col gap-3">
             <CommonLabel
               htmlFor="logo"
-              className="text-[var(--highlight-color)]"
+              className="text-[var(--sub-color)]"
             >
-              Logo link*
+              Logo link
             </CommonLabel>
-            <CommonInputField
-              id="logo"
-              {...register("logo", { required: "입력이 필요합니다" })}
-            />
+            <CommonInputField id="logo" {...register("logo")} />
           </div>
           <div className="relative flex size-full flex-col gap-3">
-            <CommonLabel>URL*</CommonLabel>
+            <CommonLabel className="text-[var(--sub-color)]">URL</CommonLabel>
             {fields.map((_field, index) => (
               <div
                 className="relative flex h-fit w-full flex-row gap-1"
@@ -164,11 +173,8 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
             </div>
           </div>
           <div className="relative flex size-full flex-col gap-3">
-            <CommonLabel
-              htmlFor="isbn"
-              className="text-[var(--highlight-color)]"
-            >
-              Book ISBN Number*
+            <CommonLabel htmlFor="isbn" className="text-[var(--sub-color)]">
+              Book ISBN Number
             </CommonLabel>
             {isbnFields.map((field, index) => (
               <div
