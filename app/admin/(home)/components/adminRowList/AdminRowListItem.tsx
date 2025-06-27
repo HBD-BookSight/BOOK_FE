@@ -26,7 +26,7 @@ export const AdminRowListItem = <T,>({
 
   return (
     <label
-      className={`relative flex w-fit flex-row items-center gap-2 pl-2 text-xs ${
+      className={`relative flex w-full flex-row items-center gap-2 pl-2 text-xs ${
         isSelect ? "bg-[#F8F8FE]" : ""
       } ${className || ""}`}
       onClick={() => setSelectRow(rowIndex)}
@@ -37,7 +37,7 @@ export const AdminRowListItem = <T,>({
       </p>
       {/* 실제로는 pk값을 사용해야됨 */}
       {keys.map((key: string, index: number) => (
-        <p key={index} className="flex h-[30px] w-24 items-center overflow-hidden text-ellipsis">
+        <p key={index} className="flex flex-1 h-[30px] items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
           {item[key as keyof T] !== undefined
             ? String(item[key as keyof T])
             : ""}

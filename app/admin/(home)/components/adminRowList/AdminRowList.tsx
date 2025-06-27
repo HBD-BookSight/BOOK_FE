@@ -19,17 +19,15 @@ const AdminRowList = <T,>({ className, keys, ...props }: Readonly<Props>) => {
       {...props}
     >
       <div className="absolute flex size-full flex-col">
-        <div className="sticky top-0 z-10 flex w-fit flex-row gap-2 border-b-[1px] bg-white pl-[88px]">
-          {keys.map((key, index) => {
-            return (
-              <p
-                key={index}
-                className="w-[115px] overflow-hidden text-xs font-bold"
-              >
-                {key}
-              </p>
-            );
-          })}
+        <div className="sticky top-0 z-10 flex flex-row border-b-[1px] bg-white pl-20">
+          {keys.map((key, index) => (
+            <p
+              key={index}
+              className="flex-1 overflow-hidden px-2 py-1 text-xs font-bold text-ellipsis whitespace-nowrap"
+            >
+              {key}
+            </p>
+          ))}
         </div>
         {data instanceof Array &&
           data.map((item, rowIndex) => {
