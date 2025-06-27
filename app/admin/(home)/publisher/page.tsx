@@ -3,7 +3,6 @@ import AdminPaginationController from "@/app/admin/(home)/components/adminPagina
 import AdminRowList from "@/app/admin/(home)/components/adminRowList/AdminRowList";
 import { getAdminPublishers } from "@/function/get/admin";
 import { formatPublisherData } from "@/function/util/format";
-import { PublisherDto } from "@/types/dto";
 import { FormattedPublisher } from "@/types/format";
 import { redirect } from "next/navigation";
 import AdminRowControllerContainer from "../components/adminRowControllerContainer/AdminRowControllerContainer";
@@ -25,7 +24,7 @@ const Publisher = async ({
   return (
     <AdminPageDataProvider<FormattedPublisher[]> initialData={formattedData}>
       <AdminRowControllerContainer />
-      <AdminRowList<PublisherDto>
+      <AdminRowList<FormattedPublisher>
         keys={[
           "PublisherName",
           "InstagramID",

@@ -1,6 +1,5 @@
 import { getAdminContents } from "@/function/get/admin";
 import { formatContentsData } from "@/function/util/format";
-import { BookCreateRequest } from "@/types/dto";
 import { FormattedContents } from "@/types/format";
 import { redirect } from "next/navigation";
 import AdminPageDataProvider from "../components/AdminPageDataProvider";
@@ -25,7 +24,7 @@ const Content = async ({
   return (
     <AdminPageDataProvider<FormattedContents[]> initialData={formattedData}>
       <AdminRowControllerContainer />
-      <AdminRowList<BookCreateRequest[]>
+      <AdminRowList<FormattedContents>
         keys={["URL", "BookISBN", "contentTitle", "BookName", "Memo", "Tag"]}
       ></AdminRowList>
       <AdminPaginationController />

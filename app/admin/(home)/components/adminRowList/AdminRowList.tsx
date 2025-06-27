@@ -9,9 +9,13 @@ type Props = {
 } & HTMLAttributes<HTMLDivElement>;
 const AdminRowList = <T,>({ className, keys, ...props }: Readonly<Props>) => {
   const { data, setSelectRow, selectRow, currentPage } = useAdminPageData<T>();
+  const PAGE_SIZE = 20;
   const currentItems =
     Array.isArray(data) &&
-    data.slice(((currentPage || 1) - 1) * 20, (currentPage || 1) * 20);
+    data.slice(
+      ((currentPage || 1) - 1) * PAGE_SIZE,
+      (currentPage || 1) * PAGE_SIZE
+    );
 
   return (
     <div
