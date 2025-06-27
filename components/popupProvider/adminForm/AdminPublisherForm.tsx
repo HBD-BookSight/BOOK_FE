@@ -3,6 +3,7 @@ import CommonDropDown from "@/components/common/CommonDropDown";
 import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
 import { usePreventEnterSubmit } from "@/components/hooks/usePreventEnterSubmit";
+import { useToast } from "@/components/hooks/useToast";
 import { usePopupAction } from "@/context/popupStore";
 import { postPublisher } from "@/function/post/admin";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
@@ -22,6 +23,7 @@ export type AdminPublisherFormRef = {
 const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
   ({ className, defaultValues, ...props }, ref) => {
     const router = useRouter();
+    const { showToast } = useToast();
     const { register, handleSubmit, control } = useForm<PublisherCreateRequest>(
       {
         mode: "onSubmit",
@@ -47,6 +49,7 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
     });
 
     const handlePreventEnterSubmit = usePreventEnterSubmit();
+
     const onSubmitHandler = async (data: PublisherCreateRequest) => {
       const payload: PublisherPostRequest = {
         ...data,
@@ -55,9 +58,15 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
           ? data.tagList.split(",").map((tag) => tag.trim())
           : [],
       };
-      await postPublisher(payload);
-      router.refresh();
-      closePopup();
+      try {
+        await postPublisher(payload);
+        showToast("success", "Successfully saved.");
+        router.refresh();
+        closePopup();
+      } catch (e) {
+        showToast("error", "Your request failed. Please try again");
+        console.log("Error submitting content:", e);
+      }
     };
 
     useImperativeHandle(
