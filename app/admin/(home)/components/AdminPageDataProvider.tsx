@@ -1,5 +1,12 @@
 "use client";
-import React, { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 type PageContextProps<T> = {
   data: T;
   selectRow: number | undefined;
@@ -7,7 +14,9 @@ type PageContextProps<T> = {
   currentPage: number | undefined;
   setCurrentPage: Dispatch<SetStateAction<number>>;
 };
-const PageDataContext = createContext<PageContextProps<unknown> | undefined>(undefined);
+const PageDataContext = createContext<PageContextProps<unknown> | undefined>(
+  undefined
+);
 type Props<T> = {
   children?: ReactNode;
   initialData: T;
@@ -22,7 +31,15 @@ const AdminPageDataProvider = <T,>({ children, initialData }: Props<T>) => {
   const [selectRow, setSelectRow] = useState<number>();
   const [currentPage, setCurrentPage] = useState<number>(1);
   return (
-    <PageDataContext.Provider value={{ data: initialData, selectRow, setSelectRow, currentPage, setCurrentPage }}>
+    <PageDataContext.Provider
+      value={{
+        data: initialData,
+        selectRow,
+        setSelectRow,
+        currentPage,
+        setCurrentPage,
+      }}
+    >
       {children}
     </PageDataContext.Provider>
   );

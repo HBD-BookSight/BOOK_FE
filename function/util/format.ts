@@ -7,7 +7,7 @@ export const formatPublisherData = (
   return publishers.map((p) => {
     return {
       PublisherName: p.name,
-      InstagramID: "",
+      InstagramID: p.engName || "",
       LogoLink: p.logo || "",
       URL: p.urls?.[0]?.url || "",
       URLType: p.urls?.[0]?.type || "",
