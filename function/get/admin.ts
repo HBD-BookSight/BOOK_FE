@@ -1,4 +1,4 @@
-import { PageResponsePublisherDto } from "@/types/dto";
+import { PageResponseContentsDto, PageResponsePublisherDto } from "@/types/dto";
 import { getRequest, getRequestForAdmin } from "./commonGet";
 
 export const getAdminKakaoBooks = () => getRequestForAdmin("/kakao-books");
@@ -9,3 +9,6 @@ export const getAdminSearchLogs = () => getRequestForAdmin("/book-search-logs");
 
 export const getAdminPublishers = () =>
   getRequest<PageResponsePublisherDto>("/publishers?page=0&limit=20");
+
+export const getAdminContents = () =>
+  getRequest<PageResponseContentsDto>("/contents?page=0&limit=20");

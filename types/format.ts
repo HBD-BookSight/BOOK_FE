@@ -8,3 +8,11 @@ export type FormattedPublisher = {
   Memo: string;
   Tag: string;
 };
+
+export type FormattedContents = {
+  contentTitle: string;
+  BookName: string;
+  URL: string;
+  Memo: string;
+  Tag: string;
+};

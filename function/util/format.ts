@@ -1,5 +1,5 @@
-import { PublisherDto } from "@/types/dto";
-import { FormattedPublisher } from "@/types/format";
+import { ContentsDto, PublisherDto } from "@/types/dto";
+import { FormattedContents, FormattedPublisher } from "@/types/format";
 
 export const formatPublisherData = (
   publishers: PublisherDto[]
@@ -13,6 +13,20 @@ export const formatPublisherData = (
       URLType: p.urls?.[0]?.type || "",
       BookISBN: "",
       Memo: p.description || "",
+      Tag: "",
+    };
+  });
+};
+
+export const formatContentsData = (
+  contents: ContentsDto[]
+): FormattedContents[] => {
+  return contents.map((c) => {
+    return {
+      contentTitle: c.title || "",
+      BookName: "",
+      URL: c.urls?.[0]?.url || "",
+      Memo: "",
       Tag: "",
     };
   });
