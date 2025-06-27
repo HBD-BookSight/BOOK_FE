@@ -9,6 +9,7 @@ type Props = {
 } & HTMLAttributes<HTMLDivElement>;
 const AdminRowList = <T,>({ className, keys, ...props }: Readonly<Props>) => {
   const { data, setSelectRow, selectRow } = useAdminPageData<T>();
+  console.log(data, "가져온 데이터");
 
   return (
     <div
@@ -17,9 +18,8 @@ const AdminRowList = <T,>({ className, keys, ...props }: Readonly<Props>) => {
       }`}
       {...props}
     >
-      <div className="absolute flex size-full flex-col gap-2">
-        <div className="sticky top-0 flex w-fit flex-row gap-2 border-b-[1px] bg-white pl-8">
-          <p className="w-10 overflow-hidden text-ellipsis font-bold"></p>
+      <div className="absolute flex size-full flex-col">
+        <div className="sticky top-0 z-10 flex w-fit flex-row gap-2 border-b-[1px] bg-white pl-[88px]">
           {keys.map((key, index) => {
             return (
               <p

@@ -1,6 +1,6 @@
 "use client";
 import CommonRadioButton from "@/components/common/CommonRadioButton";
-import React, { HTMLAttributes, memo, NamedExoticComponent } from "react";
+import { HTMLAttributes, JSX, memo } from "react";
 
 /**
  * ListItem 특성상 많은 수가 렌더링되고 contextAPI가 부모에서 참조되므로 스토어 상태 수정시
@@ -23,28 +23,32 @@ export const AdminRowListItem = <T,>({
   isSelect,
   setSelectRow,
 }: Readonly<Props<T>>) => {
+
   return (
     <label
-      className={`relative flex w-fit flex-row items-center gap-2 pl-2 ${isSelect ? "bg-[#F8F8FE]" : ""} ${
-        className || ""
-      }`}
+      className={`relative flex w-fit flex-row items-center gap-2 pl-2 text-xs ${
+        isSelect ? "bg-[#F8F8FE]" : ""
+      } ${className || ""}`}
       onClick={() => setSelectRow(rowIndex)}
     >
       <CommonRadioButton name="row" isSelected={isSelect} />
-      <p className="w-12 overflow-hidden text-ellipsis text-center">{rowIndex}</p>
+      <p className="w-12 overflow-hidden text-ellipsis text-center">
+        {rowIndex}
+      </p>
       {/* 실제로는 pk값을 사용해야됨 */}
       {keys.map((key: string, index: number) => (
-        <p key={index} className="w-24 overflow-hidden text-ellipsis">
-          {item[key as keyof T] !== undefined ? String(item[key as keyof T]) : ""}
+        <p key={index} className="flex h-[30px] w-24 items-center overflow-hidden text-ellipsis">
+          {item[key as keyof T] !== undefined
+            ? String(item[key as keyof T])
+            : ""}
         </p>
       ))}
     </label>
   );
 };
 
-const MemoizedAdminRowListItem = <T,>(props: Props<T>) => {
-  const WrappedComponent = memo(AdminRowListItem) as NamedExoticComponent<Props<T>>;
-  return <WrappedComponent {...props} />;
-};
+const MemoizedAdminRowListItem = memo(AdminRowListItem) as <T>(
+  props: Props<T>
+) => JSX.Element;
 
 export default MemoizedAdminRowListItem;

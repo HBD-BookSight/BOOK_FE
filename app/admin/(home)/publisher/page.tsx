@@ -1,7 +1,10 @@
 import AdminPageDataProvider from "@/app/admin/(home)/components/AdminPageDataProvider";
 import AdminPaginationController from "@/app/admin/(home)/components/adminPaginationController/AdminPaginationController";
 import AdminRowList from "@/app/admin/(home)/components/adminRowList/AdminRowList";
+import { getAdminPublishers } from "@/function/get/admin";
+import { formatPublisherData } from "@/function/util/format";
 import { PublisherDto } from "@/types/dto";
+import { FormattedPublisher } from "@/types/format";
 import { redirect } from "next/navigation";
 import AdminRowControllerContainer from "../components/adminRowControllerContainer/AdminRowControllerContainer";
 
@@ -16,21 +19,13 @@ const Publisher = async ({
   }
   const { keyword } = await searchParams;
   console.log("searchParams 테스트", keyword);
+  const publisherData = await getAdminPublishers();
+  const formattedData = formatPublisherData(publisherData.items);
 
   return (
-    <AdminPageDataProvider<PublisherDto[]>
-      initialData={[
-        {
-          name: "test",
-          engName: "test",
-          urls: [{ url: "test", type: "Link" }],
-          id: 0,
-          isOfficial: false,
-        },
-      ]}
-    >
+    <AdminPageDataProvider<FormattedPublisher[]> initialData={formattedData}>
       <AdminRowControllerContainer />
-      <AdminRowList<PublisherDto[]>
+      <AdminRowList<PublisherDto>
         keys={[
           "PublisherName",
           "InstagramID",
