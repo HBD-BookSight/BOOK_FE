@@ -50,6 +50,7 @@ const AdminRowController = ({
     AdminContentFormRef | AdminEventFormRef | AdminPublisherFormRef
   >(null);
   const pathName = usePathname();
+  console.log(selectRow, "selectRow in AdminRowController");
 
   const setRow = (
     pathName: string,

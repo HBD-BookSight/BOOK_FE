@@ -7,6 +7,7 @@ export type FormattedPublisher = {
   BookISBN: string;
   Memo: string;
   Tag: string;
+  id: number;
 };
 
 export type FormattedContents = {
@@ -15,4 +16,5 @@ export type FormattedContents = {
   URL: string;
   Memo: string;
   Tag: string;
+  id: number;
 };
