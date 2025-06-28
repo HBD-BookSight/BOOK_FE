@@ -18,12 +18,12 @@ import AdminPopupModal from "@/components/popupProvider/AdminPopupModal";
 import AlertPopupModal from "@/components/popupProvider/AlertPopupModal";
 import { usePopupAction } from "@/context/popupStore";
 import { fetchDetail } from "@/function/fetch/fetchDetail";
+import { DefaultValueTypes } from "@/types/admin";
 import {
   ContactDto,
   ContentsCreateRequest,
   EventCreateRequest,
   PublisherCreateRequest,
-  PublisherDetail,
 } from "@/types/dto";
 import { usePathname } from "next/navigation";
 import { HTMLAttributes, useRef } from "react";
@@ -32,17 +32,14 @@ type Props = {
   className?: string;
   resultLength?: string;
   selectRow: number | undefined;
-  defaultValues?:
-    | ContentsCreateRequest
-    | EventCreateRequest
-    | ContactDto
-    | PublisherCreateRequest;
+  defaultValues?: DefaultValueTypes;
 } & HTMLAttributes<HTMLDivElement>;
 
 const AdminRowController = ({
   className,
   resultLength,
   selectRow,
+  defaultValues,
   ...props
 }: Readonly<Props>) => {
   const { openPopup, closePopup } = usePopupAction();
@@ -55,16 +52,9 @@ const AdminRowController = ({
     const data = await fetchDetail(id, pathName);
     setRow(pathName, data);
   };
+  console.log(defaultValues);
 
-  const setRow = (
-    pathName: string,
-    defaultValues?:
-      | ContentsCreateRequest
-      | EventCreateRequest
-      | PublisherCreateRequest
-      | ContactDto
-      | PublisherDetail
-  ) => {
+  const setRow = (pathName: string, defaultValues?: DefaultValueTypes) => {
     openPopup(
       <AdminPopupModal>
         {pathName === "/admin/content" ? (

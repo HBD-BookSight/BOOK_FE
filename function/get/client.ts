@@ -1,4 +1,5 @@
 import {
+  ContentsDetail,
   Detail,
   ListResponseContentsDto,
   PageResponseBookDto,
@@ -25,4 +26,4 @@ export const getPublisherDetail = (id: number) =>
   getRequest<PublisherDetail>(`/publishers/${id}`);
 
 export const getContentDetail = (id: number) =>
-  getRequest<PublisherDetail>(`/contents/${id}`);
+  getRequest<ContentsDetail>(`/contents/${id}`);
