@@ -3,6 +3,7 @@ import {
   ListResponseContentsDto,
   PageResponseBookDto,
   PageResponsePublisherDto,
+  PublisherDetail,
 } from "@/types/dto";
 import { getRequest } from "./commonGet";
 
@@ -19,3 +20,9 @@ export const getBirthdayBooks = (date: string) =>
 
 export const getBookDetail = (isbn: number) =>
   getRequest<Detail>(`/books/{isbn}?isbn=${isbn}`);
+
+export const getPublisherDetail = (id: number) =>
+  getRequest<PublisherDetail>(`/publishers/${id}`);
+
+export const getContentDetail = (id: number) =>
+  getRequest<PublisherDetail>(`/contents/${id}`);

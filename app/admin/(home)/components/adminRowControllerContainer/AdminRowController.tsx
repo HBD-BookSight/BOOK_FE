@@ -17,11 +17,13 @@ import AdminPublisherForm, {
 import AdminPopupModal from "@/components/popupProvider/AdminPopupModal";
 import AlertPopupModal from "@/components/popupProvider/AlertPopupModal";
 import { usePopupAction } from "@/context/popupStore";
+import { fetchDetail } from "@/function/fetch/fetchDetail";
 import {
   ContactDto,
   ContentsCreateRequest,
   EventCreateRequest,
   PublisherCreateRequest,
+  PublisherDetail,
 } from "@/types/dto";
 import { usePathname } from "next/navigation";
 import { HTMLAttributes, useRef } from "react";
@@ -41,7 +43,6 @@ const AdminRowController = ({
   className,
   resultLength,
   selectRow,
-  defaultValues,
   ...props
 }: Readonly<Props>) => {
   const { openPopup, closePopup } = usePopupAction();
@@ -50,7 +51,10 @@ const AdminRowController = ({
     AdminContentFormRef | AdminEventFormRef | AdminPublisherFormRef
   >(null);
   const pathName = usePathname();
-  console.log(selectRow, "selectRow in AdminRowController");
+  const editData = async (id: number, pathName: string) => {
+    const data = await fetchDetail(id, pathName);
+    setRow(pathName, data);
+  };
 
   const setRow = (
     pathName: string,
@@ -59,6 +63,7 @@ const AdminRowController = ({
       | EventCreateRequest
       | PublisherCreateRequest
       | ContactDto
+      | PublisherDetail
   ) => {
     openPopup(
       <AdminPopupModal>
@@ -128,7 +133,7 @@ const AdminRowController = ({
         </CommonPillButton>
         <CommonPillButton
           onClick={() =>
-            selectRow !== undefined && setRow(pathName, defaultValues)
+            selectRow !== undefined && editData(selectRow, pathName)
           }
           className="h-8 w-20 border-gray-200 text-[var(--sub-color)]"
         >
