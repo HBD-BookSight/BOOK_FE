@@ -31,6 +31,18 @@ export interface PublisherPostRequest extends PublisherCreateRequest {
   tagList?: string[];
 }
 
+export interface PublisherDetail {
+  id: number;
+  name: string;
+  engName: string;
+  logo?: string;
+  isOfficial: boolean;
+  description?: string;
+  urls?: UrlInfo[];
+  books: BookDto[];
+  tagList?: TagDto;
+}
+
 /** @default [] */
 export interface UrlInfo {
   url: string;
@@ -179,6 +191,7 @@ export interface ContentsDto {
 }
 
 export interface ContactDto {
+  id: number;
   email: string;
   message: string;
   name?: string;
@@ -361,4 +374,14 @@ export enum ContentsType {
   "Blog" = "블로그",
   "Link" = "링크",
   "Profile" = "프로필",
+}
+
+export interface ContentsDetail {
+  id: number;
+  title: string;
+  urls: UrlInfo;
+  image: string;
+  booksDtoList: BookDto[];
+  tagDtoList: TagDto[];
+  creator: UserDto;
 }

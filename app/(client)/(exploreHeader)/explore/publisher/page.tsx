@@ -6,7 +6,7 @@ import PublisherFilterController from "./components/publisherFilterController/Pu
 
 const PublisherPage = async () => {
   const initialData = await getPublishers();
-  console.log(initialData);
+  console.log(initialData, '출판사');
   
   return (
     <main className="relative flex size-full flex-col items-center">
