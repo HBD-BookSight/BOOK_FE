@@ -1,8 +1,7 @@
-'use client'
+"use client";
 
 import Image from "next/image";
-import { useState, useMemo } from "react";
-import EmptyImage from "../common/EmptyImage";
+import { useMemo, useState } from "react";
 
 type Props = {
   className?: string;
@@ -42,7 +41,12 @@ const PublisherPortrait = ({
           onError={() => setHasError(true)}
         />
       ) : (
-        <EmptyImage />
+        <Image
+          src="/images/ProfileImageDefault.png"
+          alt={"profile_null"}
+          fill
+        />
+        // <EmptyImage />
       )}
     </div>
   );

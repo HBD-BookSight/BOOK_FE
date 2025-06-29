@@ -9,7 +9,7 @@ import {
 import { getRequest } from "./commonGet";
 
 export const getPublishers = () =>
-  getRequest<PageResponsePublisherDto>("/publishers");
+  getRequest<PageResponsePublisherDto>("/publishers?page=0&limit=20&orderBy=CreatedAt&direction=desc");
 
 export const getBookContents = (isbn: string) =>
   getRequest<ListResponseContentsDto>(`books/${isbn}/contents`);
