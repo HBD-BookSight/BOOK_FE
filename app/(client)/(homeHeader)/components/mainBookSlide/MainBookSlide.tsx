@@ -22,11 +22,11 @@ const MainBookSlide = ({ className, ...props }: Readonly<Props>) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [confettiWind, setConfettiWind] = useState<number>(0);
-  const today = new Date().toISOString().split("T")[0];
+  const [, month, day] = new Date().toISOString().split("T")[0].split("-");
 
   const { data } = useQuery({
     queryKey: ["today"],
-    queryFn: () => getBirthdayBooks(today),
+    queryFn: () => getBirthdayBooks(month, day),
   });
 
   //전체 크기 조정용
