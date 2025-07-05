@@ -48,6 +48,7 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
       control,
       name: "bookIsbnList",
     });
+
     const onSubmitHandler = async (data: ContentsCreateRequest) => {
       const payload: ConentsPostRequest = {
         ...data,
@@ -57,6 +58,7 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
           ? data.tagList.split(",").map((tag) => tag.trim())
           : [],
       };
+
       try {
         await postContents(payload);
         closePopup();

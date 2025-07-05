@@ -26,7 +26,8 @@ export const formatContentsData = (
     return {
       contentTitle: c.title || "",
       BookName: "",
-      URL: c.urls?.[0]?.url || "",
+      // URL: c.urls?.[0]?.url || [],
+      URL: c.urls?.map((url) => url.url) || [],
       Memo: "",
       Tag: "",
       id: c.id || 0,

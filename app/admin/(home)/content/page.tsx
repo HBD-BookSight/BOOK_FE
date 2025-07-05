@@ -20,6 +20,8 @@ const Content = async ({
   console.log(keyword, "searchParams 테스트");
 
   const contentsData = await getAdminContents();
+  console.log(contentsData,'콘텐트 데이터');
+  
   const formattedData = formatContentsData(contentsData.items);
   return (
     <AdminPageDataProvider<FormattedContents[]> initialData={formattedData}>
