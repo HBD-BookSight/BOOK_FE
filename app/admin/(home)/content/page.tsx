@@ -13,18 +13,20 @@ const Content = async ({
   searchParams: Promise<{ keyword?: string }>;
 }) => {
   if (false) {
-    //서버에서 권한 인증 통신에 성공하지 못한경우 리다이렉트
     redirect("/admin/login");
   }
   const { keyword } = await searchParams;
-  console.log(keyword, "searchParams 테스트");
-
   const contentsData = await getAdminContents();
-  console.log(contentsData,'콘텐트 데이터');
-  
-  const formattedData = formatContentsData(contentsData.items);
+  const filteredItems = keyword?.trim()
+    ? contentsData.items.filter((item) =>
+        item.title?.toLowerCase().includes(keyword.toLowerCase())
+      )
+    : contentsData.items;
+    const initialData = formatContentsData(filteredItems);
+
+
   return (
-    <AdminPageDataProvider<FormattedContents[]> initialData={formattedData}>
+    <AdminPageDataProvider<FormattedContents[]> initialData={initialData}>
       <AdminRowControllerContainer />
       <AdminRowList<FormattedContents>
         keys={["URL", "BookISBN", "contentTitle", "BookName", "Memo", "Tag"]}

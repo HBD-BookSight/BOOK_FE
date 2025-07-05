@@ -16,13 +16,17 @@ const Publisher = async ({
     //서버에서 권한 인증 통신에 성공하지 못한경우 리다이렉트
     redirect("/admin/login");
   }
-  const { keyword } = await searchParams;
-  console.log("searchParams 테스트", keyword);
   const publisherData = await getAdminPublishers();
-  const formattedData = formatPublisherData(publisherData.items);
+  const { keyword } = await searchParams;
+  const filteredItems = keyword?.trim()
+    ? publisherData.items.filter((item) =>
+        item.name?.toLowerCase().includes(keyword.toLowerCase())
+      )
+    : publisherData.items;
+  const initialData = formatPublisherData(filteredItems);
 
   return (
-    <AdminPageDataProvider<FormattedPublisher[]> initialData={formattedData}>
+    <AdminPageDataProvider<FormattedPublisher[]> initialData={initialData}>
       <AdminRowControllerContainer />
       <AdminRowList<FormattedPublisher>
         keys={[
