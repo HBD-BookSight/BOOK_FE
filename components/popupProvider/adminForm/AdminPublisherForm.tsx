@@ -9,7 +9,7 @@ import { postPublisher } from "@/function/post/admin";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
 import { PublisherCreateRequest, PublisherPostRequest } from "@/types/dto";
 import { useRouter } from "next/navigation";
-import { forwardRef, HTMLAttributes, useImperativeHandle } from "react";
+import { forwardRef, HTMLAttributes, useImperativeHandle, useRef } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 
 type Props = {
@@ -24,6 +24,7 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
   ({ className, defaultValues, ...props }, ref) => {
     const router = useRouter();
     const { showToast } = useToast();
+    const isSubmittingRef = useRef(false);
     const { register, handleSubmit, control } = useForm<PublisherCreateRequest>(
       {
         mode: "onSubmit",
@@ -51,6 +52,8 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
     const handlePreventEnterSubmit = usePreventEnterSubmit();
 
     const onSubmitHandler = async (data: PublisherCreateRequest) => {
+      if (isSubmittingRef.current) return;
+      isSubmittingRef.current = true;
       const payload: PublisherPostRequest = {
         ...data,
         bookIsbnList: data.bookIsbnList?.map((b) => b.value),
@@ -66,6 +69,8 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
       } catch (e) {
         showToast("error", "Your request failed. Please try again");
         console.log("Error submitting content:", e);
+      } finally {
+        isSubmittingRef.current = false;
       }
     };
 
@@ -115,10 +120,7 @@ const AdminPublisherForm = forwardRef<AdminPublisherFormRef, Props>(
             />
           </div>
           <div className="relative flex size-full flex-col gap-3">
-            <CommonLabel
-              htmlFor="logo"
-              className="text-[var(--sub-color)]"
-            >
+            <CommonLabel htmlFor="logo" className="text-[var(--sub-color)]">
               Logo link
             </CommonLabel>
             <CommonInputField id="logo" {...register("logo")} />
