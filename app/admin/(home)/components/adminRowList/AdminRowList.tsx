@@ -7,7 +7,7 @@ type Props = {
   keys: string[];
   className?: string;
 } & HTMLAttributes<HTMLDivElement>;
-const AdminRowList = <T extends { id: number; },>({ className, keys, ...props }: Readonly<Props>) => {
+const AdminRowList = <T,>({ className, keys, ...props }: Readonly<Props>) => {
   const { data, setSelectRow, selectRow, currentPage } = useAdminPageData<T>();
   const PAGE_SIZE = 20;
   const currentItems =
@@ -16,7 +16,6 @@ const AdminRowList = <T extends { id: number; },>({ className, keys, ...props }:
       ((currentPage || 1) - 1) * PAGE_SIZE,
       (currentPage || 1) * PAGE_SIZE
     );
-  console.log(data);
 
   return (
     <div
@@ -45,7 +44,7 @@ const AdminRowList = <T extends { id: number; },>({ className, keys, ...props }:
                   item={item}
                   keys={keys}
                   rowIndex={rowIndex}
-                  isSelect={selectRow === item.id}
+                  isSelect={selectRow === rowIndex}
                   setSelectRow={setSelectRow}
                 />
               );

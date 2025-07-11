@@ -14,7 +14,6 @@ export const formatPublisherData = (
       BookISBN: "",
       Memo: p.description || "",
       Tag: "",
-      id: p.id || 0,
     };
   });
 };
@@ -29,7 +28,6 @@ export const formatContentsData = (
       URL: c.urls?.[0]?.url || "",
       Memo: "",
       Tag: "",
-      id: c.id || 0,
     };
   });
 };

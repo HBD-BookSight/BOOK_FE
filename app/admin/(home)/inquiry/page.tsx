@@ -20,7 +20,7 @@ const Inquiry = async ({
   return (
     <AdminPageDataProvider<ContactDto[]> initialData={[]}>
       <AdminRowControllerContainer />
-      <AdminRowList<ContactDto>
+      <AdminRowList<ContactDto[]>
         keys={[
           "isbn",
           "title",

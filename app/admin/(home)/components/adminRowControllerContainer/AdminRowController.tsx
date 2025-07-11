@@ -17,8 +17,6 @@ import AdminPublisherForm, {
 import AdminPopupModal from "@/components/popupProvider/AdminPopupModal";
 import AlertPopupModal from "@/components/popupProvider/AlertPopupModal";
 import { usePopupAction } from "@/context/popupStore";
-import { fetchDetail } from "@/function/fetch/fetchDetail";
-import { DefaultValueTypes } from "@/types/admin";
 import {
   ContactDto,
   ContentsCreateRequest,
@@ -32,7 +30,11 @@ type Props = {
   className?: string;
   resultLength?: string;
   selectRow: number | undefined;
-  defaultValues?: DefaultValueTypes;
+  defaultValues?:
+    | ContentsCreateRequest
+    | EventCreateRequest
+    | ContactDto
+    | PublisherCreateRequest;
 } & HTMLAttributes<HTMLDivElement>;
 
 const AdminRowController = ({
@@ -48,13 +50,15 @@ const AdminRowController = ({
     AdminContentFormRef | AdminEventFormRef | AdminPublisherFormRef
   >(null);
   const pathName = usePathname();
-  const editData = async (id: number, pathName: string) => {
-    const data = await fetchDetail(id, pathName);
-    setRow(pathName, data);
-  };
-  console.log(defaultValues);
 
-  const setRow = (pathName: string, defaultValues?: DefaultValueTypes) => {
+  const setRow = (
+    pathName: string,
+    defaultValues?:
+      | ContentsCreateRequest
+      | EventCreateRequest
+      | PublisherCreateRequest
+      | ContactDto
+  ) => {
     openPopup(
       <AdminPopupModal>
         {pathName === "/admin/content" ? (
@@ -123,7 +127,7 @@ const AdminRowController = ({
         </CommonPillButton>
         <CommonPillButton
           onClick={() =>
-            selectRow !== undefined && editData(selectRow, pathName)
+            selectRow !== undefined && setRow(pathName, defaultValues)
           }
           className="h-8 w-20 border-gray-200 text-[var(--sub-color)]"
         >

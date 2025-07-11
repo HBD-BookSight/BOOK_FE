@@ -41,7 +41,7 @@ const Event = async ({
       ]}
     >
       <AdminRowControllerContainer />
-      <AdminRowList<EventDto>
+      <AdminRowList<EventDto[]>
         keys={[
           "isbn",
           "title",

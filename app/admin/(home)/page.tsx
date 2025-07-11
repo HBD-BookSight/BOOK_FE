@@ -6,7 +6,7 @@ const AdminHome = () => {
     redirect("/admin/login");
   } else {
     //이 라우터는 content 리다이렉트 시켜주기 위한 라우터
-    redirect("/admin/publisher");
+    redirect("/admin/content");
   }
 };
 

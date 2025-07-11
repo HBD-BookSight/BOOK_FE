@@ -38,14 +38,6 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "avatars.githubusercontent.com",
       },
-      {
-        protocol: "https",
-        hostname: "www.instagram.com",
-      },
-      {
-        protocol: "https",
-        hostname: "scontent-ssn1-1.cdninstagram.com",
-      },
     ], // 책사진 도메인 허용
     domains: [
       "i.ytimg.com",

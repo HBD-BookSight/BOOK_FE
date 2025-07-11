@@ -23,7 +23,7 @@ export default function NotFound() {
         </div>
       </div>
       <Link
-        className="w-[328px] rounded-full bg-[#f8f8fe] py-6 text-center text-lg font-semibold text-[#5F69BE]"
+        className="w-[328px] rounded-full bg-[--sub-color] py-6 text-center text-lg font-semibold text-[#5F69BE]"
         href={"/"}
       >
         홈 화면으로
