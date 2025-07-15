@@ -1,3 +1,5 @@
+import { LoginProps, LoginResType } from "@/types/admin";
+
 export const postRequest = async <T>(
   endpoint: string,
   bodyData: T
@@ -51,6 +53,32 @@ export const adminPostRequest = async <T>(
     return await response.json();
   } catch (error) {
     console.error(`Error POST ${endpoint}:`, error);
+    throw error;
+  }
+};
+
+export const postLogin = async (
+  bodyData: LoginProps
+): Promise<LoginResType> => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bodyData),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to POST to login`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error(`Error POST login:`, error);
     throw error;
   }
 };
