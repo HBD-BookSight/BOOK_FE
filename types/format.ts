@@ -13,7 +13,7 @@ export type FormattedPublisher = {
 export type FormattedContents = {
   contentTitle: string;
   BookName: string;
-  URL: string;
+  URL: string[];
   Memo: string;
   Tag: string;
   id: number;

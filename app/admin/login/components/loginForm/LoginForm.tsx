@@ -1,19 +1,27 @@
 "use client";
 import CommonInputField from "@/components/common/CommonInputField";
 import CommonLabel from "@/components/common/CommonLabel";
+import { postLogin } from "@/function/post/commonPost";
+import { LoginProps } from "@/types/admin";
 import { useRouter } from "next/navigation";
 import { HTMLAttributes } from "react";
 import { useForm } from "react-hook-form";
 
 type Props = { className?: string } & HTMLAttributes<HTMLDivElement>;
-type Inputs = { email: string; password: string };
+type Inputs = LoginProps;
 const LoginForm = ({ className, ...props }: Props) => {
   const { register, handleSubmit } = useForm<Inputs>();
   const router = useRouter();
-  const onSubmitHandler = (data: unknown) => {
-    console.log(data);
+
+  const onSubmitHandler = async (data: LoginProps) => {
+    const res = await postLogin(data);
+    if (res.accessToken && res.refreshToken) {
+      document.cookie = `accessToken=${res.accessToken}; path=/;`;
+      document.cookie = `refreshToken=${res.refreshToken}; path=/;`;
+    }
     router.push("/admin");
   };
+
   const onErrorHandler = (errors: unknown) => {
     if (typeof errors === "object" && errors !== null) {
       Object.values(errors).forEach((error) => {
@@ -40,13 +48,12 @@ const LoginForm = ({ className, ...props }: Props) => {
         onSubmit={handleSubmit(onSubmitHandler, onErrorHandler)}
       >
         <div className="relative flex size-full flex-col gap-3">
-          <CommonLabel htmlFor="email">E-mail</CommonLabel>
+          <CommonLabel htmlFor="username">E-mail</CommonLabel>
           <CommonInputField
             placeholder="이메일을 입력하세요"
-            type="email"
-            id="email"
+            id="username"
             className="placeholder:text-[var(--sub-color)]"
-            {...register("email", { required: "이메일을 입력해주세요" })}
+            {...register("username", { required: "이메일을 입력해주세요" })}
           />
         </div>
         <div className="relative flex size-full flex-col gap-3">

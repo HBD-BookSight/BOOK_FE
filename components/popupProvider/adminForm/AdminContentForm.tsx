@@ -9,7 +9,7 @@ import { postContents } from "@/function/post/admin";
 import CancleIcon from "@/public/icons/cancleIcon.svg";
 import { ConentsPostRequest, ContentsCreateRequest } from "@/types/dto";
 import { useRouter } from "next/navigation";
-import { forwardRef, HTMLAttributes, useImperativeHandle } from "react";
+import { forwardRef, HTMLAttributes, useImperativeHandle, useRef } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 
 type Props = {
@@ -24,6 +24,7 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
   ({ className, defaultValues, ...props }, ref) => {
     const router = useRouter();
     const { showToast } = useToast();
+    const isSubmittingRef = useRef(false);
     const { register, handleSubmit, control } = useForm<ContentsCreateRequest>({
       mode: "onSubmit",
       defaultValues: defaultValues || {
@@ -48,7 +49,10 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
       control,
       name: "bookIsbnList",
     });
+
     const onSubmitHandler = async (data: ContentsCreateRequest) => {
+      if (isSubmittingRef.current) return;
+      isSubmittingRef.current = true;
       const payload: ConentsPostRequest = {
         ...data,
         creatorId: 1, // 임시로 1로 설정, 실제 사용자 ID로 변경 필요
@@ -57,6 +61,7 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
           ? data.tagList.split(",").map((tag) => tag.trim())
           : [],
       };
+
       try {
         await postContents(payload);
         closePopup();
@@ -65,6 +70,8 @@ const AdminContentForm = forwardRef<AdminContentFormRef, Props>(
       } catch (e) {
         showToast("error", "Your request failed. Please try again");
         console.log("Error submitting content:", e);
+      } finally {
+        isSubmittingRef.current = false;
       }
     };
     const handlePreventEnterSubmit = usePreventEnterSubmit();
