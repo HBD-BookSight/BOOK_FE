@@ -15,7 +15,6 @@ const LoginForm = ({ className, ...props }: Props) => {
 
   const onSubmitHandler = async (data: LoginProps) => {
     const res = await postLogin(data);
-    console.log(res);
     if (res.accessToken && res.refreshToken) {
       document.cookie = `accessToken=${res.accessToken}; path=/;`;
       document.cookie = `refreshToken=${res.refreshToken}; path=/;`;
