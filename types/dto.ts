@@ -272,7 +272,7 @@ export interface ListResponseBookDto {
 }
 
 export interface PageResponseContentsDto {
-  items: ContentsDto[];
+  items: ContentsDtoChanged[];
   /** @format int64 */
   totalCount: number;
   /** @format int32 */
@@ -384,4 +384,15 @@ export interface ContentsDetail {
   booksDtoList: BookDto[];
   tagDtoList: TagDto[];
   creator: UserDto;
+}
+
+export interface ContentsDtoChanged {
+  /** @format int64 */
+  id: number;
+  urls: UrlInfo[];
+  title?: string;
+  image?: string;
+  creator: UserDto;
+  books: BookDto[];
+  tags: TagDto[];
 }

@@ -17,13 +17,13 @@ const Content = async ({
   }
   const { keyword } = await searchParams;
   const contentsData = await getAdminContents();
+
   const filteredItems = keyword?.trim()
     ? contentsData.items.filter((item) =>
         item.title?.toLowerCase().includes(keyword.toLowerCase())
       )
     : contentsData.items;
-    const initialData = formatContentsData(filteredItems);
-
+  const initialData = formatContentsData(filteredItems);
 
   return (
     <AdminPageDataProvider<FormattedContents[]> initialData={initialData}>
